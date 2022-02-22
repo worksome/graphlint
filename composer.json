@@ -1,0 +1,41 @@
+{
+    "name": "olivernybroe/graphlint",
+    "description": "A static analysis tool for GraphQl",
+    "type": "project",
+    "require": {
+        "php": "^8.0",
+        "webonyx/graphql-php": "^14.9",
+        "symfony/console": "^5.3",
+        "illuminate/support": "^8.55",
+        "symfony/dependency-injection": "^5.3",
+        "symfony/http-kernel": "^5.3",
+        "symfony/config": "^5.3",
+        "symplify/autowire-array-parameter": "^9.4",
+        "symplify/console-color-diff": "^9.4"
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.16",
+        "symfony/var-dumper": "^5.3",
+        "symplify/easy-testing": "^9.4"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Olivernybroe\\Graphlint\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Olivernybroe\\Graphlint\\Tests\\": "tests/"
+        }
+    },
+    "bin": [
+        "bin/graphlint"
+    ],
+    "authors": [
+        {
+            "name": "Oliver Nybroe",
+            "email": "olivernybroe@gmail.com"
+        }
+    ]
+}
