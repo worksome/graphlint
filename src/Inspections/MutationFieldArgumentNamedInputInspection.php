@@ -1,14 +1,14 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
 use GraphQL\Language\AST\InputValueDefinitionNode;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use Illuminate\Support\Collection;
-use Olivernybroe\Graphlint\Fixes\RenameFixer;
-use Olivernybroe\Graphlint\ProblemsHolder;
-use Olivernybroe\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\Fixes\RenameFixer;
+use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class MutationFieldArgumentNamedInputInspection extends Inspection
 {

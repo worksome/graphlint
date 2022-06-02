@@ -1,16 +1,16 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
 use GraphQL\Language\AST\DocumentNode;
-use Olivernybroe\Graphlint\Analyser\Analyser;
-use Olivernybroe\Graphlint\Events\AfterAnalyseEvent;
-use Olivernybroe\Graphlint\Events\AfterFixerEvent;
-use Olivernybroe\Graphlint\Events\BeforeAnalyseEvent;
-use Olivernybroe\Graphlint\Events\EventInterface;
-use Olivernybroe\Graphlint\Fixer\Fixer;
-use Olivernybroe\Graphlint\Visitors\CompiledVisitorCollector;
-use Olivernybroe\Graphlint\Visitors\OriginalVisitorCollector;
+use Worksome\Graphlint\Analyser\Analyser;
+use Worksome\Graphlint\Events\AfterAnalyseEvent;
+use Worksome\Graphlint\Events\AfterFixerEvent;
+use Worksome\Graphlint\Events\BeforeAnalyseEvent;
+use Worksome\Graphlint\Events\EventInterface;
+use Worksome\Graphlint\Fixer\Fixer;
+use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
+use Worksome\Graphlint\Visitors\OriginalVisitorCollector;
 
 class Graphlint
 {

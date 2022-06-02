@@ -1,13 +1,12 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
-use Olivernybroe\Graphlint\Inspections\Inspection;
-use Olivernybroe\Graphlint\PostFixes\PostFixer;
+use Worksome\Graphlint\Inspections\Inspection;
+use Worksome\Graphlint\PostFixes\PostFixer;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-use Symplify\ConsoleColorDiff\Bundle\ConsoleColorDiffBundle;
 use Symplify\PackageBuilder\DependencyInjection\CompilerPass\AutowireInterfacesCompilerPass;
 
 class Kernel extends \Symfony\Component\HttpKernel\Kernel
@@ -24,7 +23,6 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
     public function registerBundles(): array
     {
         return [
-            new ConsoleColorDiffBundle(),
         ];
     }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint\PostFixes;
+namespace Worksome\Graphlint\PostFixes;
 
 use GraphQL\Language\AST\Node;
-use Olivernybroe\Graphlint\PostFixes\Collector\NodeReplacerCollector;
+use Worksome\Graphlint\PostFixes\Collector\NodeReplacerCollector;
 
 class NodeReplacerPostFixer extends PostFixer
 {

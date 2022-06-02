@@ -1,12 +1,12 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
 use GraphQL\Language\AST\NonNullTypeNode;
-use Olivernybroe\Graphlint\Fixes\NonNullFixer;
-use Olivernybroe\Graphlint\ProblemsHolder;
-use Olivernybroe\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\Fixes\NonNullFixer;
+use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class NonNullableIdInspection extends Inspection
 {

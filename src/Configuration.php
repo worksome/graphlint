@@ -1,8 +1,8 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
-use Olivernybroe\Graphlint\Inspections\Inspection;
+use Worksome\Graphlint\Inspections\Inspection;
 
 class Configuration
 {

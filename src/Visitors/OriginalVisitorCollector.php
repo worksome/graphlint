@@ -1,8 +1,8 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Visitors;
+namespace Worksome\Graphlint\Visitors;
 
-use Olivernybroe\Graphlint\Inspections\Inspection;
+use Worksome\Graphlint\Inspections\Inspection;
 
 class OriginalVisitorCollector extends VisitorCollector
 {

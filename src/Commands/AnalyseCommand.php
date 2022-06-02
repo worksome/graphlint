@@ -1,19 +1,16 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Commands;
+namespace Worksome\Graphlint\Commands;
 
 use GraphQL\Language\Printer;
-use Olivernybroe\Graphlint\Analyser\Analyser;
-use Olivernybroe\Graphlint\Configuration;
-use Olivernybroe\Graphlint\Kernel;
-use Olivernybroe\Graphlint\Utils\NodeNameResolver;
+use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\Analyser\Analyser;
+use Worksome\Graphlint\Kernel;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symplify\ConsoleColorDiff\Console\Output\ConsoleDiffer;
 
 class AnalyseCommand extends Command
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Fixer;
+namespace Worksome\Graphlint\Fixer;
 
 use GraphQL\Language\AST\DocumentNode;
 

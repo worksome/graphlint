@@ -1,10 +1,10 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Tests\Unit\Inspections;
+namespace Worksome\Graphlint\Tests\Unit\Inspections;
 
-use Olivernybroe\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
-use Olivernybroe\Graphlint\Inspections\InputSuffixInputObjectTypeDefinitionInspection;
-use Olivernybroe\Graphlint\Inspections\MutationFieldArgumentNamedInputInspection;
+use Worksome\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
+use Worksome\Graphlint\Inspections\InputSuffixInputObjectTypeDefinitionInspection;
+use Worksome\Graphlint\Inspections\MutationFieldArgumentNamedInputInspection;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 

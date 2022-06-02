@@ -1,9 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
-use Olivernybroe\Graphlint\Analyser\AnalyserResult;
-use Olivernybroe\Graphlint\Fixer\FixerResult;
+use Worksome\Graphlint\Analyser\AnalyserResult;
+use Worksome\Graphlint\Fixer\FixerResult;
 
 class Result
 {

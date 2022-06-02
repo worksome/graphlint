@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Utils;
+namespace Worksome\Graphlint\Utils;
 
 use GraphQL\Language\AST\DirectiveNode;
 use GraphQL\Language\AST\NodeList;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 
 use GraphQL\Language\AST\ArgumentNode;
@@ -10,7 +10,7 @@ use GraphQL\Language\AST\InputObjectTypeDefinitionNode;
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
-use Olivernybroe\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\ProblemsHolder;
 use Stringable;
 
 abstract class Inspection implements Stringable

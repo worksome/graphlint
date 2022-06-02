@@ -1,11 +1,11 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Fixer;
+namespace Worksome\Graphlint\Fixer;
 
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\Visitor;
-use Olivernybroe\Graphlint\Analyser\AnalyserResult;
-use Olivernybroe\Graphlint\PostFixes\PostFixer;
+use Worksome\Graphlint\Analyser\AnalyserResult;
+use Worksome\Graphlint\PostFixes\PostFixer;
 
 class Fixer
 {

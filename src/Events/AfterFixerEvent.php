@@ -1,8 +1,8 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Events;
+namespace Worksome\Graphlint\Events;
 
-use Olivernybroe\Graphlint\Fixer\FixerResult;
+use Worksome\Graphlint\Fixer\FixerResult;
 
 class AfterFixerEvent implements EventInterface
 {

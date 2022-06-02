@@ -1,12 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Analyser;
+namespace Worksome\Graphlint\Analyser;
 
 use GraphQL\Language\AST\DocumentNode;
-use GraphQL\Language\Printer;
-use Olivernybroe\Graphlint\ProblemsHolder;
-use SebastianBergmann\Diff\Differ;
-use Symplify\ConsoleColorDiff\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\ProblemsHolder;
 
 class AnalyserResult
 {

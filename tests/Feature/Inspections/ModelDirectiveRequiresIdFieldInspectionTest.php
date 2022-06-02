@@ -1,10 +1,10 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Tests\Unit\Inspections;
+namespace Worksome\Graphlint\Tests\Unit\Inspections;
 
-use Olivernybroe\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
-use Olivernybroe\Graphlint\Inspections\DisallowEnumInspection;
-use Olivernybroe\Graphlint\Inspections\ModelDirectiveRequiresIdFieldInspection;
+use Worksome\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
+use Worksome\Graphlint\Inspections\DisallowEnumInspection;
+use Worksome\Graphlint\Inspections\ModelDirectiveRequiresIdFieldInspection;
 use Psr\Container\ContainerInterface;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;

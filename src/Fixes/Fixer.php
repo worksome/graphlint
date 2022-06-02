@@ -1,8 +1,8 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Fixes;
+namespace Worksome\Graphlint\Fixes;
 
-use Olivernybroe\Graphlint\ProblemDescriptor;
+use Worksome\Graphlint\ProblemDescriptor;
 
 abstract class Fixer
 {

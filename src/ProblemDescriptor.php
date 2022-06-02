@@ -1,9 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
 use GraphQL\Language\AST\Node;
-use Olivernybroe\Graphlint\Fixes\Fixer;
+use Worksome\Graphlint\Fixes\Fixer;
 
 class ProblemDescriptor
 {

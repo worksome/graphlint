@@ -1,13 +1,13 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
 use GraphQL\Language\Printer;
-use Olivernybroe\Graphlint\Events\AfterAnalyseEvent;
-use Olivernybroe\Graphlint\Events\AfterFixerEvent;
-use Olivernybroe\Graphlint\Events\BeforeAnalyseEvent;
+use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\Events\AfterAnalyseEvent;
+use Worksome\Graphlint\Events\AfterFixerEvent;
+use Worksome\Graphlint\Events\BeforeAnalyseEvent;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\ConsoleColorDiff\Console\Output\ConsoleDiffer;
 
 class ConsolePrinterListener implements GraphlintListener
 {

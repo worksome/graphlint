@@ -1,9 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
 use GraphQL\Language\AST\Node;
-use Olivernybroe\Graphlint\Fixes\Fixer;
+use Worksome\Graphlint\Fixes\Fixer;
 
 class ProblemsHolder
 {
@@ -15,7 +15,8 @@ class ProblemsHolder
     public function registerProblem(
         Node   $node,
         ?Fixer $fix = null,
-    ){
+    ): void
+    {
         $this->problems[] = new ProblemDescriptor(
             $node,
             $fix

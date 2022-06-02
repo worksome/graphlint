@@ -1,10 +1,10 @@
 <?php
 
-namespace Olivernybroe\Graphlint;
+namespace Worksome\Graphlint;
 
-use Olivernybroe\Graphlint\Events\AfterAnalyseEvent;
-use Olivernybroe\Graphlint\Events\AfterFixerEvent;
-use Olivernybroe\Graphlint\Events\BeforeAnalyseEvent;
+use Worksome\Graphlint\Events\AfterAnalyseEvent;
+use Worksome\Graphlint\Events\AfterFixerEvent;
+use Worksome\Graphlint\Events\BeforeAnalyseEvent;
 
 interface GraphlintListener
 {

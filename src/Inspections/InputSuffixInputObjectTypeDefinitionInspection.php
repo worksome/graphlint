@@ -1,12 +1,12 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\InputObjectTypeDefinitionNode;
 use Illuminate\Support\Str;
-use Olivernybroe\Graphlint\Fixes\SuffixNameFixer;
-use Olivernybroe\Graphlint\ProblemsHolder;
-use Olivernybroe\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\Fixes\SuffixNameFixer;
+use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class InputSuffixInputObjectTypeDefinitionInspection extends Inspection
 {

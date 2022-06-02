@@ -3,11 +3,11 @@
 use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use Illuminate\Support\Str;
-use Olivernybroe\Graphlint\Analyser\Analyser;
-use Olivernybroe\Graphlint\Fixer\Fixer;
-use Olivernybroe\Graphlint\Inspections\Inspection;
-use Olivernybroe\Graphlint\Kernel;
-use Olivernybroe\Graphlint\Visitors\CompiledVisitorCollector;
+use Worksome\Graphlint\Analyser\Analyser;
+use Worksome\Graphlint\Fixer\Fixer;
+use Worksome\Graphlint\Inspections\Inspection;
+use Worksome\Graphlint\Kernel;
+use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 use Psr\Container\ContainerInterface;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 
@@ -30,7 +30,7 @@ uses()->beforeEach(function () {
     $kernel->boot();
 
     $this->app = $kernel->getContainer();
-})->in('Unit');
+})->in('Feature');
 
 /*
 |--------------------------------------------------------------------------

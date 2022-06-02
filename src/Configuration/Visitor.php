@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Configuration;
+namespace Worksome\Graphlint\Configuration;
 
 class Visitor
 {

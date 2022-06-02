@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\PostFixes\Collector;
+namespace Worksome\Graphlint\PostFixes\Collector;
 
 use GraphQL\Language\AST\Node;
 

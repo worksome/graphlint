@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Utils;
+namespace Worksome\Graphlint\Utils;
 
 use GraphQL\Language\AST\NameNode;
 use GraphQL\Language\AST\Node;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Fixes;
+namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NonNullTypeNode;
 use GraphQL\Language\AST\TypeNode;
-use Olivernybroe\Graphlint\PostFixes\Collector\NodeReplacerCollector;
-use Olivernybroe\Graphlint\ProblemDescriptor;
+use Worksome\Graphlint\PostFixes\Collector\NodeReplacerCollector;
+use Worksome\Graphlint\ProblemDescriptor;
 
 class NonNullFixer extends Fixer
 {

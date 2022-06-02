@@ -1,9 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Analyser;
+namespace Worksome\Graphlint\Analyser;
 
 use Illuminate\Support\Collection;
-use Olivernybroe\Graphlint\Inspections\Inspection;
+use Worksome\Graphlint\Inspections\Inspection;
 
 class AffectedInspections
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Events;
+namespace Worksome\Graphlint\Events;
 
-use Olivernybroe\Graphlint\Analyser\AnalyserResult;
+use Worksome\Graphlint\Analyser\AnalyserResult;
 
 class AfterAnalyseEvent implements EventInterface
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NonNullTypeNode;
-use Olivernybroe\Graphlint\Fixes\NonNullFixer;
-use Olivernybroe\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Fixes\NonNullFixer;
+use Worksome\Graphlint\ProblemsHolder;
 
 class NonNullableInsideListInspection extends Inspection
 {

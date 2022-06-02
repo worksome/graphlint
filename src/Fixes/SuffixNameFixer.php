@@ -1,10 +1,10 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Fixes;
+namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NameNode;
-use Olivernybroe\Graphlint\ProblemDescriptor;
-use Olivernybroe\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\ProblemDescriptor;
+use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class SuffixNameFixer extends Fixer
 {

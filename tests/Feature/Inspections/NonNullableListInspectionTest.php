@@ -1,8 +1,8 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Tests\Unit\Inspections;
+namespace Worksome\Graphlint\Tests\Unit\Inspections;
 
-use Olivernybroe\Graphlint\Inspections\NonNullableListInspection;
+use Worksome\Graphlint\Inspections\NonNullableListInspection;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 

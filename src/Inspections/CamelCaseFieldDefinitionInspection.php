@@ -1,12 +1,12 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
 use Illuminate\Support\Str;
-use Olivernybroe\Graphlint\Fixes\CamelCaseNameFixer;
-use Olivernybroe\Graphlint\ProblemsHolder;
-use Olivernybroe\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\Fixes\CamelCaseNameFixer;
+use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class CamelCaseFieldDefinitionInspection extends Inspection
 {
@@ -30,4 +30,6 @@ class CamelCaseFieldDefinitionInspection extends Inspection
             $this->camelCaseNameFixer,
         );
     }
+
+
 }

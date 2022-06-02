@@ -1,8 +1,8 @@
 <?php
 
-use Olivernybroe\Graphlint\Configuration\Visitor;
-use Olivernybroe\Graphlint\Visitors\CompiledVisitorCollector;
-use Olivernybroe\Graphlint\Visitors\OriginalVisitorCollector;
+use Worksome\Graphlint\Configuration\Visitor;
+use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
+use Worksome\Graphlint\Visitors\OriginalVisitorCollector;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
@@ -21,7 +21,7 @@ return function(ContainerConfigurator $configurator) {
         ->args([tagged_iterator(Visitor::COMPILED)]);
 
     $services->load(
-        'Olivernybroe\\Graphlint\\',
+        'Worksome\\Graphlint\\',
         '../src/*',
     )->exclude([
         '../src/Fixer/FixerResult.php',

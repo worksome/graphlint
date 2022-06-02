@@ -1,12 +1,12 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\Parser;
-use Olivernybroe\Graphlint\Fixes\AddFieldFixer;
-use Olivernybroe\Graphlint\ProblemsHolder;
-use Olivernybroe\Graphlint\Utils\ListFinder;
+use Worksome\Graphlint\Fixes\AddFieldFixer;
+use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\ListFinder;
 
 class ModelDirectiveRequiresIdFieldInspection extends Inspection
 {

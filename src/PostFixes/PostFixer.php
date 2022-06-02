@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\PostFixes;
+namespace Worksome\Graphlint\PostFixes;
 
 abstract class PostFixer
 {

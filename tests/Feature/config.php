@@ -6,7 +6,7 @@ return function(ContainerConfigurator $configurator) {
     $services = $configurator->services();
 
     $services->load(
-        'Olivernybroe\\Graphlint\\Inspections\\',
+        'Worksome\\Graphlint\\Inspections\\',
          '../../src/Inspections/*',
     )->public();
 };

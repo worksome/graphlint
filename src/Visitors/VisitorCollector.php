@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Visitors;
+namespace Worksome\Graphlint\Visitors;
 
 use Closure;
 use GraphQL\Language\AST\ArgumentNode;
@@ -12,9 +12,9 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NodeKind;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\Visitor;
-use Olivernybroe\Graphlint\Analyser\AffectedInspections;
-use Olivernybroe\Graphlint\Inspections\Inspection;
-use Olivernybroe\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Analyser\AffectedInspections;
+use Worksome\Graphlint\Inspections\Inspection;
+use Worksome\Graphlint\ProblemsHolder;
 
 abstract class VisitorCollector
 {

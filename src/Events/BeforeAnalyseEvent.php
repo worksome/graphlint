@@ -1,6 +1,6 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Events;
+namespace Worksome\Graphlint\Events;
 
 class BeforeAnalyseEvent implements EventInterface
 {

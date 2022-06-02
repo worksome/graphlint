@@ -1,11 +1,11 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Fixes;
+namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
 use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
-use Olivernybroe\Graphlint\ProblemDescriptor;
+use Worksome\Graphlint\ProblemDescriptor;
 
 class AddFieldFixer extends Fixer
 {

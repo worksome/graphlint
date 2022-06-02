@@ -1,9 +1,9 @@
 <?php
 
-namespace Olivernybroe\Graphlint\Inspections;
+namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\EnumTypeDefinitionNode;
-use Olivernybroe\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\ProblemsHolder;
 
 class DisallowEnumInspection extends Inspection
 {
