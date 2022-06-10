@@ -39,8 +39,10 @@ class MutationFieldArgumentNamedInputInspection extends Inspection
             // Get all arguments of the fields
             ->flatMap(fn(FieldDefinitionNode $node) => iterator_to_array($node->arguments))
             // Filter down to arguments which are not named `input`
+            /** @phpstan-ignore-next-line flatMap return type is wrong */
             ->filter(fn(InputValueDefinitionNode $node) => $this->nameResolver->getName($node) !== 'input')
             // Register a problem on each of the arguments
+            /** @phpstan-ignore-next-line */
             ->each(fn(InputValueDefinitionNode $node) => $problemsHolder->registerProblem(
                 $node->name,
                 $this->renameFixer->withName('input'),

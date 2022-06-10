@@ -6,10 +6,13 @@ parameters:
         - src
         - tests
 
-    level: 8
+    level: 9
 
     ignoreErrors:
         - '#Call to an undefined method Pest\\Expectation.*#'
         -
             message: "#Undefined variable: \\$this#"
+            path: tests/Pest.php
+        -
+            message: "#Cannot access property .* on mixed.#"
             path: tests/Pest.php

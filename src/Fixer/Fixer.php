@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint\Fixer;
 
+use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\Visitor;
 use Worksome\Graphlint\Analyser\AnalyserResult;
@@ -29,6 +30,7 @@ class Fixer
         }
 
         foreach ($this->postFixers as $postFixer) {
+            /** @var DocumentNode $documentNode */
             $documentNode = Visitor::visit(
                 $documentNode,
                 [

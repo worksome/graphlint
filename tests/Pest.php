@@ -8,7 +8,9 @@ use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use Illuminate\Support\Str;
 use Psr\Container\ContainerInterface;
+use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
+use Symplify\SmartFileSystem\SmartFileInfo;
 use Worksome\Graphlint\Analyser\Analyser;
 use Worksome\Graphlint\Fixer\Fixer;
 use Worksome\Graphlint\Inspections\Inspection;
@@ -85,4 +87,17 @@ expect()->extend('toPassInspection', function (Inspection $inspection) {
 function app(): ContainerInterface
 {
     return test()->app;
+}
+
+/**
+ * @param string $directory
+ * @return iterable<int, array<int, SmartFileInfo>>
+ */
+function yieldFixtures(string $directory): iterable
+{
+    /** @phpstan-ignore-next-line */
+    return StaticFixtureFinder::yieldDirectory(
+        $directory,
+        '*.graphql.inc',
+    );
 }
