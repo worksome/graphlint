@@ -1,13 +1,14 @@
 <?php
 
+use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Worksome\Graphlint\Configuration\Visitor;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 use Worksome\Graphlint\Visitors\OriginalVisitorCollector;
-use Symfony\Component\Console\Application;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+
 use function Symfony\Component\DependencyInjection\Loader\Configurator\tagged_iterator;
 
-return function(ContainerConfigurator $configurator) {
+return function (ContainerConfigurator $configurator) {
     $services = $configurator->services()
         ->defaults()
             ->autowire()
@@ -35,5 +36,7 @@ return function(ContainerConfigurator $configurator) {
         '../src/ConsolePrinterListener.php',
         '../src/Events',
         '../src/Laravel',
+        '../src/Contracts',
+        '../src/InspectionDescription.php',
     ]);
 };

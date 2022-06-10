@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Analyser;
 
 use GraphQL\Language\AST\DocumentNode;
@@ -12,7 +14,8 @@ class AnalyserResult
         private DocumentNode $documentNode,
         private ProblemsHolder $problemsHolder,
         private AffectedInspections $affectedInspections,
-    ) {}
+    ) {
+    }
 
     public function getAffectedInspections(): AffectedInspections
     {

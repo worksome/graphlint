@@ -3,3 +3,6 @@ composer.lock
 .phpunit.result.cache
 var
 .idea
+.php-cs-fixer.cache
+graphlint.php
+schema.graphql

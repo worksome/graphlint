@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint;
 
 use GraphQL\Language\AST\Node;
@@ -13,10 +15,9 @@ class ProblemsHolder
     private array $problems = [];
 
     public function registerProblem(
-        Node   $node,
+        Node $node,
         ?Fixer $fix = null,
-    ): void
-    {
+    ): void {
         $this->problems[] = new ProblemDescriptor(
             $node,
             $fix

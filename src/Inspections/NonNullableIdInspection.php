@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
 use GraphQL\Language\AST\NonNullTypeNode;
 use Worksome\Graphlint\Fixes\NonNullFixer;
+use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
@@ -13,7 +16,8 @@ class NonNullableIdInspection extends Inspection
     public function __construct(
         private NodeNameResolver $nameResolver,
         private NonNullFixer $nonNullFixer,
-    ) {}
+    ) {
+    }
 
     public function visitFieldDefinition(
         ProblemsHolder $problemsHolder,
@@ -34,6 +38,13 @@ class NonNullableIdInspection extends Inspection
         $problemsHolder->registerProblem(
             $type,
             $this->nonNullFixer
+        );
+    }
+
+    public function definition(): InspectionDescription
+    {
+        return new InspectionDescription(
+            "Fields named ID must be non nullable.",
         );
     }
 }

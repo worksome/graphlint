@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NonNullTypeNode;
@@ -11,7 +13,8 @@ class NonNullFixer extends Fixer
 {
     public function __construct(
         private NodeReplacerCollector $nodeReplacerCollector,
-    ) {}
+    ) {
+    }
 
     public function fix(ProblemDescriptor $problemDescriptor): void
     {
@@ -23,6 +26,7 @@ class NonNullFixer extends Fixer
 
         $this->nodeReplacerCollector->addNodeToReplace(
             $node,
+            /** @phpstan-ignore-next-line */
             new NonNullTypeNode([
                 'type' => $node,
             ])

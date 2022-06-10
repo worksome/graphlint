@@ -1,12 +1,14 @@
 <?php
 
-namespace Worksome\Graphlint\Tests\Unit\Inspections;
+declare(strict_types=1);
 
-use Worksome\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
-use Worksome\Graphlint\Inspections\InputSuffixInputObjectTypeDefinitionInspection;
-use Worksome\Graphlint\Inspections\MutationFieldArgumentNamedInputInspection;
+namespace Worksome\Graphlint\Tests\Feature\Inspections;
+
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
+use Worksome\Graphlint\Inspections\MutationFieldArgumentNamedInputInspection;
+
+use function Worksome\Graphlint\Tests\app;
 
 it('can rename argument field', function (SmartFileInfo $smartFileInfo) {
     $inspection = app()->get(MutationFieldArgumentNamedInputInspection::class);

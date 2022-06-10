@@ -16,7 +16,8 @@
     "require-dev": {
         "pestphp/pest": "^1.21",
         "symfony/var-dumper": "^6.0",
-        "symplify/easy-testing": "^10.0"
+        "symplify/easy-testing": "^10.0",
+        "worksome/coding-style": "^0.20.0"
     },
     "license": "MIT",
     "autoload": {
@@ -40,7 +41,18 @@
     ],
     "config": {
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "worksome/coding-style": true
         }
+    },
+    "scripts": {
+        "phpcs": "vendor/bin/phpcs",
+        "php-cs-fixer": "vendor/bin/php-cs-fixer fix --ansi",
+        "php-cs-fixer-ci": "vendor/bin/php-cs-fixer fix --dry-run --ansi",
+        "phpcbf": "vendor/bin/phpcbf",
+        "phpstan": "vendor/bin/phpstan analyse",
+        "rector-ci": "vendor/bin/rector process --dry-run --ansi",
+        "rector": "vendor/bin/rector process --ansi"
     }
 }

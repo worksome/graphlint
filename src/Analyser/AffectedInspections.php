@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Analyser;
 
 use Illuminate\Support\Collection;
@@ -8,7 +10,7 @@ use Worksome\Graphlint\Inspections\Inspection;
 class AffectedInspections
 {
     /**
-     * @var Collection<Inspection>
+     * @var Collection<int, Inspection>
      */
     private Collection $inspections;
 

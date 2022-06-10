@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\PostFixes\Collector;
 
 use GraphQL\Language\AST\Node;
@@ -16,6 +18,9 @@ class NodeReplacerCollector
         $this->nodesToReplace[] = [$originalNode, $replacementNode];
     }
 
+    /**
+     * @return Node[][]
+     */
     public function getNodesToReplace(): array
     {
         return $this->nodesToReplace;

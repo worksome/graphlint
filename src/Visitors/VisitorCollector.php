@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Visitors;
 
 use Closure;
@@ -23,6 +25,9 @@ abstract class VisitorCollector
      */
     public abstract function getInspections(): iterable;
 
+    /**
+     * @return array<string, callable>
+     */
     public function getVisitor(ProblemsHolder $problemsHolder, AffectedInspections $affectedInspections): array
     {
         $visitors = array_map(
@@ -70,8 +75,11 @@ abstract class VisitorCollector
         return Visitor::visitInParallel($visitors);
     }
 
-    private function wrapper(Closure $closure, Inspection $inspection, AffectedInspections $affectedInspections): Closure
-    {
+    private function wrapper(
+        Closure $closure,
+        Inspection $inspection,
+        AffectedInspections $affectedInspections
+    ): Closure {
         return function (Node $node, $key, $parent) use ($closure, $affectedInspections, $inspection) {
 
             $beforeNode = $node->toArray(true);

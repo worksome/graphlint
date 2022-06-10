@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Worksome\Graphlint\Tests;
+
 use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use Illuminate\Support\Str;
+use Psr\Container\ContainerInterface;
+use Symplify\EasyTesting\StaticFixtureSplitter;
 use Worksome\Graphlint\Analyser\Analyser;
 use Worksome\Graphlint\Fixer\Fixer;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\Kernel;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
-use Psr\Container\ContainerInterface;
-use Symplify\EasyTesting\StaticFixtureSplitter;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +25,6 @@ use Symplify\EasyTesting\StaticFixtureSplitter;
 | need to change it using the "uses()" function to bind a different classes or traits.
 |
 */
-
-
 uses()->beforeEach(function () {
     $kernel = new Kernel([
         __DIR__ . '/Feature/config.php',
@@ -31,7 +33,6 @@ uses()->beforeEach(function () {
 
     $this->app = $kernel->getContainer();
 })->in('Feature');
-
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -42,9 +43,7 @@ uses()->beforeEach(function () {
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-
-expect()->extend('toPassInspection', function (Inspection $inspection)
-{
+expect()->extend('toPassInspection', function (Inspection $inspection) {
     $smartFileInfo = $this->value;
 
     $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($smartFileInfo);
@@ -73,8 +72,6 @@ expect()->extend('toPassInspection', function (Inspection $inspection)
         $inputAndExpected->getExpected()
     );
 });
-
-
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -85,7 +82,7 @@ expect()->extend('toPassInspection', function (Inspection $inspection)
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
-function app(): ContainerInterface {
+function app(): ContainerInterface
+{
     return test()->app;
 }

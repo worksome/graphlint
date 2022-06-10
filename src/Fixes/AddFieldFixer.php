@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
@@ -10,6 +12,7 @@ use Worksome\Graphlint\ProblemDescriptor;
 class AddFieldFixer extends Fixer
 {
     private FieldDefinitionNode $fieldDefinitionNode;
+
     private bool $fieldAtTop;
 
     public function fix(ProblemDescriptor $problemDescriptor): void

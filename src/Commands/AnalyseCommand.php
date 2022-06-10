@@ -1,16 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Commands;
 
+use GraphQL\Error\SyntaxError;
+use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
-use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use Worksome\Graphlint\Analyser\Analyser;
-use Worksome\Graphlint\Kernel;
+use Safe\Exceptions\FilesystemException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\Analyser\Analyser;
+use Worksome\Graphlint\Kernel;
+use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
+
+use function Safe\file_get_contents;
 
 class AnalyseCommand extends Command
 {
@@ -21,7 +29,7 @@ class AnalyseCommand extends Command
 
     protected static $defaultDescription = 'Analyses a graphql file';
 
-    protected function configure()
+    protected function configure(): void
     {
         $this->addArgument(
             self::COMPILED_SCHEMA,
@@ -35,6 +43,10 @@ class AnalyseCommand extends Command
         );
     }
 
+    /**
+     * @throws SyntaxError
+     * @throws FilesystemException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $configurationFile = getcwd() . DIRECTORY_SEPARATOR . 'graphlint.php';
@@ -43,8 +55,8 @@ class AnalyseCommand extends Command
             $configurationFile,
         ]);
         $kernel->boot();
-        $container = $kernel->getContainer();
 
+        $container = $kernel->getContainer();
 
         $style = new SymfonyStyle(
             $input,
@@ -54,28 +66,37 @@ class AnalyseCommand extends Command
         /** @var Analyser $analyser */
         $analyser = $container->get(Analyser::class);
 
-        $originalSchema = $input->getArgument(self::ORIGINAL_SCHEMA);
+        // get the schema files
+        $input->getArgument(self::ORIGINAL_SCHEMA);
         $compiledSchema = $input->getArgument(self::COMPILED_SCHEMA);
 
+        $compiledNode = Parser::parse(file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema));
+        /** @var CompiledVisitorCollector $compiledVisitor */
+        $compiledVisitor = $container->get(CompiledVisitorCollector::class);
+
+
         $style->info("Analysing schema...");
-        $result = $analyser->analyse($originalSchema);
+        $result = $analyser->analyse(
+            $compiledNode,
+            $compiledVisitor
+        );
 
         $problems = $result->getProblemsHolder()->getProblems();
-        $problemsAmount = count($problems);
+        $problemCount = count($problems);
 
-        if ($problemsAmount === 0) {
+        if ($problemCount === 0) {
             $style->success("No problems found!");
             return self::SUCCESS;
         }
 
-        $style->error("Found $problemsAmount problems");
+        $style->error("Found $problemCount problems");
 
         // Print out which inspections affected the schema.
         $style->writeln('<options=underscore>Applied inspections:</>');
         $style->listing($result->getAffectedInspections()->getInspections());
 
         foreach ($problems as $problemDescriptor) {
-            $problemDescriptor->getFix()->fix($problemDescriptor);
+            $problemDescriptor->getFix()?->fix($problemDescriptor);
         }
 
         $changedNode = Printer::doPrint($result->getDocumentNode());
@@ -90,5 +111,4 @@ class AnalyseCommand extends Command
 
         return self::FAILURE;
     }
-
 }

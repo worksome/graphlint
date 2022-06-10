@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint;
 
 use GraphQL\Language\Printer;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;
 use Worksome\Graphlint\Events\AfterFixerEvent;
 use Worksome\Graphlint\Events\BeforeAnalyseEvent;
-use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ConsolePrinterListener implements GraphlintListener
 {
@@ -16,7 +18,8 @@ class ConsolePrinterListener implements GraphlintListener
     public function __construct(
         private SymfonyStyle $style,
         private ConsoleDiffer $consoleDiffer,
-    ) {}
+    ) {
+    }
 
     public function beforeAnalyse(BeforeAnalyseEvent $event): void
     {
@@ -30,15 +33,15 @@ class ConsolePrinterListener implements GraphlintListener
 
         foreach (['compiled' => $compiledResult, 'original' => $originalResult] as $type => $result) {
             $problems = $result->getProblemsHolder()->getProblems();
-            $problemsAmount = count($problems);
+            $problemCount = count($problems);
 
-            if ($problemsAmount === 0) {
+            if ($problemCount === 0) {
                 $this->style->success("No problems found in $type schema!");
                 continue;
             }
 
             $this->hasErrors = true;
-            $this->style->error("Found $problemsAmount problems in $type schema");
+            $this->style->error("Found $problemCount problems in $type schema");
         }
     }
 

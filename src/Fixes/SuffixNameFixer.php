@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NameNode;
@@ -12,7 +14,8 @@ class SuffixNameFixer extends Fixer
 
     public function __construct(
         private NodeNameResolver $nodeNameResolver,
-    ) {}
+    ) {
+    }
 
     public function fix(ProblemDescriptor $problemDescriptor): void
     {

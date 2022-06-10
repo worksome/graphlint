@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixer;
 
 use GraphQL\Language\AST\DocumentNode;
@@ -9,7 +11,8 @@ class FixerResult
     public function __construct(
         private DocumentNode $originalDocumentNode,
         private DocumentNode $documentNode,
-    ) {}
+    ) {
+    }
 
     public function getDocumentNode(): DocumentNode
     {

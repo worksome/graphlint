@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+require __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use Worksome\Graphlint\Commands\AnalyseCommand;
+
+$application = new Application('Graphlint', '1.0.0');
+$command = new AnalyseCommand();
+
+$application->add($command);
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();

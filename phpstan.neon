@@ -1,0 +1,15 @@
+includes:
+    - ./vendor/worksome/coding-style/phpstan.neon
+
+parameters:
+    paths:
+        - src
+        - tests
+
+    level: 8
+
+    ignoreErrors:
+        - '#Call to an undefined method Pest\\Expectation.*#'
+        -
+            message: "#Undefined variable: \\$this#"
+            path: tests/Pest.php

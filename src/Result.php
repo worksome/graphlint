@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint;
 
 use Worksome\Graphlint\Analyser\AnalyserResult;
@@ -10,7 +12,8 @@ class Result
     public function __construct(
         private AnalyserResult $analyserResult,
         private FixerResult $fixerResult,
-    ) {}
+    ) {
+    }
 
     public function getAnalyserResult(): AnalyserResult
     {

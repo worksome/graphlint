@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NameNode;
@@ -11,7 +13,8 @@ class PascalCaseNameFixer extends Fixer
 {
     public function __construct(
         private NodeNameResolver $nodeNameResolver,
-    ) {}
+    ) {
+    }
 
     public function fix(ProblemDescriptor $problemDescriptor): void
     {
@@ -21,7 +24,13 @@ class PascalCaseNameFixer extends Fixer
             return;
         }
 
-        $pascalCase = Str::of($this->nodeNameResolver->getName($node))
+        $name = $this->nodeNameResolver->getName($node);
+
+        if ($name === null) {
+            return;
+        }
+
+        $pascalCase = Str::of($name)
             ->camel()
             ->ucfirst();
 

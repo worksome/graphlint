@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixer;
 
 use GraphQL\Language\AST\Node;
@@ -14,7 +16,8 @@ class Fixer
      */
     public function __construct(
         private array $postFixers,
-    ) {}
+    ) {
+    }
 
     public function fix(AnalyserResult $result): FixerResult
     {

@@ -1,0 +1,51 @@
+name: Code Analysis
+
+on:
+  push:
+
+jobs:
+  code_analysis_composer:
+    timeout-minutes: 30
+    if: github.event_name == 'pull_request'
+    name: ${{ matrix.actions.name }} on PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast : false
+      matrix:
+        php: ["8.1"]
+
+        actions:
+          - name: PHP CodeSniffer
+            run: "vendor/bin/phpcs -q --report=checkstyle | cs2pr --graceful-warnings"
+
+          - name: PHPStan
+            run: "composer phpstan"
+
+          - name: PHPCS Fixer
+            run: "composer php-cs-fixer-ci -- --format=checkstyle | cs2pr"
+
+          - name: Rector
+            run: "composer rector-ci"
+
+          - name : Composer validate
+            run : "composer validate"
+
+    env:
+      APP_NAME : "Worksome CI"
+      APP_ENV : testing
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          coverage: none
+          php-version: ${{ matrix.php }}
+          tools: composer, cs2pr
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v2
+
+      - run: ${{ matrix.actions.run }}

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NameNode;
@@ -11,7 +13,8 @@ class CamelCaseNameFixer extends Fixer
 {
     public function __construct(
         private NodeNameResolver $nodeNameResolver,
-    ) {}
+    ) {
+    }
 
     public function fix(ProblemDescriptor $problemDescriptor): void
     {
@@ -21,7 +24,13 @@ class CamelCaseNameFixer extends Fixer
             return;
         }
 
-        $camelCasedName = Str::camel($this->nodeNameResolver->getName($node));
+        $name = $this->nodeNameResolver->getName($node);
+
+        if ($name === null) {
+            return;
+        }
+
+        $camelCasedName = Str::camel($name);
 
         $node->value = $camelCasedName;
     }

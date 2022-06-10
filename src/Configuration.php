@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint;
 
 use Worksome\Graphlint\Inspections\Inspection;
@@ -11,7 +13,8 @@ class Configuration
      */
     public function __construct(
         private array $inspections,
-    ) {}
+    ) {
+    }
 
     /**
      * @return Inspection[]

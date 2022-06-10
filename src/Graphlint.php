@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Worksome\Graphlint;
 
 use GraphQL\Language\AST\DocumentNode;
@@ -23,12 +25,13 @@ class Graphlint
         private Analyser $analyser,
         private Fixer $fixer,
         private array $listeners,
-    ) {}
+    ) {
+    }
 
     public function inspect(
         DocumentNode $originalDocumentNode,
         DocumentNode $compiledDocumentNode,
-    ) {
+    ): void {
         $this->dispatchEvent(new BeforeAnalyseEvent());
 
         $originalAnalyserResult = $this->analyser->analyse(
