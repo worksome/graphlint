@@ -6,7 +6,6 @@ on:
 jobs:
   code_analysis_composer:
     timeout-minutes: 30
-    if: github.event_name == 'pull_request'
     name: ${{ matrix.actions.name }} on PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
     strategy:
