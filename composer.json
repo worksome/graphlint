@@ -54,6 +54,14 @@
         "phpcbf": "vendor/bin/phpcbf",
         "phpstan": "vendor/bin/phpstan analyse",
         "rector-ci": "vendor/bin/rector process --dry-run --ansi",
-        "rector": "vendor/bin/rector process --ansi"
+        "rector": "vendor/bin/rector process --ansi",
+        "pest": "vendor/bin/pest --parallel",
+        "test": [
+            "@phpcs",
+            "@php-cs-fixer-ci",
+            "@phpstan",
+            "@rector-ci",
+            "@pest"
+        ]
     }
 }

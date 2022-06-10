@@ -90,7 +90,6 @@ function app(): ContainerInterface
 }
 
 /**
- * @param string $directory
  * @return iterable<int, array<int, SmartFileInfo>>
  */
 function yieldFixtures(string $directory): iterable

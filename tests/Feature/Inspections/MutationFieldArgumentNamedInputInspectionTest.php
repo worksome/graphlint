@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint\Tests\Feature\Inspections;
 
-use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Worksome\Graphlint\Inspections\MutationFieldArgumentNamedInputInspection;
 
