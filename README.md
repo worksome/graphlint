@@ -25,6 +25,12 @@ $ graphlint path/to/schema.graphql
 
 ## Configuration
 
+
+> ⚠️ Currently the package only supports running on compiled schema.
+> It will later get support for running on original schemas also.
+
+Create a file in the root called `graphlint.php` with the following configuration.
+
 ```php
 declare(strict_types=1);
 
@@ -39,3 +45,6 @@ return function (ContainerConfigurator $config): void {
         ->tag(Visitor::COMPILED);
 };
 ```
+
+The tool can have a configuration for schemas before compiling and after.
+Some libraries do not compile their schema, so for those only one of the tags should be used.
