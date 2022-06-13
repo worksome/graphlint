@@ -1,5 +1,5 @@
 {
-  "directories": ["config", "src", "vendor", "var"],
+  "directories": ["config", "src", "vendor"],
   "files": ["VERSION"],
   "output": "build/graphlint.phar"
 }
