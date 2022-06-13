@@ -49,7 +49,18 @@ class AnalyseCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $style = new SymfonyStyle(
+            $input,
+            $output
+        );
+
         $configurationFile = getcwd() . DIRECTORY_SEPARATOR . 'graphlint.php';
+
+        if (! is_file($configurationFile) || ! is_readable($configurationFile)) {
+            $style->error("Unable to find a \"graphlint.php\" configuration file in your current directory.");
+
+            return 1;
+        }
 
         $kernel = new Kernel([
             $configurationFile,
@@ -57,11 +68,6 @@ class AnalyseCommand extends Command
         $kernel->boot();
 
         $container = $kernel->getContainer();
-
-        $style = new SymfonyStyle(
-            $input,
-            $output
-        );
 
         /** @var Analyser $analyser */
         $analyser = $container->get(Analyser::class);
