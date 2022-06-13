@@ -51,6 +51,11 @@ jobs:
             --title "${{ steps.version.outputs.version }}" \
             --generate-notes
 
+      - name: List all releases
+        run: gh release list
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload phar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
