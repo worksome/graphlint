@@ -56,4 +56,4 @@ jobs:
       - name: Upload phar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.version.outputs.version }} build/graphlint.phar
+        run: gh release upload ${{ steps.version.outputs.version }} build/graphlint
