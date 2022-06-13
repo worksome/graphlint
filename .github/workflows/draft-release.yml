@@ -51,11 +51,6 @@ jobs:
       - name: Compile Graphlint into Phar
         run: ./box.phar compile
 
-      - name: List all releases
-        run: gh release list
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Upload phar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
