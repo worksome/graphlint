@@ -1,0 +1,52 @@
+# Creates a draft release
+name: Draft Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  releaseDraft:
+    name: Update draft
+    runs-on: ubuntu-latest
+    steps:
+      # Check out current repository
+      - name: Fetch Sources
+        uses: actions/checkout@v3
+
+      - name: Fetch version
+        id: version
+        run: |
+          VERSION="$(cat VERSION)"
+          echo "::set-output name=version::$VERSION"
+
+      # Remove old release drafts by using the curl request for the available releases with draft flag
+      - name: Remove Old Release Drafts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/{owner}/{repo}/releases \
+            --jq '.[] | select(.draft == true) | .id' \
+            | xargs -I '{}' gh api -X DELETE repos/{owner}/{repo}/releases/{}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+
+      - name: Download Box Phar
+        run: wget https://github.com/box-project/box/releases/latest/download/box.phar
+
+      - name: Compile Graphlint into Phar
+        run: ./box.phar compile
+
+      # Create new release draft - which is not publicly visible and requires manual acceptance
+      - name: Create Release Draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ steps.version.outputs.version }} \
+            --draft \
+            --title "${{ steps.version.outputs.version }}" \
+            --generate-notes
+
+      - name: Upload phar
+        run: gh release upload ${{ steps.version.outputs.version }} build/graphlint.phar

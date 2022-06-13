@@ -5,7 +5,7 @@ require __DIR__.'/../vendor/autoload.php';
 use Symfony\Component\Console\Application;
 use Worksome\Graphlint\Commands\AnalyseCommand;
 
-$application = new Application('Graphlint', '1.0.0');
+$application = new Application('Graphlint', \Safe\file_get_contents(__DIR__ . '/../VERSION'));
 $command = new AnalyseCommand();
 
 $application->add($command);
