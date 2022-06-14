@@ -59,7 +59,7 @@ class AnalyseCommand extends Command
         if (! is_file($configurationFile) || ! is_readable($configurationFile)) {
             $style->error("Unable to find a \"graphlint.php\" configuration file in your current directory.");
 
-            return 1;
+            return self::FAILURE;
         }
 
         $kernel = new Kernel([
@@ -72,7 +72,7 @@ class AnalyseCommand extends Command
         /** @var Analyser $analyser */
         $analyser = $container->get(Analyser::class);
 
-        // get the schema files
+        // Get the schema files
         $input->getArgument(self::ORIGINAL_SCHEMA);
         $compiledSchema = $input->getArgument(self::COMPILED_SCHEMA);
 
