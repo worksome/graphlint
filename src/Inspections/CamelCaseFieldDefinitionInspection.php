@@ -9,13 +9,15 @@ use Illuminate\Support\Str;
 use Worksome\Graphlint\Fixes\CamelCaseNameFixer;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\ApolloFederationChecker;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class CamelCaseFieldDefinitionInspection extends Inspection
 {
     public function __construct(
-        private NodeNameResolver $nameResolver,
-        private CamelCaseNameFixer $camelCaseNameFixer,
+        private readonly NodeNameResolver $nameResolver,
+        private readonly CamelCaseNameFixer $camelCaseNameFixer,
+        private readonly ApolloFederationChecker $apolloFederationChecker,
     ) {
     }
 
@@ -30,6 +32,10 @@ class CamelCaseFieldDefinitionInspection extends Inspection
         }
 
         if ($name === Str::camel($name)) {
+            return;
+        }
+
+        if ($this->apolloFederationChecker->isApolloFieldDefinition($fieldDefinitionNode)) {
             return;
         }
 
