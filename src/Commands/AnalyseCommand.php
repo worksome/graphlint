@@ -11,6 +11,7 @@ use Safe\Exceptions\FilesystemException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
@@ -24,6 +25,7 @@ class AnalyseCommand extends Command
 {
     private const ORIGINAL_SCHEMA = 'sdl';
     private const COMPILED_SCHEMA = 'compiled_schema';
+    private const INPUT = 'input';
 
     protected static $defaultName = 'analyse';
 
@@ -40,6 +42,13 @@ class AnalyseCommand extends Command
             self::ORIGINAL_SCHEMA,
             InputArgument::OPTIONAL,
             'The original schema definition language.'
+        );
+        $this->addOption(
+            self::INPUT,
+            null,
+            InputOption::VALUE_OPTIONAL,
+            "The format for the schema inputs",
+            InputFormat::FILE->value,
         );
     }
 
@@ -73,10 +82,17 @@ class AnalyseCommand extends Command
         $analyser = $container->get(Analyser::class);
 
         // Get the schema files
-        $input->getArgument(self::ORIGINAL_SCHEMA);
+        /** @var string $compiledSchema */
         $compiledSchema = $input->getArgument(self::COMPILED_SCHEMA);
+        /** @var string $inputFormat */
+        $inputFormat = $input->getOption(self::INPUT);
+        if (InputFormat::from($inputFormat) === InputFormat::FILE) {
+            $rawSchema = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema);
+        } else {
+            $rawSchema = $compiledSchema;
+        }
 
-        $compiledNode = Parser::parse(file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema));
+        $compiledNode = Parser::parse($rawSchema);
         /** @var CompiledVisitorCollector $compiledVisitor */
         $compiledVisitor = $container->get(CompiledVisitorCollector::class);
 
