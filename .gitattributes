@@ -1,0 +1,10 @@
+.github export-ignore
+.tests export-ignore
+test-resources export-ignore
+..gitattributes export-ignore
+box.json export-ignore
+.php-cs-fixer.dist.php export-ignore
+phpcs.xml export-ignore
+phpstan.neon export-ignore
+phpunit.xml export-ignore
+rector.php export-ignore
