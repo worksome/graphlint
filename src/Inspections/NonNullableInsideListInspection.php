@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\ListTypeNode;
+use GraphQL\Language\AST\NamedTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NonNullTypeNode;
 use Worksome\Graphlint\Fixes\NonNullFixer;
@@ -31,7 +32,7 @@ class NonNullableInsideListInspection extends Inspection
             return;
         }
 
-        if ($this->apolloFederationChecker->isApolloTypeName($type->name)) {
+        if ($type instanceof NamedTypeNode && $this->apolloFederationChecker->isApolloTypeName($type->name)) {
             return;
         }
 

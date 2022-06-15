@@ -15,7 +15,7 @@ use Worksome\Graphlint\Utils\NodeNameResolver;
 class PascalCaseObjectTypeDefinitionInspection extends Inspection
 {
     public function __construct(
-        private readonly NodeNameResolver    $nameResolver,
+        private readonly NodeNameResolver $nameResolver,
         private readonly PascalCaseNameFixer $pascalCaseNameFixer,
         private readonly ApolloFederationChecker $apolloFederationChecker,
     ) {
