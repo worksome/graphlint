@@ -8,6 +8,7 @@ use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use GraphQL\Language\Visitor;
+use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\ProblemsHolder;
 use Worksome\Graphlint\Visitors\VisitorCollector;
 
@@ -17,12 +18,21 @@ class Analyser
         DocumentNode $documentNode,
         VisitorCollector $visitorCollector,
     ): AnalyserResult {
+        $problemsHolder = new ProblemsHolder();
+        $affectedInspections = new AffectedInspections();
+
+        if ($documentNode instanceof EmptyDocumentNode) {
+            return new AnalyserResult(
+                $documentNode,
+                $documentNode,
+                $problemsHolder,
+                $affectedInspections,
+            );
+        }
+
         $originalDocumentNode = Parser::parse(
             Printer::doPrint($documentNode)
         );
-
-        $problemsHolder = new ProblemsHolder();
-        $affectedInspections = new AffectedInspections();
 
         Visitor::visit(
             $documentNode,

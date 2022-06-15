@@ -6,7 +6,6 @@ namespace Worksome\Graphlint\Commands;
 
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
-use GraphQL\Language\Printer;
 use Safe\Exceptions\FilesystemException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -15,9 +14,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use Worksome\Graphlint\Analyser\Analyser;
+use Worksome\Graphlint\ConsolePrinterListener;
+use Worksome\Graphlint\EmptyDocumentNode;
+use Worksome\Graphlint\Graphlint;
 use Worksome\Graphlint\Kernel;
-use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 
 use function Safe\file_get_contents;
 
@@ -78,8 +78,10 @@ class AnalyseCommand extends Command
 
         $container = $kernel->getContainer();
 
-        /** @var Analyser $analyser */
-        $analyser = $container->get(Analyser::class);
+        /** @var Graphlint $graphlint */
+        $graphlint = $container->get(Graphlint::class);
+        /** @var ConsoleDiffer $differ */
+        $differ = $container->get(ConsoleDiffer::class);
 
         // Get the schema files
         /** @var string $compiledSchema */
@@ -93,44 +95,15 @@ class AnalyseCommand extends Command
         }
 
         $compiledNode = Parser::parse($rawSchema);
-        /** @var CompiledVisitorCollector $compiledVisitor */
-        $compiledVisitor = $container->get(CompiledVisitorCollector::class);
 
 
-        $style->info("Analysing schema...");
-        $result = $analyser->analyse(
+        $consolePrinter = new ConsolePrinterListener($style, $differ);
+        $graphlint->addListener($consolePrinter);
+        $graphlint->inspect(
+            new EmptyDocumentNode(),
             $compiledNode,
-            $compiledVisitor
         );
 
-        $problems = $result->getProblemsHolder()->getProblems();
-        $problemCount = count($problems);
-
-        if ($problemCount === 0) {
-            $style->success("No problems found!");
-            return self::SUCCESS;
-        }
-
-        $style->error("Found $problemCount problems");
-
-        // Print out which inspections affected the schema.
-        $style->writeln('<options=underscore>Applied inspections:</>');
-        $style->listing($result->getAffectedInspections()->getInspections());
-
-        foreach ($problems as $problemDescriptor) {
-            $problemDescriptor->getFix()?->fix($problemDescriptor);
-        }
-
-        $changedNode = Printer::doPrint($result->getDocumentNode());
-        $originalNode = Printer::doPrint($result->getOriginalDocumentNode());
-
-        /** @var ConsoleDiffer $differ */
-        $differ = $container->get(ConsoleDiffer::class);
-        $style->writeln($differ->diff(
-            $originalNode,
-            $changedNode,
-        ));
-
-        return self::FAILURE;
+        return $consolePrinter->getStatusCode();
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint;
 
 use GraphQL\Language\Printer;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;
@@ -16,8 +17,8 @@ class ConsolePrinterListener implements GraphlintListener
     private bool $hasErrors = false;
 
     public function __construct(
-        private SymfonyStyle $style,
-        private ConsoleDiffer $consoleDiffer,
+        private readonly SymfonyStyle $style,
+        private readonly ConsoleDiffer $consoleDiffer,
     ) {
     }
 
@@ -67,6 +68,6 @@ class ConsolePrinterListener implements GraphlintListener
 
     public function getStatusCode(): int
     {
-        return $this->hasErrors ? 0 : 1;
+        return $this->hasErrors ? Command::FAILURE : Command::SUCCESS;
     }
 }

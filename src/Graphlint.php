@@ -20,10 +20,10 @@ class Graphlint
      * @param GraphlintListener[] $listeners
      */
     public function __construct(
-        private OriginalVisitorCollector $originalVisitorCollector,
-        private CompiledVisitorCollector $compiledVisitorCollector,
-        private Analyser $analyser,
-        private Fixer $fixer,
+        private readonly OriginalVisitorCollector $originalVisitorCollector,
+        private readonly CompiledVisitorCollector $compiledVisitorCollector,
+        private readonly Analyser $analyser,
+        private readonly Fixer $fixer,
         private array $listeners,
     ) {
     }

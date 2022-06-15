@@ -32,6 +32,7 @@ $ graphlint path/to/schema.graphql
 Create a file in the root called `graphlint.php` with the following configuration.
 
 ```php
+<?php
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -45,6 +46,21 @@ return function (ContainerConfigurator $config): void {
         ->tag(Visitor::COMPILED);
 };
 ```
+
+for using the graphql standard, the following configuration can be used
+```php
+<?php
+
+declare(strict_types=1);
+
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Worksome\Graphlint\GraphlintSet;
+
+return function (ContainerConfigurator $config): void {
+    $config->import(GraphlintSet::Standard->value);
+};
+```
+
 
 The tool can have a configuration for schemas before compiling and after.
 Some libraries do not compile their schema, so for those only one of the tags should be used.
