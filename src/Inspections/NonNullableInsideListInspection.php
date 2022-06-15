@@ -10,11 +10,13 @@ use GraphQL\Language\AST\NonNullTypeNode;
 use Worksome\Graphlint\Fixes\NonNullFixer;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\ApolloFederationChecker;
 
 class NonNullableInsideListInspection extends Inspection
 {
     public function __construct(
-        private NonNullFixer $nonNullFixer,
+        private readonly NonNullFixer $nonNullFixer,
+        private readonly ApolloFederationChecker $apolloFederationChecker,
     ) {
     }
 
@@ -29,6 +31,9 @@ class NonNullableInsideListInspection extends Inspection
             return;
         }
 
+        if ($this->apolloFederationChecker->isApolloTypeName($type->name)) {
+            return;
+        }
 
         $problemsHolder->registerProblem(
             $type,

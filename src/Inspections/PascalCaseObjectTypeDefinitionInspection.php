@@ -9,13 +9,15 @@ use Illuminate\Support\Str;
 use Worksome\Graphlint\Fixes\PascalCaseNameFixer;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\ApolloFederationChecker;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class PascalCaseObjectTypeDefinitionInspection extends Inspection
 {
     public function __construct(
-        private NodeNameResolver $nameResolver,
-        private PascalCaseNameFixer $pascalCaseNameFixer,
+        private readonly NodeNameResolver    $nameResolver,
+        private readonly PascalCaseNameFixer $pascalCaseNameFixer,
+        private readonly ApolloFederationChecker $apolloFederationChecker,
     ) {
     }
 
@@ -26,6 +28,10 @@ class PascalCaseObjectTypeDefinitionInspection extends Inspection
         $name = $this->nameResolver->getName($objectTypeDefinitionNode);
 
         if ($name === null) {
+            return;
+        }
+
+        if ($this->apolloFederationChecker->isApolloTypeName($objectTypeDefinitionNode->name)) {
             return;
         }
 
