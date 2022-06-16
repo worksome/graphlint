@@ -1,0 +1,23 @@
+name: Release
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  publish-to-brew-tap:
+    name: Publish to Brew Tap
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish to Brew Tap
+        uses: mislav/bump-homebrew-formula-action@v2
+        with:
+          formula-name: graphlint
+          formula-path: Formula/graphlint.rb
+          homebrew-tap: worksome/homebrew-tap
+          base-branch: main
+          tag-name: ${{ github.event.release.tag_name }}
+          download-url: https://github.com/worksome/graphlint/releases/download/${{ github.event.release.tag_name }}/graphlint
+          commit-message: 'chore({{formulaName}}): update to version {{version}}'
+        env:
+          COMMITTER_TOKEN: ${{ secrets.BREW_TAP_PUBLISH_TOKEN }}
