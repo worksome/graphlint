@@ -7,12 +7,17 @@ namespace Worksome\Graphlint\Visitors;
 use Closure;
 use GraphQL\Language\AST\ArgumentNode;
 use GraphQL\Language\AST\EnumTypeDefinitionNode;
+use GraphQL\Language\AST\EnumValueDefinitionNode;
 use GraphQL\Language\AST\FieldDefinitionNode;
 use GraphQL\Language\AST\InputObjectTypeDefinitionNode;
+use GraphQL\Language\AST\InputValueDefinitionNode;
+use GraphQL\Language\AST\InterfaceTypeDefinitionNode;
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NodeKind;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
+use GraphQL\Language\AST\ScalarTypeDefinitionNode;
+use GraphQL\Language\AST\UnionTypeDefinitionNode;
 use GraphQL\Language\Visitor;
 use Worksome\Graphlint\Analyser\AffectedInspections;
 use Worksome\Graphlint\Inspections\Inspection;
@@ -65,6 +70,36 @@ abstract class VisitorCollector
                 NodeKind::ENUM_TYPE_DEFINITION => $this->wrapper(
                     fn(EnumTypeDefinitionNode $node) =>
                     $inspection->visitEnumTypeDefinition($problemsHolder, $node),
+                    $inspection,
+                    $affectedInspections,
+                ),
+                NodeKind::SCALAR_TYPE_DEFINITION => $this->wrapper(
+                    fn(ScalarTypeDefinitionNode $node) =>
+                    $inspection->visitScalarTypeDefinition($problemsHolder, $node),
+                    $inspection,
+                    $affectedInspections,
+                ),
+                NodeKind::INPUT_VALUE_DEFINITION => $this->wrapper(
+                    fn(InputValueDefinitionNode $node) =>
+                    $inspection->visitInputValueDefinition($problemsHolder, $node),
+                    $inspection,
+                    $affectedInspections,
+                ),
+                NodeKind::INTERFACE_TYPE_DEFINITION => $this->wrapper(
+                    fn(InterfaceTypeDefinitionNode $node) =>
+                    $inspection->visitInterfaceTypeDefinition($problemsHolder, $node),
+                    $inspection,
+                    $affectedInspections,
+                ),
+                NodeKind::UNION_TYPE_DEFINITION => $this->wrapper(
+                    fn(UnionTypeDefinitionNode $node) =>
+                    $inspection->visitUnionTypeDefinition($problemsHolder, $node),
+                    $inspection,
+                    $affectedInspections,
+                ),
+                NodeKind::ENUM_VALUE_DEFINITION => $this->wrapper(
+                    fn(EnumValueDefinitionNode $node) =>
+                    $inspection->visitEnumValueDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                 ),

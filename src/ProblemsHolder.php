@@ -20,6 +20,19 @@ class ProblemsHolder
     ): void {
         $this->problems[] = new ProblemDescriptor(
             $node,
+            null,
+            $fix
+        );
+    }
+
+    public function registerProblemWithDescription(
+        Node $node,
+        string $description,
+        ?Fixer $fix = null,
+    ): void {
+        $this->problems[] = new ProblemDescriptor(
+            $node,
+            $description,
             $fix
         );
     }

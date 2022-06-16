@@ -74,6 +74,22 @@ expect()->extend('toPassInspection', function (Inspection $inspection) {
         $inputAndExpected->getExpected()
     );
 });
+
+expect()->extend('toHaveInspectionProblems', function (Inspection $inspection, int $count = 1) {
+    $smartFileInfo = $this->value;
+
+    $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($smartFileInfo);
+
+    $analyser = new Analyser();
+    $result = $analyser->analyse(
+        Parser::parse($inputAndExpected->getInput()),
+        new CompiledVisitorCollector([
+            $inspection
+        ]),
+    );
+    expect($result->getProblemsHolder()->getProblems())->toHaveCount($count);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -94,9 +110,14 @@ function app(): ContainerInterface
  */
 function yieldFixtures(string $directory): iterable
 {
-    /** @phpstan-ignore-next-line */
-    return StaticFixtureFinder::yieldDirectory(
+    /** @var iterable<int, array<int, SmartFileInfo>> $args */
+    $args = StaticFixtureFinder::yieldDirectory(
         $directory,
         '*.graphql.inc',
     );
+    foreach ($args as $files) {
+        $file = $files[0];
+
+        yield $file->getFilename() => $files;
+    }
 }

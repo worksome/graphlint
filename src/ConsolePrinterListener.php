@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Worksome\Graphlint;
 
 use GraphQL\Language\Printer;
+use Illuminate\Support\Collection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\Analyser\AnalyserResult;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;
 use Worksome\Graphlint\Events\AfterFixerEvent;
 use Worksome\Graphlint\Events\BeforeAnalyseEvent;
@@ -33,6 +35,8 @@ class ConsolePrinterListener implements GraphlintListener
         $originalResult = $event->getOriginalAnalyserResult();
 
         foreach (['compiled' => $compiledResult, 'original' => $originalResult] as $type => $result) {
+            /** @var AnalyserResult $result */
+
             $problems = $result->getProblemsHolder()->getProblems();
             $problemCount = count($problems);
 
@@ -43,6 +47,25 @@ class ConsolePrinterListener implements GraphlintListener
 
             $this->hasErrors = true;
             $this->style->error("Found $problemCount problems in $type schema");
+
+            $unfixableErrors = Collection::make($problems)
+                ->filter(fn(ProblemDescriptor $descriptor) => $descriptor->getFix() === null)
+                ->count();
+            $this->style->warning("$unfixableErrors cannot be automatically fixed in $type schema");
+
+            $this->style->table(
+                [
+                    'location',
+                    'description',
+                ],
+                Collection::make($problems)
+                    ->map(function (ProblemDescriptor $descriptor) {
+                        $startToken = $descriptor->getNode()->loc->startToken;
+
+                        return ["$startToken->line:$startToken->column", $descriptor->getDescription()];
+                    })->all()
+            )
+            ;
         }
     }
 

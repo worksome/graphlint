@@ -10,8 +10,9 @@ use Worksome\Graphlint\Fixes\Fixer;
 class ProblemDescriptor
 {
     public function __construct(
-        private Node $node,
-        private ?Fixer $fix,
+        private readonly Node $node,
+        private readonly string|null $description,
+        private readonly ?Fixer $fix,
     ) {
     }
 
@@ -23,5 +24,10 @@ class ProblemDescriptor
     public function getFix(): ?Fixer
     {
         return $this->fix;
+    }
+
+    public function getDescription(): string|null
+    {
+        return $this->description;
     }
 }
