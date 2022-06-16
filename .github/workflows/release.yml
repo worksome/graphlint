@@ -26,6 +26,7 @@ jobs:
           push-to: worksome/homebrew-tap
           base-branch: main
           tag-name: ${{ github.event.release.tag_name }}
+          create-pullrequest: false
           download-url: https://github.com/worksome/graphlint/releases/download/${{ github.event.release.tag_name }}/graphlint
           commit-message: 'chore({{formulaName}}): update to version {{version}}'
         env:
