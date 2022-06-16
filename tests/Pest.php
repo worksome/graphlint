@@ -6,6 +6,7 @@ namespace Worksome\Graphlint\Tests;
 
 use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Psr\Container\ContainerInterface;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
@@ -16,6 +17,7 @@ use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Fixer\Fixer;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\Kernel;
+use Worksome\Graphlint\ProblemDescriptor;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 
 /*
@@ -64,6 +66,9 @@ expect()->extend('toPassInspection', function (
     );
 
     if (Str::endsWith($smartFileInfo->getRealPath(), '.skip.graphql.inc')) {
+        Collection::make($result->getProblemsHolder()->getProblems())
+            ->map(fn(ProblemDescriptor $descriptor) => $descriptor->getDescription())
+            ->dump();
         expect($result->getProblemsHolder()->getProblems())->toHaveCount(0);
         return;
     }

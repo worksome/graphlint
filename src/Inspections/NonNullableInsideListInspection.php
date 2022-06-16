@@ -32,7 +32,7 @@ class NonNullableInsideListInspection extends Inspection
             return;
         }
 
-        if ($type instanceof NamedTypeNode && $this->apolloFederationChecker->isApolloTypeName($type->name)) {
+        if ($type instanceof NamedTypeNode && $this->apolloFederationChecker->isApolloDefinitionName($type->name)) {
             return;
         }
 

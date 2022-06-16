@@ -29,7 +29,7 @@ class ApolloFederationChecker
         return true;
     }
 
-    public function isApolloTypeName(NameNode $name): bool
+    public function isApolloDefinitionName(NameNode $name): bool
     {
         $name = $this->nodeNameResolver->getName($name);
 
@@ -37,7 +37,7 @@ class ApolloFederationChecker
             return false;
         }
 
-        if (! in_array($name, ['_Entity', '_Service'])) {
+        if (! in_array($name, ['_Entity', '_Service', '_FieldSet', '_Any', 'representations', 'sdl'])) {
             return false;
         }
 

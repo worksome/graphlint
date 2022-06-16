@@ -31,7 +31,7 @@ class PascalCaseObjectTypeDefinitionInspection extends Inspection
             return;
         }
 
-        if ($this->apolloFederationChecker->isApolloTypeName($objectTypeDefinitionNode->name)) {
+        if ($this->apolloFederationChecker->isApolloDefinitionName($objectTypeDefinitionNode->name)) {
             return;
         }
 

@@ -17,9 +17,15 @@ use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Language\AST\UnionTypeDefinitionNode;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
+use Worksome\Graphlint\Utils\ApolloFederationChecker;
 
 class DescriptionRequiredInspection extends Inspection
 {
+    public function __construct(
+        private readonly ApolloFederationChecker $apolloFederationChecker,
+    ) {
+    }
+
     public function visitScalarTypeDefinition(
         ProblemsHolder $problemsHolder,
         ScalarTypeDefinitionNode $scalarTypeDefinitionNode,
@@ -85,12 +91,23 @@ class DescriptionRequiredInspection extends Inspection
 
     private function visitDefinition(Node $node, ProblemsHolder $problemsHolder): void
     {
+
         if (! property_exists($node, 'description')) {
             return;
         }
+
         if (! property_exists($node, 'name')) {
             return;
         }
+
+        if ($this->apolloFederationChecker->isApolloDefinitionName($node->name)) {
+            return;
+        }
+
+        if ($node instanceof FieldDefinitionNode && $this->apolloFederationChecker->isApolloFieldDefinition($node)) {
+            return;
+        }
+
         if ($this->hasDescription($node->description)) {
             return;
         }
