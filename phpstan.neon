@@ -16,3 +16,6 @@ parameters:
         -
             message: "#Cannot access property .* on mixed.#"
             path: tests/Pest.php
+        -
+            message: '#^Instanceof between GraphQL\\Language\\AST\\Node and GraphQL\\Language\\AST\\NodeList will always evaluate to false\.$#'
+            path: src/Inspections/IgnoreByNameSuppressorInspection.php
