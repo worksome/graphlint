@@ -60,12 +60,14 @@ class ConsolePrinterListener implements GraphlintListener
                 ],
                 Collection::make($problems)
                     ->map(function (ProblemDescriptor $descriptor) {
-                        $startToken = $descriptor->getNode()->loc->startToken;
+                        $startToken = $descriptor->getNode()->loc?->startToken;
+                        if ($startToken === null) {
+                            throw new ShouldNotHappenException("No location on node.");
+                        }
 
                         return ["$startToken->line:$startToken->column", $descriptor->getDescription()];
                     })->all()
-            )
-            ;
+            );
         }
     }
 

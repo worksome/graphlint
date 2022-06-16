@@ -12,7 +12,7 @@ class OriginalVisitorCollector extends VisitorCollector
      * @param Inspection[]|iterable $inspections
      */
     public function __construct(
-        private iterable $inspections,
+        private readonly iterable $inspections,
     ) {
     }
 

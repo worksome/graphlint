@@ -6,6 +6,7 @@ namespace Worksome\Graphlint\Tests\Feature\Inspections;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Worksome\Graphlint\Inspections\DescriptionRequiredInspection;
+
 use function Worksome\Graphlint\Tests\app;
 use function Worksome\Graphlint\Tests\yieldFixtures;
 

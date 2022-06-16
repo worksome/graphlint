@@ -83,12 +83,14 @@ class DescriptionRequiredInspection extends Inspection
         $this->visitDefinition($inputObjectTypeDefinitionNode, $problemsHolder);
     }
 
-    private function visitDefinition(Node $node, ProblemsHolder $problemsHolder)
+    private function visitDefinition(Node $node, ProblemsHolder $problemsHolder): void
     {
         if (! property_exists($node, 'description')) {
             return;
         }
-
+        if (! property_exists($node, 'name')) {
+            return;
+        }
         if ($this->hasDescription($node->description)) {
             return;
         }
@@ -107,7 +109,6 @@ class DescriptionRequiredInspection extends Inspection
 
         return $descriptionNode->value !== '';
     }
-
 
     public function definition(): InspectionDescription
     {
