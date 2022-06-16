@@ -1,0 +1,31 @@
+name: Release
+on:
+  release:
+    types:
+      - released
+
+jobs:
+  publish-to-brew-tap:
+    name: Publish to Brew Tap
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Generate App Token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          private_key: ${{ secrets.WORKSOME_BOT_PRIVATE_KEY }}
+          app_id: ${{ secrets.WORKSOME_BOT_APP_ID }}
+
+      - name: Publish to Brew Tap
+        uses: mislav/bump-homebrew-formula-action@v2
+        with:
+          formula-name: graphlint
+          formula-path: Formula/graphlint.rb
+          homebrew-tap: worksome/homebrew-tap
+          base-branch: main
+          tag-name: ${{ github.event.release.tag_name }}
+          download-url: https://github.com/worksome/graphlint/releases/download/${{ github.event.release.tag_name }}/graphlint
+          commit-message: 'chore({{formulaName}}): update to version {{version}}'
+        env:
+          COMMITTER_TOKEN: ${{ steps.generate_token.outputs.token }}
