@@ -25,7 +25,7 @@ class IgnoreByNameSuppressorInspection implements SuppressorInspection
         $name = $this->nameResolver->getName($node);
 
         $parent = end($parents);
-        if ($parent === false) {
+        if ($parent === false || $parent instanceof NodeList) {
             $parentName = null;
         } else {
             $parentName = $this->nameResolver->getName($parent);
