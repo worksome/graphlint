@@ -23,6 +23,7 @@ jobs:
           formula-name: graphlint
           formula-path: Formula/graphlint.rb
           homebrew-tap: worksome/homebrew-tap
+          push-to: worksome/homebrew-tap
           base-branch: main
           tag-name: ${{ github.event.release.tag_name }}
           download-url: https://github.com/worksome/graphlint/releases/download/${{ github.event.release.tag_name }}/graphlint
