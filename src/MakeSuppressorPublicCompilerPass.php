@@ -7,7 +7,6 @@ namespace Worksome\Graphlint;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
-use Worksome\Graphlint\Inspections\Inspection;
 
 /**
  * Before dependency injections can work for inspections, they need to be public.

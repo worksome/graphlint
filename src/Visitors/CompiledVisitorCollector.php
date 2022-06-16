@@ -10,7 +10,7 @@ use Worksome\Graphlint\Inspections\Inspection;
 class CompiledVisitorCollector extends VisitorCollector
 {
     /**
-     * @param iterable<Inspection> $inspections
+     * @param iterable<Inspection>   $inspections
      * @param SuppressorInspection[] $suppressors
      */
     public function __construct(

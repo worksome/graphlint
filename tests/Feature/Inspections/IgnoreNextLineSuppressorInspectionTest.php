@@ -6,8 +6,8 @@ namespace Worksome\Graphlint\Tests\Feature\Inspections;
 
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Worksome\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
-
 use Worksome\Graphlint\Inspections\IgnoreNextLineSuppressorInspection;
+
 use function Worksome\Graphlint\Tests\app;
 use function Worksome\Graphlint\Tests\yieldFixtures;
 

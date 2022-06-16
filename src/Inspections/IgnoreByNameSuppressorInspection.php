@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\Node;
-use GraphQL\Language\AST\NodeList;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
 class IgnoreByNameSuppressorInspection implements SuppressorInspection
 {
+    /**
+     * @var string[]
+     */
     private array $names = [];
 
     public function __construct(
@@ -21,7 +23,13 @@ class IgnoreByNameSuppressorInspection implements SuppressorInspection
     public function shouldSuppress(Node $node, array $parents, Inspection $inspection): bool
     {
         $name = $this->nameResolver->getName($node);
-        $parentName = $this->nameResolver->getName(last($parents));
+
+        $parent = end($parents);
+        if ($parent === false) {
+            $parentName = null;
+        } else {
+            $parentName = $this->nameResolver->getName($parent);
+        }
 
         if ($name === null) {
             return false;
@@ -40,7 +48,7 @@ class IgnoreByNameSuppressorInspection implements SuppressorInspection
         return false;
     }
 
-    public function configure(string... $names): void
+    public function configure(string ...$names): void
     {
         $this->names = $names;
     }

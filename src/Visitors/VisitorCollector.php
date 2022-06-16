@@ -15,16 +15,12 @@ use GraphQL\Language\AST\InterfaceTypeDefinitionNode;
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NodeKind;
-use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\AST\ScalarTypeDefinitionNode;
 use GraphQL\Language\AST\UnionTypeDefinitionNode;
-use GraphQL\Language\Token;
 use GraphQL\Language\Visitor;
-use Illuminate\Support\Str;
 use Worksome\Graphlint\Analyser\AffectedInspections;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
-use Worksome\Graphlint\Inspections\IgnoreNextLineSuppressorInspection;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\ProblemsHolder;
 
@@ -137,7 +133,18 @@ abstract class VisitorCollector
         AffectedInspections $affectedInspections,
         ProblemsHolder $problemsHolder,
     ): Closure {
-        return function (Node $node, $key, $parent, $path, $ancestors) use ($closure, $affectedInspections, $inspection, $problemsHolder) {
+        return function (
+            Node $node,
+            $key,
+            $parent,
+            $path,
+            $ancestors
+        ) use (
+            $closure,
+            $affectedInspections,
+            $inspection,
+            $problemsHolder
+) {
             $beforeProblems = count($problemsHolder->getProblems());
 
             if ($this->shouldSkip($node, $ancestors, $inspection)) {
