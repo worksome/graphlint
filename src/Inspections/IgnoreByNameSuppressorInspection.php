@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\Node;
+use GraphQL\Language\AST\NodeList;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
