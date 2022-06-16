@@ -13,11 +13,11 @@ The tool can be installed as a composer global dependency via
 ```bash
 $ composer global require worksome/graphlint
 ```
-or via Homebrew (until)
+or via Homebrew
 
 ```bash
-brew tap owenvoke/casks
-brew install --formula owenvoke/casks/graphlint
+brew tap worksome/tap
+brew install --formula worksome/tap/graphlint
 ```
 
 ## Usage
