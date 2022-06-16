@@ -14,8 +14,8 @@ jobs:
         uses: tibdex/github-app-token@v1
         id: generate_token
         with:
-          private_key: ${{ secrets.WORKSOME_BOT_PRIVATE_KEY }}
-          app_id: ${{ secrets.WORKSOME_BOT_APP_ID }}
+          private_key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
+          app_id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
 
       - name: Publish to Brew Tap
         uses: mislav/bump-homebrew-formula-action@v2
