@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Symplify\PackageBuilder\DependencyInjection\CompilerPass\AutowireInterfacesCompilerPass;
 use Symplify\PackageBuilder\ValueObject\ConsoleColorDiffConfig;
+use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\PostFixes\PostFixer;
 
@@ -50,12 +51,14 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     protected function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new AutowireArrayParameterCompilerPass());
         $container->addCompilerPass(new AutowireInterfacesCompilerPass([
             Inspection::class,
             PostFixer::class,
+            SuppressorInspection::class,
         ]));
+        $container->addCompilerPass(new AutowireArrayParameterCompilerPass());
         $container->addCompilerPass(new MakeInspectionsPublicCompilerPass());
+        $container->addCompilerPass(new MakeSuppressorPublicCompilerPass());
     }
 
     public function getCacheDir(): string

@@ -67,3 +67,25 @@ return function (ContainerConfigurator $config): void {
 
 The tool can have a configuration for schemas before compiling and after.
 Some libraries do not compile their schema, so for those only one of the tags should be used.
+
+### Ignoring problems
+A problem can be suppressed by adding an `ignore-next-line` comment before it.
+```graphql
+interface Account {
+  # @graphlint-ignore-next-line
+  id: ID
+}
+```
+
+In some cases, it is not possible to add a comment because the schema is auto generated. For
+those cases, the error can be ignored by adding the following in the configuration file.
+```php
+return function (ContainerConfigurator $config): void {
+        $config->services()
+        ->set(IgnoreByNameSuppressorInspection::class)
+        ->call('configure', [
+            'TEST',
+            'AccountInput.name' // Dotted value for only applying on some fields
+        ]);
+};
+```

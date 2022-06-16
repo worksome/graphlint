@@ -27,7 +27,6 @@ return function (ContainerConfigurator $configurator) {
     )->exclude([
         '../src/Fixer/FixerResult.php',
         '../src/Visitors',
-        '../src/Inspections',
         '../src/Analyser/AnalyserResult.php',
         '../src/Result.php',
         '../src/ProblemsHolder.php',
@@ -36,7 +35,6 @@ return function (ContainerConfigurator $configurator) {
         '../src/ConsolePrinterListener.php',
         '../src/Events',
         '../src/Laravel',
-        '../src/Contracts',
         '../src/InspectionDescription.php',
     ]);
 };

@@ -15,11 +15,16 @@ use GraphQL\Language\AST\InterfaceTypeDefinitionNode;
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NodeKind;
+use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\AST\ScalarTypeDefinitionNode;
 use GraphQL\Language\AST\UnionTypeDefinitionNode;
+use GraphQL\Language\Token;
 use GraphQL\Language\Visitor;
+use Illuminate\Support\Str;
 use Worksome\Graphlint\Analyser\AffectedInspections;
+use Worksome\Graphlint\Contracts\SuppressorInspection;
+use Worksome\Graphlint\Inspections\IgnoreNextLineSuppressorInspection;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\ProblemsHolder;
 
@@ -29,6 +34,11 @@ abstract class VisitorCollector
      * @return Inspection[]
      */
     public abstract function getInspections(): iterable;
+
+    /**
+     * @return iterable<SuppressorInspection>
+     */
+    public abstract function getSuppressors(): iterable;
 
     /**
      * @return array<string, callable>
@@ -42,66 +52,77 @@ abstract class VisitorCollector
                         $inspection->visitFieldDefinition($problemsHolder, $fieldDefinitionNode),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::INPUT_OBJECT_TYPE_DEFINITION => $this->wrapper(
                     fn(InputObjectTypeDefinitionNode $node) =>
                         $inspection->visitInputObjectTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::ARGUMENT => $this->wrapper(
                     fn(ArgumentNode $argumentNode) =>
                         $inspection->visitArgumentNode($problemsHolder, $argumentNode),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::OBJECT_TYPE_DEFINITION => $this->wrapper(
                     fn(ObjectTypeDefinitionNode $node) =>
                         $inspection->visitObjectTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::LIST_TYPE => $this->wrapper(
                     fn(ListTypeNode $node, Node $parent) =>
                     $inspection->visitListType($problemsHolder, $node, $parent),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::ENUM_TYPE_DEFINITION => $this->wrapper(
                     fn(EnumTypeDefinitionNode $node) =>
                     $inspection->visitEnumTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::SCALAR_TYPE_DEFINITION => $this->wrapper(
                     fn(ScalarTypeDefinitionNode $node) =>
                     $inspection->visitScalarTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::INPUT_VALUE_DEFINITION => $this->wrapper(
                     fn(InputValueDefinitionNode $node) =>
                     $inspection->visitInputValueDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::INTERFACE_TYPE_DEFINITION => $this->wrapper(
                     fn(InterfaceTypeDefinitionNode $node) =>
                     $inspection->visitInterfaceTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::UNION_TYPE_DEFINITION => $this->wrapper(
                     fn(UnionTypeDefinitionNode $node) =>
                     $inspection->visitUnionTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
                 NodeKind::ENUM_VALUE_DEFINITION => $this->wrapper(
                     fn(EnumValueDefinitionNode $node) =>
                     $inspection->visitEnumValueDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
+                    $problemsHolder,
                 ),
             ],
             [...$this->getInspections()],
@@ -113,17 +134,39 @@ abstract class VisitorCollector
     private function wrapper(
         Closure $closure,
         Inspection $inspection,
-        AffectedInspections $affectedInspections
+        AffectedInspections $affectedInspections,
+        ProblemsHolder $problemsHolder,
     ): Closure {
-        return function (Node $node, $key, $parent) use ($closure, $affectedInspections, $inspection) {
+        return function (Node $node, $key, $parent, $path, $ancestors) use ($closure, $affectedInspections, $inspection, $problemsHolder) {
+            $beforeProblems = count($problemsHolder->getProblems());
 
-            $beforeNode = $node->toArray(true);
+            if ($this->shouldSkip($node, $ancestors, $inspection)) {
+                return;
+            }
 
             $closure->call($this, $node, $parent);
 
-            if ($beforeNode != $node->toArray(true)) {
-                $affectedInspections->addInspection($inspection);
+            $afterProblems = count($problemsHolder->getProblems());
+
+            // Check if inspection found any problems.
+            if ($beforeProblems === $afterProblems) {
+                return;
             }
+
+            $affectedInspections->addInspection($inspection);
         };
+    }
+
+    /**
+     * @param Node[] $parent
+     */
+    private function shouldSkip(Node $node, array $parent, Inspection $inspection): bool
+    {
+        foreach ($this->getSuppressors() as $suppressor) {
+            if ($suppressor->shouldSuppress($node, $parent, $inspection)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

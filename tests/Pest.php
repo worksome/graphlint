@@ -12,6 +12,7 @@ use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Worksome\Graphlint\Analyser\Analyser;
+use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Fixer\Fixer;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\Kernel;
@@ -45,7 +46,10 @@ uses()->beforeEach(function () {
 | to assert different things. Of course, you may extend the Expectation API at any time.
 |
 */
-expect()->extend('toPassInspection', function (Inspection $inspection) {
+expect()->extend('toPassInspection', function (
+    Inspection $inspection,
+    SuppressorInspection|null $suppressorInspection = null
+) {
     $smartFileInfo = $this->value;
 
     $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($smartFileInfo);
@@ -53,9 +57,10 @@ expect()->extend('toPassInspection', function (Inspection $inspection) {
     $analyser = new Analyser();
     $result = $analyser->analyse(
         Parser::parse($inputAndExpected->getInput()),
-        new CompiledVisitorCollector([
-            $inspection
-        ]),
+        new CompiledVisitorCollector(
+            [$inspection],
+            array_filter([$suppressorInspection]),
+        ),
     );
 
     if (Str::endsWith($smartFileInfo->getRealPath(), '.skip.graphql.inc')) {
@@ -73,21 +78,6 @@ expect()->extend('toPassInspection', function (Inspection $inspection) {
     expect($schemaPrint)->toEqual(
         $inputAndExpected->getExpected()
     );
-});
-
-expect()->extend('toHaveInspectionProblems', function (Inspection $inspection, int $count = 1) {
-    $smartFileInfo = $this->value;
-
-    $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($smartFileInfo);
-
-    $analyser = new Analyser();
-    $result = $analyser->analyse(
-        Parser::parse($inputAndExpected->getInput()),
-        new CompiledVisitorCollector([
-            $inspection
-        ]),
-    );
-    expect($result->getProblemsHolder()->getProblems())->toHaveCount($count);
 });
 
 /*
