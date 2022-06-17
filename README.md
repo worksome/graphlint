@@ -28,15 +28,13 @@ $ graphlint path/to/schema.graphql
 
 ## Configuration
 
-
 > ⚠️ Currently the package only supports running on compiled schema.
 > It will later get support for running on original schemas also.
 
 Create a file in the root called `graphlint.php` with the following configuration.
 
 ```php
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Worksome\Graphlint\Configuration\Visitor;
@@ -50,11 +48,10 @@ return function (ContainerConfigurator $config): void {
 };
 ```
 
-for using the graphql standard, the following configuration can be used
-```php
-<?php
+To use the Worksome GraphQL standard:
 
-declare(strict_types=1);
+```php
+<?php declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Worksome\Graphlint\GraphlintSet;
@@ -63,7 +60,6 @@ return function (ContainerConfigurator $config): void {
     $config->import(GraphlintSet::Standard->value);
 };
 ```
-
 
 The tool can have a configuration for schemas before compiling and after.
 Some libraries do not compile their schema, so for those only one of the tags should be used.
@@ -81,7 +77,7 @@ In some cases, it is not possible to add a comment because the schema is auto ge
 those cases, the error can be ignored by adding the following in the configuration file.
 ```php
 return function (ContainerConfigurator $config): void {
-        $config->services()
+    $config->services()
         ->set(IgnoreByNameSuppressorInspection::class)
         ->call('configure', [
             'TEST',
