@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\InputObjectTypeDefinitionNode;
+use GraphQL\Language\AST\InputValueDefinitionNode;
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NonNullTypeNode;
@@ -46,8 +47,11 @@ class NonNullableListInspection extends Inspection
             if ($typeDefinitionNode instanceof InputObjectTypeDefinitionNode) {
                 return;
             }
-        }
 
+            if ($parent instanceof InputValueDefinitionNode) {
+                return;
+            }
+        }
 
         $problemsHolder->registerProblem(
             $listTypeNode,
@@ -62,7 +66,9 @@ class NonNullableListInspection extends Inspection
         );
     }
 
-    public function configure(bool $onlyOutputTypes): void
+    public function configure(
+        bool $onlyOutputTypes = true,
+    ): void
     {
         $this->onlyOutputTypes = $onlyOutputTypes;
     }

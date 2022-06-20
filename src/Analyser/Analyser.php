@@ -8,6 +8,7 @@ use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use GraphQL\Language\Visitor;
+use GraphQL\Utils\BuildSchema;
 use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\ProblemsHolder;
 use Worksome\Graphlint\Visitors\VisitorCollector;
