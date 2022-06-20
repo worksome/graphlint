@@ -46,10 +46,14 @@ abstract class Inspection implements Stringable, InspectionDescriptor
     ): void {
     }
 
+    /**
+     * @param Node[] $ancestors
+     */
     public function visitListType(
         ProblemsHolder $problemsHolder,
         ListTypeNode $listTypeNode,
         Node $parent,
+        array $ancestors,
     ): void {
     }
 
