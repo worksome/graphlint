@@ -68,8 +68,7 @@ class NonNullableListInspection extends Inspection
 
     public function configure(
         bool $onlyOutputTypes = true,
-    ): void
-    {
+    ): void {
         $this->onlyOutputTypes = $onlyOutputTypes;
     }
 }
