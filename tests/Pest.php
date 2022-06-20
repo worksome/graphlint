@@ -66,10 +66,11 @@ expect()->extend('toPassInspection', function (
     );
 
     if (Str::endsWith($smartFileInfo->getRealPath(), '.skip.graphql.inc')) {
-        Collection::make($result->getProblemsHolder()->getProblems())
+        $descriptions = Collection::make($result->getProblemsHolder()->getProblems())
             ->map(fn(ProblemDescriptor $descriptor) => $descriptor->getDescription())
-            ->dump();
-        expect($result->getProblemsHolder()->getProblems())->toHaveCount(0);
+            ->all();
+        expect($descriptions)->toEqual([])
+            ->and($result->getProblemsHolder()->getProblems())->toHaveCount(0);
         return;
     }
 

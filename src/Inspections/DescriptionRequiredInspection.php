@@ -18,11 +18,13 @@ use GraphQL\Language\AST\UnionTypeDefinitionNode;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
 use Worksome\Graphlint\Utils\ApolloFederationChecker;
+use Worksome\Graphlint\Utils\RootTypeChecker;
 
 class DescriptionRequiredInspection extends Inspection
 {
     public function __construct(
         private readonly ApolloFederationChecker $apolloFederationChecker,
+        private readonly RootTypeChecker $baseTypeChecker,
     ) {
     }
 
@@ -97,6 +99,10 @@ class DescriptionRequiredInspection extends Inspection
         }
 
         if (! property_exists($node, 'name')) {
+            return;
+        }
+
+        if ($this->baseTypeChecker->isRootName($node->name)) {
             return;
         }
 
