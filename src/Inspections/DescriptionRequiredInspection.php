@@ -24,7 +24,7 @@ class DescriptionRequiredInspection extends Inspection
 {
     public function __construct(
         private readonly ApolloFederationChecker $apolloFederationChecker,
-        private readonly RootTypeChecker         $baseTypeChecker,
+        private readonly RootTypeChecker $baseTypeChecker,
     ) {
     }
 
