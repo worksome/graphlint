@@ -16,6 +16,7 @@ jobs:
         with:
           private_key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
           app_id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
+          repository: worksome/homebrew-tap
 
       - name: Publish to Brew Tap
         uses: mislav/bump-homebrew-formula-action@v2
