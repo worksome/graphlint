@@ -72,8 +72,8 @@ abstract class VisitorCollector
                     $problemsHolder,
                 ),
                 NodeKind::LIST_TYPE => $this->wrapper(
-                    fn(ListTypeNode $node, Node $parent) =>
-                    $inspection->visitListType($problemsHolder, $node, $parent),
+                    fn(ListTypeNode $node, Node $parent, array $ancestors) =>
+                        $inspection->visitListType($problemsHolder, $node, $parent, $ancestors),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
@@ -151,7 +151,7 @@ abstract class VisitorCollector
                 return;
             }
 
-            $closure->call($this, $node, $parent);
+            $closure->call($this, $node, $parent, $ancestors);
 
             $afterProblems = count($problemsHolder->getProblems());
 

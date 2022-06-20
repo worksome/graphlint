@@ -25,6 +25,7 @@ class NonNullableInsideListInspection extends Inspection
         ProblemsHolder $problemsHolder,
         ListTypeNode $listTypeNode,
         Node $parent,
+        array $ancestors,
     ): void {
         $type = $listTypeNode->type;
 
