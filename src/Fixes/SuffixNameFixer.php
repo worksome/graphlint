@@ -25,9 +25,7 @@ class SuffixNameFixer extends Fixer
             return;
         }
 
-        $suffixedName = "{$this->nodeNameResolver->getName($node)}$this->suffix";
-
-        $node->value = $suffixedName;
+        $node->value = "{$this->nodeNameResolver->getName($node)}$this->suffix";
     }
 
     public function withSuffix(string $suffix): self

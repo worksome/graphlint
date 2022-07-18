@@ -30,8 +30,6 @@ class CamelCaseNameFixer extends Fixer
             return;
         }
 
-        $camelCasedName = Str::camel($name);
-
-        $node->value = $camelCasedName;
+        $node->value = Str::camel($name);
     }
 }
