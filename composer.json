@@ -18,7 +18,7 @@
         "pestphp/pest": "^1.21",
         "symfony/var-dumper": "^6.0",
         "symplify/easy-testing": "^10.0",
-        "worksome/coding-style": "^0.25.0",
+        "worksome/coding-style": "^0.26.0",
         "pestphp/pest-plugin-parallel": "^1.1"
     },
     "license": "MIT",
