@@ -33,8 +33,9 @@ class InputSuffixInputObjectTypeDefinitionInspection extends Inspection
             return;
         }
 
-        $problemsHolder->registerProblem(
+        $problemsHolder->registerProblemWithDescription(
             $fieldDefinitionNode->name,
+            $this->definition()->getTitle(),
             $this->suffixNameFixer->withSuffix('Input'),
         );
     }

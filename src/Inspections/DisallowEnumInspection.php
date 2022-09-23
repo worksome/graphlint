@@ -14,8 +14,9 @@ class DisallowEnumInspection extends Inspection
         ProblemsHolder $problemsHolder,
         EnumTypeDefinitionNode $enumTypeDefinitionNode,
     ): void {
-        $problemsHolder->registerProblem(
-            $enumTypeDefinitionNode
+        $problemsHolder->registerProblemWithDescription(
+            $enumTypeDefinitionNode,
+            $this->definition()->getTitle()
         );
     }
 

@@ -37,8 +37,9 @@ class NonNullableInsideListInspection extends Inspection
             return;
         }
 
-        $problemsHolder->registerProblem(
+        $problemsHolder->registerProblemWithDescription(
             $type,
+            $this->definition()->getTitle(),
             $this->nonNullFixer
         );
     }

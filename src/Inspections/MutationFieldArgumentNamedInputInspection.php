@@ -43,8 +43,9 @@ class MutationFieldArgumentNamedInputInspection extends Inspection
             ->filter(fn(InputValueDefinitionNode $node) => $this->nameResolver->getName($node) !== 'input')
             // Register a problem on each of the arguments
             /** @phpstan-ignore-next-line */
-            ->each(fn(InputValueDefinitionNode $node) => $problemsHolder->registerProblem(
+            ->each(fn(InputValueDefinitionNode $node) => $problemsHolder->registerProblemWithDescription(
                 $node->name,
+                $this->definition()->getTitle(),
                 $this->renameFixer->withName('input'),
             ));
     }

@@ -39,8 +39,9 @@ class CamelCaseFieldDefinitionInspection extends Inspection
             return;
         }
 
-        $problemsHolder->registerProblem(
+        $problemsHolder->registerProblemWithDescription(
             $fieldDefinitionNode->name,
+            $this->definition()->getTitle(),
             $this->camelCaseNameFixer,
         );
     }

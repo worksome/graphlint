@@ -53,8 +53,9 @@ class NonNullableListInspection extends Inspection
             }
         }
 
-        $problemsHolder->registerProblem(
+        $problemsHolder->registerProblemWithDescription(
             $listTypeNode,
+            $this->definition()->getTitle(),
             $this->nonNullFixer
         );
     }
