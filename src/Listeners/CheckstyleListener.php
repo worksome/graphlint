@@ -22,6 +22,7 @@ class CheckstyleListener implements GraphlintListener
 
     public function __construct(
         private readonly SymfonyStyle $style,
+        private readonly string|null $compiledPath = null
     ) {
         if (! \extension_loaded('dom')) {
             throw new RuntimeException('Cannot generate report! `ext-dom` is not available!');
@@ -53,7 +54,7 @@ class CheckstyleListener implements GraphlintListener
             $this->hasErrors = true;
 
             foreach ($problems as $problem) {
-                $location = $problem->getNode()->loc?->source?->name;
+                $location = $this->compiledPath ?? $problem->getNode()->loc?->source?->name;
 
                 if ($location === null) {
                     throw new ShouldNotHappenException("No location on node.");
@@ -61,7 +62,7 @@ class CheckstyleListener implements GraphlintListener
 
                 /** @var DOMElement $file */
                 $file = $checkstyles->appendChild($dom->createElement('file'));
-                $file->setAttribute('name', "{$type}: {$location}");
+                $file->setAttribute('name', $location);
 
                 $error = $this->createError($dom, $problem);
                 $file->appendChild($error);

@@ -1,6 +1,6 @@
 # GraphLint
 
-A linting tool for GraphQL schemas. 
+A linting tool for GraphQL schemas.
 
 This tool is meant for finding errors in your GraphQL schemas.
 It is not made for your Queries.
@@ -9,10 +9,13 @@ The purpose of this tool is
 to implement the [GraphQL Standard from Worksome](https://github.com/worksome/graphql-standards).
 
 ## Installation
+
 The tool can be installed as a composer global dependency via
+
 ```bash
 $ composer global require worksome/graphlint
 ```
+
 or via Homebrew
 
 ```bash
@@ -21,10 +24,23 @@ brew install --formula worksome/tap/graphlint
 ```
 
 ## Usage
+
 The tool can be run via
+
 ```bash
 $ graphlint path/to/schema.graphql
 ```
+
+### CI Usage with GitHub Actions
+
+With GitHub Actions, we support using the [`cs2pr`](https://github.com/staabm/annotate-pull-request-from-checkstyle)
+tool to add inline annotations to your pull requests.
+
+```bash
+graphlint --format=checkstyle path/to/schema.graphql | cs2pr
+```
+
+As we do not pass the 
 
 ## Configuration
 
@@ -65,16 +81,19 @@ The tool can have a configuration for schemas before compiling and after.
 Some libraries do not compile their schema, so for those only one of the tags should be used.
 
 ### Ignoring problems
+
 A problem can be suppressed by adding an `ignore-next-line` comment before it.
+
 ```graphql
 interface Account {
-  # @graphlint-ignore-next-line
-  id: ID
+    # @graphlint-ignore-next-line
+    id: ID
 }
 ```
 
 In some cases, it is not possible to add a comment because the schema is auto generated. For
 those cases, the error can be ignored by adding the following in the configuration file.
+
 ```php
 return function (ContainerConfigurator $config): void {
     $config->services()

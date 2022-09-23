@@ -72,7 +72,7 @@ class AnalyseCommand extends Command
             $output
         );
 
-        $configurationFile = getcwd() . DIRECTORY_SEPARATOR . 'graphlint.php';
+        $configurationFile = getcwd().DIRECTORY_SEPARATOR.'graphlint.php';
 
         if (! is_file($configurationFile) || ! is_readable($configurationFile)) {
             $style->error("Unable to find a \"graphlint.php\" configuration file in your current directory.");
@@ -97,18 +97,19 @@ class AnalyseCommand extends Command
         $compiledSchema = $input->getArgument(self::COMPILED_SCHEMA);
         /** @var string $inputFormat */
         $inputFormat = $input->getOption(self::INPUT);
-        if (InputFormat::from($inputFormat) === InputFormat::FILE) {
-            $rawSchema = file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema);
-        } else {
-            $rawSchema = $compiledSchema;
-        }
+        $rawSchema = match ($inputFormat = InputFormat::tryFrom($inputFormat)) {
+            InputFormat::FILE => file_get_contents(getcwd().DIRECTORY_SEPARATOR.$compiledSchema),
+            default => $compiledSchema,
+        };
 
         $compiledNode = Parser::parse($rawSchema);
+
+        $compiledPath = $inputFormat === InputFormat::FILE ? getcwd().DIRECTORY_SEPARATOR.$compiledSchema : null;
 
         /** @var string $format */
         $format = $input->getOption(self::FORMAT);
         $printer = match (OutputFormat::tryFrom($format)) {
-            OutputFormat::Checkstyle => new CheckstyleListener($style),
+            OutputFormat::Checkstyle => new CheckstyleListener($style, $compiledPath),
             default => new ConsolePrinterListener($style, $differ),
         };
 
