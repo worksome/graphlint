@@ -41,8 +41,9 @@ class ModelDirectiveRequiresIdFieldInspection extends Inspection
             return;
         }
 
-        $problemsHolder->registerProblem(
+        $problemsHolder->registerProblemWithDescription(
             $objectTypeDefinitionNode,
+            $this->definition()->getTitle(),
             $this->addFieldFixer->withFieldDefinitionNode(
                 Parser::fieldDefinition("id: ID!")
             )->atTop()

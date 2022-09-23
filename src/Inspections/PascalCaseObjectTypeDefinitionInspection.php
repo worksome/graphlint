@@ -41,8 +41,9 @@ class PascalCaseObjectTypeDefinitionInspection extends Inspection
             return;
         }
 
-        $problemsHolder->registerProblem(
+        $problemsHolder->registerProblemWithDescription(
             $objectTypeDefinitionNode->name,
+            $this->definition()->getTitle(),
             $this->pascalCaseNameFixer,
         );
     }

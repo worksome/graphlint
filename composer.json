@@ -64,5 +64,8 @@
             "@rector-ci",
             "@pest"
         ]
+    },
+    "suggest": {
+        "ext-dom": "Required for Checkstyle output format."
     }
 }
