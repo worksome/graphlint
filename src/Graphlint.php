@@ -11,6 +11,7 @@ use Worksome\Graphlint\Events\AfterFixerEvent;
 use Worksome\Graphlint\Events\BeforeAnalyseEvent;
 use Worksome\Graphlint\Events\EventInterface;
 use Worksome\Graphlint\Fixer\Fixer;
+use Worksome\Graphlint\Listeners\GraphlintListener;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 use Worksome\Graphlint\Visitors\OriginalVisitorCollector;
 

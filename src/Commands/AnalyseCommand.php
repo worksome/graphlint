@@ -14,10 +14,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
-use Worksome\Graphlint\ConsolePrinterListener;
 use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\Graphlint;
 use Worksome\Graphlint\Kernel;
+use Worksome\Graphlint\Listeners\CheckstyleListener;
+use Worksome\Graphlint\Listeners\ConsolePrinterListener;
 
 use function Safe\file_get_contents;
 
@@ -26,6 +27,7 @@ class AnalyseCommand extends Command
     private const ORIGINAL_SCHEMA = 'sdl';
     private const COMPILED_SCHEMA = 'compiled_schema';
     private const INPUT = 'input';
+    private const FORMAT = 'format';
 
     protected static $defaultName = 'analyse';
 
@@ -49,6 +51,13 @@ class AnalyseCommand extends Command
             InputOption::VALUE_OPTIONAL,
             "The format for the schema inputs",
             InputFormat::FILE->value,
+        );
+        $this->addOption(
+            self::FORMAT,
+            null,
+            InputOption::VALUE_OPTIONAL,
+            "The output format",
+            OutputFormat::Text->value,
         );
     }
 
@@ -96,14 +105,20 @@ class AnalyseCommand extends Command
 
         $compiledNode = Parser::parse($rawSchema);
 
+        /** @var string $format */
+        $format = $input->getOption(self::FORMAT);
+        $printer = match (OutputFormat::tryFrom($format)) {
+            OutputFormat::Checkstyle => new CheckstyleListener($style),
+            default => new ConsolePrinterListener($style, $differ),
+        };
 
-        $consolePrinter = new ConsolePrinterListener($style, $differ);
-        $graphlint->addListener($consolePrinter);
+        $graphlint->addListener($printer);
+
         $graphlint->inspect(
             new EmptyDocumentNode(),
             $compiledNode,
         );
 
-        return $consolePrinter->getStatusCode();
+        return $printer->getStatusCode();
     }
 }

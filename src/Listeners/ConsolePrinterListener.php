@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Worksome\Graphlint;
+namespace Worksome\Graphlint\Listeners;
 
 use GraphQL\Language\Printer;
 use Illuminate\Support\Collection;
@@ -13,6 +13,8 @@ use Worksome\Graphlint\Analyser\AnalyserResult;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;
 use Worksome\Graphlint\Events\AfterFixerEvent;
 use Worksome\Graphlint\Events\BeforeAnalyseEvent;
+use Worksome\Graphlint\ProblemDescriptor;
+use Worksome\Graphlint\ShouldNotHappenException;
 
 class ConsolePrinterListener implements GraphlintListener
 {
@@ -38,7 +40,7 @@ class ConsolePrinterListener implements GraphlintListener
             /** @var AnalyserResult $result */
 
             $problems = $result->getProblemsHolder()->getProblems();
-            $problemCount = count($problems);
+            $problemCount = \count($problems);
 
             if ($problemCount === 0) {
                 $this->style->success("No problems found in $type schema!");
