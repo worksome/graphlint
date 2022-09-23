@@ -10,6 +10,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
 use Worksome\Graphlint\Analyser\AnalyserResult;
+use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;
 use Worksome\Graphlint\Events\AfterFixerEvent;
 use Worksome\Graphlint\Events\BeforeAnalyseEvent;
@@ -79,6 +80,10 @@ class ConsolePrinterListener implements GraphlintListener
         $compiledFixerResult = $event->getCompiledFixerResult();
 
         foreach ([$compiledFixerResult, $originalFixerResult] as $result) {
+            if ($result->getDocumentNode() instanceof EmptyDocumentNode) {
+                continue;
+            }
+
             $changedNode = Printer::doPrint($result->getDocumentNode());
             $originalNode = Printer::doPrint($result->getOriginalDocumentNode());
 

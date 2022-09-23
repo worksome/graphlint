@@ -8,6 +8,7 @@ use GraphQL\Language\AST\DocumentNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\Visitor;
 use Worksome\Graphlint\Analyser\AnalyserResult;
+use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\PostFixes\PostFixer;
 
 class Fixer
@@ -24,6 +25,13 @@ class Fixer
     {
         $documentNode = $result->getDocumentNode();
         $problems = $result->getProblemsHolder()->getProblems();
+
+        if ($documentNode instanceof EmptyDocumentNode) {
+            return new FixerResult(
+                $documentNode,
+                $documentNode,
+            ) ;
+        }
 
         foreach ($problems as $problem) {
             $problem->getFix()?->fix($problem);
