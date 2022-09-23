@@ -30,7 +30,7 @@ class Fixer
             return new FixerResult(
                 $documentNode,
                 $documentNode,
-            ) ;
+            );
         }
 
         foreach ($problems as $problem) {
