@@ -40,8 +40,6 @@ tool to add inline annotations to your pull requests.
 graphlint --format=checkstyle path/to/schema.graphql | cs2pr
 ```
 
-As we do not pass the 
-
 ## Configuration
 
 > ⚠️ Currently the package only supports running on compiled schema.
