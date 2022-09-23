@@ -41,7 +41,7 @@ class CheckstyleListener implements GraphlintListener
         $dom = new DOMDocument('1.0', 'UTF-8');
         $checkstyles = $dom->appendChild($dom->createElement('checkstyle'));
 
-        foreach (['Compiled' => $compiledResult, 'Original' => $originalResult] as $type => $result) {
+        foreach (['Compiled' => $compiledResult, 'Original' => $originalResult] as $result) {
             /** @var AnalyserResult $result */
 
             $problems = $result->getProblemsHolder()->getProblems();

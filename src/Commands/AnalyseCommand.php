@@ -72,7 +72,7 @@ class AnalyseCommand extends Command
             $output
         );
 
-        $configurationFile = getcwd().DIRECTORY_SEPARATOR.'graphlint.php';
+        $configurationFile = getcwd() . DIRECTORY_SEPARATOR . 'graphlint.php';
 
         if (! is_file($configurationFile) || ! is_readable($configurationFile)) {
             $style->error("Unable to find a \"graphlint.php\" configuration file in your current directory.");
@@ -98,13 +98,13 @@ class AnalyseCommand extends Command
         /** @var string $inputFormat */
         $inputFormat = $input->getOption(self::INPUT);
         $rawSchema = match ($inputFormat = InputFormat::tryFrom($inputFormat)) {
-            InputFormat::FILE => file_get_contents(getcwd().DIRECTORY_SEPARATOR.$compiledSchema),
+            InputFormat::FILE => file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
             default => $compiledSchema,
         };
 
         $compiledNode = Parser::parse($rawSchema);
 
-        $compiledPath = $inputFormat === InputFormat::FILE ? getcwd().DIRECTORY_SEPARATOR.$compiledSchema : null;
+        $compiledPath = $inputFormat === InputFormat::FILE ? getcwd() . DIRECTORY_SEPARATOR . $compiledSchema : null;
 
         /** @var string $format */
         $format = $input->getOption(self::FORMAT);
