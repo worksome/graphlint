@@ -29,12 +29,12 @@ abstract class VisitorCollector
     /**
      * @return Inspection[]
      */
-    public abstract function getInspections(): iterable;
+    abstract public function getInspections(): iterable;
 
     /**
      * @return iterable<SuppressorInspection>
      */
-    public abstract function getSuppressors(): iterable;
+    abstract public function getSuppressors(): iterable;
 
     /**
      * @return array<string, callable>
@@ -138,13 +138,13 @@ abstract class VisitorCollector
             $key,
             $parent,
             $path,
-            $ancestors
+            $ancestors,
         ) use (
             $closure,
             $affectedInspections,
             $inspection,
             $problemsHolder
-) {
+        ) {
             $beforeProblems = count($problemsHolder->getProblems());
 
             if ($this->shouldSkip($node, $ancestors, $inspection)) {

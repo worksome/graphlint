@@ -59,7 +59,7 @@ abstract class Inspection implements Stringable, InspectionDescriptor
 
     public function visitNode(
         ProblemsHolder $problemsHolder,
-        Node $node
+        Node $node,
     ): void {
     }
 

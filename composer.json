@@ -18,7 +18,7 @@
         "pestphp/pest": "^1.21",
         "symfony/var-dumper": "^6.0",
         "symplify/easy-testing": "^10.0",
-        "worksome/coding-style": "^0.29.0",
+        "worksome/coding-style": "^2.0.0",
         "pestphp/pest-plugin-parallel": "^1.1"
     },
     "license": "MIT",
@@ -49,19 +49,16 @@
         }
     },
     "scripts": {
-        "phpcs": "vendor/bin/phpcs",
-        "php-cs-fixer": "vendor/bin/php-cs-fixer fix --ansi",
-        "php-cs-fixer-ci": "vendor/bin/php-cs-fixer fix --dry-run --ansi",
-        "phpcbf": "vendor/bin/phpcbf",
+        "ecs": "vendor/bin/ecs",
+        "ecs:fix": "vendor/bin/ecs --fix",
         "phpstan": "vendor/bin/phpstan analyse",
-        "rector-ci": "vendor/bin/rector process --dry-run --ansi",
-        "rector": "vendor/bin/rector process --ansi",
+        "rector": "vendor/bin/rector process --dry-run --ansi",
+        "rector:fix": "vendor/bin/rector process --ansi",
         "pest": "vendor/bin/pest --parallel",
         "test": [
-            "@phpcs",
-            "@php-cs-fixer-ci",
+            "@ecs",
             "@phpstan",
-            "@rector-ci",
+            "@rector",
             "@pest"
         ]
     },

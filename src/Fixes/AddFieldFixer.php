@@ -19,7 +19,7 @@ class AddFieldFixer extends Fixer
     {
         $node = $problemDescriptor->getNode();
 
-        if (!$node instanceof ObjectTypeDefinitionNode) {
+        if (! $node instanceof ObjectTypeDefinitionNode) {
             return;
         }
 

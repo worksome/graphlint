@@ -20,7 +20,7 @@ class NonNullFixer extends Fixer
     {
         $node = $problemDescriptor->getNode();
 
-        if (!$node instanceof TypeNode) {
+        if (! $node instanceof TypeNode) {
             return;
         }
 

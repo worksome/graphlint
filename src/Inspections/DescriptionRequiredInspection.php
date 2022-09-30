@@ -93,7 +93,6 @@ class DescriptionRequiredInspection extends Inspection
 
     private function visitDefinition(Node $node, ProblemsHolder $problemsHolder): void
     {
-
         if (! property_exists($node, 'description')) {
             return;
         }

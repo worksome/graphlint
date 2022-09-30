@@ -50,7 +50,7 @@ uses()->beforeEach(function () {
 */
 expect()->extend('toPassInspection', function (
     Inspection $inspection,
-    SuppressorInspection|null $suppressorInspection = null
+    SuppressorInspection|null $suppressorInspection = null,
 ) {
     $smartFileInfo = $this->value;
 

@@ -8,5 +8,5 @@ use GraphQL\Language\AST\Node;
 
 abstract class PostFixer
 {
-    public abstract function visitNode(Node $node): ?Node;
+    abstract public function visitNode(Node $node): ?Node;
 }

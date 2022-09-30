@@ -14,20 +14,17 @@ jobs:
         php: ["8.1"]
 
         actions:
-          - name: PHP CodeSniffer
-            run: "vendor/bin/phpcs -q --report=checkstyle | cs2pr --graceful-warnings"
+          - name: ECS
+            run: "composer ecs"
 
           - name: PHPStan
             run: "composer phpstan"
 
-          - name: PHPCS Fixer
-            run: "composer php-cs-fixer-ci -- --format=checkstyle | cs2pr"
-
           - name: Rector
-            run: "composer rector-ci"
+            run: "composer rector"
 
-          - name : Composer validate
-            run : "composer validate"
+          - name: Composer validate
+            run: "composer validate"
 
     env:
       APP_NAME : "Worksome CI"

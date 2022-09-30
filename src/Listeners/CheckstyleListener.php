@@ -22,7 +22,7 @@ class CheckstyleListener implements GraphlintListener
 
     public function __construct(
         private readonly SymfonyStyle $style,
-        private readonly string|null $compiledPath = null
+        private readonly string|null $compiledPath = null,
     ) {
         if (! \extension_loaded('dom')) {
             throw new RuntimeException('Cannot generate report! `ext-dom` is not available!');

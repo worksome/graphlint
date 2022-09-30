@@ -21,7 +21,7 @@ class SuffixNameFixer extends Fixer
     {
         $node = $problemDescriptor->getNode();
 
-        if (!$node instanceof NameNode) {
+        if (! $node instanceof NameNode) {
             return;
         }
 
