@@ -13,7 +13,7 @@ class SuffixNameFixer extends Fixer
     private string $suffix;
 
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
+        private readonly NodeNameResolver $nodeNameResolver,
     ) {
     }
 

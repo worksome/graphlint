@@ -10,7 +10,7 @@ use Worksome\Graphlint\PostFixes\Collector\NodeReplacerCollector;
 class NodeReplacerPostFixer extends PostFixer
 {
     public function __construct(
-        private NodeReplacerCollector $nodeReplacerCollector,
+        private readonly NodeReplacerCollector $nodeReplacerCollector,
     ) {
     }
 

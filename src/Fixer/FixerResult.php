@@ -9,8 +9,8 @@ use GraphQL\Language\AST\DocumentNode;
 class FixerResult
 {
     public function __construct(
-        private DocumentNode $originalDocumentNode,
-        private DocumentNode $documentNode,
+        private readonly DocumentNode $originalDocumentNode,
+        private readonly DocumentNode $documentNode,
     ) {
     }
 

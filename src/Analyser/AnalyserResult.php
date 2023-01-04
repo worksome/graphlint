@@ -10,10 +10,10 @@ use Worksome\Graphlint\ProblemsHolder;
 class AnalyserResult
 {
     public function __construct(
-        private DocumentNode $originalDocumentNode,
-        private DocumentNode $documentNode,
-        private ProblemsHolder $problemsHolder,
-        private AffectedInspections $affectedInspections,
+        private readonly DocumentNode $originalDocumentNode,
+        private readonly DocumentNode $documentNode,
+        private readonly ProblemsHolder $problemsHolder,
+        private readonly AffectedInspections $affectedInspections,
     ) {
     }
 

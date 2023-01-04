@@ -22,7 +22,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
      * @param non-empty-string[] $configFiles
      */
     public function __construct(
-        private array $configFiles,
+        private readonly array $configFiles,
     ) {
         parent::__construct(
             'local',

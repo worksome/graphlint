@@ -7,7 +7,7 @@ namespace Worksome\Graphlint;
 class InspectionDescription
 {
     public function __construct(
-        private string $title,
+        private readonly string $title,
     ) {
     }
 

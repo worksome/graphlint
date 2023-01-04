@@ -3,7 +3,7 @@
     "description": "A static analysis tool for GraphQl",
     "type": "project",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "webonyx/graphql-php": "^14.11",
         "symfony/console": "^6.1",
         "illuminate/support": "^9.0",

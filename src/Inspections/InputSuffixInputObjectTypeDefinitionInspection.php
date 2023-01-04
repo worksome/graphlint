@@ -14,8 +14,8 @@ use Worksome\Graphlint\Utils\NodeNameResolver;
 class InputSuffixInputObjectTypeDefinitionInspection extends Inspection
 {
     public function __construct(
-        private NodeNameResolver $nameResolver,
-        private SuffixNameFixer $suffixNameFixer,
+        private readonly NodeNameResolver $nameResolver,
+        private readonly SuffixNameFixer $suffixNameFixer,
     ) {
     }
 

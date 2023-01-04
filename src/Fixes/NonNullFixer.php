@@ -12,7 +12,7 @@ use Worksome\Graphlint\ProblemDescriptor;
 class NonNullFixer extends Fixer
 {
     public function __construct(
-        private NodeReplacerCollector $nodeReplacerCollector,
+        private readonly NodeReplacerCollector $nodeReplacerCollector,
     ) {
     }
 

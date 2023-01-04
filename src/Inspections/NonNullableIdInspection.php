@@ -14,8 +14,8 @@ use Worksome\Graphlint\Utils\NodeNameResolver;
 class NonNullableIdInspection extends Inspection
 {
     public function __construct(
-        private NodeNameResolver $nameResolver,
-        private NonNullFixer $nonNullFixer,
+        private readonly NodeNameResolver $nameResolver,
+        private readonly NonNullFixer $nonNullFixer,
     ) {
     }
 
