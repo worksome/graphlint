@@ -12,7 +12,7 @@ class AffectedInspections
     /**
      * @var Collection<int, Inspection>
      */
-    private Collection $inspections;
+    private readonly Collection $inspections;
 
     public function __construct()
     {

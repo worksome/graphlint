@@ -17,7 +17,7 @@ class Fixer
      * @param PostFixer[] $postFixers
      */
     public function __construct(
-        private array $postFixers,
+        private readonly array $postFixers,
     ) {
     }
 

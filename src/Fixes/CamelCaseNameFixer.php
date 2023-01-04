@@ -12,7 +12,7 @@ use Worksome\Graphlint\Utils\NodeNameResolver;
 class CamelCaseNameFixer extends Fixer
 {
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
+        private readonly NodeNameResolver $nodeNameResolver,
     ) {
     }
 

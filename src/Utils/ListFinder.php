@@ -9,7 +9,7 @@ use GraphQL\Language\AST\Node;
 class ListFinder
 {
     public function __construct(
-        private NodeNameResolver $nodeNameResolver,
+        private readonly NodeNameResolver $nodeNameResolver,
     ) {
     }
 

@@ -9,8 +9,8 @@ use Worksome\Graphlint\Fixer\FixerResult;
 class AfterFixerEvent implements EventInterface
 {
     public function __construct(
-        private FixerResult $originalFixerResult,
-        private FixerResult $compiledFixerResult,
+        private readonly FixerResult $originalFixerResult,
+        private readonly FixerResult $compiledFixerResult,
     ) {
     }
 

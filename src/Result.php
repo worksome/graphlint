@@ -10,8 +10,8 @@ use Worksome\Graphlint\Fixer\FixerResult;
 class Result
 {
     public function __construct(
-        private AnalyserResult $analyserResult,
-        private FixerResult $fixerResult,
+        private readonly AnalyserResult $analyserResult,
+        private readonly FixerResult $fixerResult,
     ) {
     }
 

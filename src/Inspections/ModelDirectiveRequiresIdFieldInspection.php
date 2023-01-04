@@ -14,8 +14,8 @@ use Worksome\Graphlint\Utils\ListFinder;
 class ModelDirectiveRequiresIdFieldInspection extends Inspection
 {
     public function __construct(
-        private ListFinder $listFinder,
-        private AddFieldFixer $addFieldFixer,
+        private readonly ListFinder $listFinder,
+        private readonly AddFieldFixer $addFieldFixer,
     ) {
     }
 

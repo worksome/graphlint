@@ -16,8 +16,8 @@ use Worksome\Graphlint\Utils\NodeNameResolver;
 class MutationFieldArgumentNamedInputInspection extends Inspection
 {
     public function __construct(
-        private NodeNameResolver $nameResolver,
-        private RenameFixer $renameFixer,
+        private readonly NodeNameResolver $nameResolver,
+        private readonly RenameFixer $renameFixer,
     ) {
     }
 
@@ -39,10 +39,8 @@ class MutationFieldArgumentNamedInputInspection extends Inspection
             // Get all arguments of the fields
             ->flatMap(fn(FieldDefinitionNode $node) => iterator_to_array($node->arguments))
             // Filter down to arguments which are not named `input`
-            /** @phpstan-ignore-next-line flatMap return type is wrong */
             ->filter(fn(InputValueDefinitionNode $node) => $this->nameResolver->getName($node) !== 'input')
             // Register a problem on each of the arguments
-            /** @phpstan-ignore-next-line */
             ->each(fn(InputValueDefinitionNode $node) => $problemsHolder->registerProblemWithDescription(
                 $node->name,
                 $this->definition()->getTitle(),

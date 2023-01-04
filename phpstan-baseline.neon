@@ -1,0 +1,16 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to function property_exists\\(\\) with GraphQL\\\\Language\\\\AST\\\\Node and 'description' will always evaluate to false\\.$#"
+			count: 1
+			path: src/Inspections/DescriptionRequiredInspection.php
+
+		-
+			message: "#^Instanceof between \\*NEVER\\* and GraphQL\\\\Language\\\\AST\\\\FieldDefinitionNode will always evaluate to false\\.$#"
+			count: 1
+			path: src/Inspections/DescriptionRequiredInspection.php
+
+		-
+			message: "#^Result of && is always false\\.$#"
+			count: 1
+			path: src/Inspections/DescriptionRequiredInspection.php
