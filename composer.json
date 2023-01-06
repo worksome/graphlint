@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "php": "^8.2",
-        "webonyx/graphql-php": "^14.11",
+        "webonyx/graphql-php": "^15.0",
         "symfony/console": "^6.1",
         "illuminate/support": "^9.0",
         "symfony/dependency-injection": "^6.0",
