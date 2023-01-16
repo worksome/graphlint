@@ -26,7 +26,6 @@ class NonNullFixer extends Fixer
 
         $this->nodeReplacerCollector->addNodeToReplace(
             $node,
-            /** @phpstan-ignore-next-line */
             new NonNullTypeNode([
                 'type' => $node,
             ])

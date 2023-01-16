@@ -24,6 +24,9 @@ use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\ProblemsHolder;
 
+/**
+ * @phpstan-import-type VisitorArray from Visitor
+ */
 abstract class VisitorCollector
 {
     /**
@@ -37,10 +40,13 @@ abstract class VisitorCollector
     abstract public function getSuppressors(): iterable;
 
     /**
-     * @return array<string, callable>
+     * @return array<string, mixed>
+     *
+     * @phpstan-return VisitorArray
      */
     public function getVisitor(ProblemsHolder $problemsHolder, AffectedInspections $affectedInspections): array
     {
+        /** @var array<int, VisitorArray> $visitors */
         $visitors = array_map(
             fn(Inspection $inspection) => [
                 NodeKind::FIELD_DEFINITION => $this->wrapper(
