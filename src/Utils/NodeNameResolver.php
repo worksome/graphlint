@@ -19,7 +19,6 @@ class NodeNameResolver
             return $node->value;
         }
 
-        // @phpstan-ignore-next-line
         if (! isset($node->name)) {
             return null;
         }

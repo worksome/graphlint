@@ -102,3 +102,13 @@ return function (ContainerConfigurator $config): void {
         ]);
 };
 ```
+
+## Testing
+
+This package ships with a docker configuration for running the tests.
+Assuming you have cloned the repository and have docker and docker-compose installed, you can run the tests by running
+
+```bash
+docker-compose run --rm composer install # Only needed the first time
+docker-compose run --rm pest
+```
