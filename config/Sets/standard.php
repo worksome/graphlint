@@ -12,6 +12,7 @@ use Worksome\Graphlint\Inspections\NonNullableIdInspection;
 use Worksome\Graphlint\Inspections\NonNullableInsideListInspection;
 use Worksome\Graphlint\Inspections\NonNullableListInspection;
 use Worksome\Graphlint\Inspections\PascalCaseObjectTypeDefinitionInspection;
+use Worksome\Graphlint\Inspections\UpperSnakeCaseEnumCaseDefinitionInspection;
 
 return function (ContainerConfigurator $config): void {
     $services = $config->services();
@@ -25,6 +26,7 @@ return function (ContainerConfigurator $config): void {
         NonNullableListInspection::class,
         PascalCaseObjectTypeDefinitionInspection::class,
         DescriptionRequiredInspection::class,
+        UpperSnakeCaseEnumCaseDefinitionInspection::class,
     ];
 
     foreach ($inspections as $inspection) {
