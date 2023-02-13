@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\EnumValueDefinitionNode;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Worksome\Graphlint\Fixes\UpperSnakeCaseNameFixer;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
@@ -35,7 +35,7 @@ class UpperSnakeCaseEnumCaseDefinitionInspection extends Inspection
             return;
         }
 
-        $upperCase = Str::of($name)->replace('_', ' ')->title()->snake()->upper()->__toString();
+        $upperCase = (new Convert($name))->toMacro();
 
         if ($name === $upperCase) {
             return;

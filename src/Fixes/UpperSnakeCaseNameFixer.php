@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NameNode;
-use Illuminate\Support\Str;
+use Jawira\CaseConverter\Convert;
 use Worksome\Graphlint\ProblemDescriptor;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
@@ -30,12 +30,6 @@ class UpperSnakeCaseNameFixer extends Fixer
             return;
         }
 
-        $upperCase = Str::of($name)
-            ->replace('_', ' ')
-            ->title()
-            ->snake()
-            ->upper();
-
-        $node->value = $upperCase->__toString();
+        $node->value = (new Convert($name))->toMacro();
     }
 }
