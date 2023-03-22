@@ -8,7 +8,6 @@ use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Psr\Container\ContainerInterface;
 use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
 use Symplify\EasyTesting\StaticFixtureSplitter;
 use Symplify\SmartFileSystem\SmartFileInfo;
@@ -16,7 +15,6 @@ use Worksome\Graphlint\Analyser\Analyser;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Fixer\Fixer;
 use Worksome\Graphlint\Inspections\Inspection;
-use Worksome\Graphlint\Kernel;
 use Worksome\Graphlint\ProblemDescriptor;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 
@@ -30,14 +28,7 @@ use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 | need to change it using the "uses()" function to bind a different classes or traits.
 |
 */
-uses()->beforeEach(function () {
-    $kernel = new Kernel([
-        __DIR__ . '/Feature/config.php',
-    ]);
-    $kernel->boot();
-
-    $this->app = $kernel->getContainer();
-})->in('Feature');
+uses(TestCase::class)->in('Feature');
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -77,7 +68,7 @@ expect()->extend('toPassInspection', function (
     expect($result->getProblemsHolder()->getProblems())->toHaveCount(1);
 
     /** @var Fixer $fixer */
-    $fixer = app()->get(Fixer::class);
+    $fixer = test()->app->get(Fixer::class); // @phpstan-ignore-line
     $fixerResult = $fixer->fix($result);
 
     $schemaPrint = Printer::doPrint($fixerResult->getDocumentNode());
@@ -96,24 +87,25 @@ expect()->extend('toPassInspection', function (
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-function app(): ContainerInterface
-{
-    return test()->app;
-}
 
 /**
- * @return iterable<string, array<int, SmartFileInfo>>
+ * @return array<string, array<int, SmartFileInfo>>
  */
-function yieldFixtures(string $directory): iterable
+function getFixturesForDirectory(string $directory): array
 {
     /** @var iterable<int, array<int, SmartFileInfo>> $args */
     $args = StaticFixtureFinder::yieldDirectory(
         $directory,
         '*.graphql.inc',
     );
+
+    $values = [];
+
     foreach ($args as $files) {
         $file = $files[0];
 
-        yield $file->getFilename() => $files;
+        $values[$file->getFilename()] = $files;
     }
+
+    return $values;
 }

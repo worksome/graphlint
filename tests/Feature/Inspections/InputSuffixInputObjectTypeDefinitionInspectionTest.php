@@ -7,14 +7,13 @@ namespace Worksome\Graphlint\Tests\Feature\Inspections;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Worksome\Graphlint\Inspections\InputSuffixInputObjectTypeDefinitionInspection;
 
-use function Worksome\Graphlint\Tests\app;
-use function Worksome\Graphlint\Tests\yieldFixtures;
+use function Worksome\Graphlint\Tests\getFixturesForDirectory;
 
 it('can rename input object type', function (SmartFileInfo $smartFileInfo) {
-    $inspection = app()->get(InputSuffixInputObjectTypeDefinitionInspection::class);
+    $inspection = $this->app->get(InputSuffixInputObjectTypeDefinitionInspection::class);
 
     expect($smartFileInfo)
         ->toPassInspection($inspection);
-})->with(yieldFixtures(
+})->with(getFixturesForDirectory(
     __DIR__ . '/../../../test-resources/Inspections/InputSuffixInputObjectTypeDefinitionInspectionTest'
 ));
