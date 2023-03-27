@@ -41,9 +41,10 @@ class Fixer
             /** @var DocumentNode $documentNode */
             $documentNode = Visitor::visit(
                 $documentNode,
+                /** @phpstan-ignore-next-line */
                 [
-                    'leave' => fn(Node $node, $tes, $tes2, $test3) => $postFixer->visitNode($node),
-                ]
+                    'leave' => fn (Node $node) => $postFixer->visitNode($node),
+                ],
             );
         }
 

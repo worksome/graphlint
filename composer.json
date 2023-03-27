@@ -6,21 +6,20 @@
     "php": "^8.2",
     "webonyx/graphql-php": "^15.0.1",
     "symfony/console": "^6.1",
-    "illuminate/support": "^9.0|^10.0",
+    "illuminate/support": "^10.0",
     "symfony/dependency-injection": "^6.0",
     "symfony/http-kernel": "^6.0",
     "symfony/config": "^6.0",
     "symplify/autowire-array-parameter": "^11.0",
     "symplify/package-builder": "^11.0",
-    "thecodingmachine/safe": "^2.2",
+    "thecodingmachine/safe": "^2.4",
     "jawira/case-converter": "^3.5"
   },
   "require-dev": {
-    "pestphp/pest": "^1.21",
+    "pestphp/pest": "^2.0",
     "symfony/var-dumper": "^6.0",
     "symplify/easy-testing": "^11.0",
-    "worksome/coding-style": "^2.0.0",
-    "pestphp/pest-plugin-parallel": "^1.1"
+    "worksome/coding-style": "^2.5"
   },
   "license": "MIT",
   "autoload": {

@@ -12,10 +12,7 @@ parameters:
         - '#Call to an undefined method Pest\\Expectation.*#'
         -
             message: "#Undefined variable: \\$this#"
-            path: tests/Pest.php
-        -
-            message: "#Cannot access property .* on mixed.#"
-            path: tests/Pest.php
+            path: tests/**
         -
             message: '#^Instanceof between GraphQL\\Language\\AST\\Node and GraphQL\\Language\\AST\\NodeList will always evaluate to false\.$#'
             path: src/Inspections/IgnoreByNameSuppressorInspection.php
