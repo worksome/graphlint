@@ -37,5 +37,6 @@ return function (ContainerConfigurator $configurator) {
         '../src/Events',
         '../src/Laravel',
         '../src/InspectionDescription.php',
+        '../src/Utils/ProblemOutputGenerator.php',
     ]);
 };

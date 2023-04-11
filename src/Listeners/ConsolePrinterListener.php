@@ -15,7 +15,7 @@ use Worksome\Graphlint\Events\AfterAnalyseEvent;
 use Worksome\Graphlint\Events\AfterFixerEvent;
 use Worksome\Graphlint\Events\BeforeAnalyseEvent;
 use Worksome\Graphlint\ProblemDescriptor;
-use Worksome\Graphlint\ShouldNotHappenException;
+use Worksome\Graphlint\Utils\ProblemOutputGenerator;
 
 class ConsolePrinterListener implements GraphlintListener
 {
@@ -56,20 +56,12 @@ class ConsolePrinterListener implements GraphlintListener
                 ->count();
             $this->style->warning("$unfixableErrors cannot be automatically fixed in $type schema");
 
-            $this->style->table(
-                [
-                    'location',
-                    'description',
-                ],
+            $this->style->writeln(
                 Collection::make($problems)
-                    ->map(function (ProblemDescriptor $descriptor) {
-                        $startToken = $descriptor->getNode()->loc?->startToken;
-                        if ($startToken === null) {
-                            throw new ShouldNotHappenException("No location on node.");
-                        }
-
-                        return ["$startToken->line:$startToken->column", $descriptor->getDescription()];
-                    })->all()
+                    ->mapInto(ProblemOutputGenerator::class)
+                    ->map(fn (ProblemOutputGenerator $generator) => $generator->generate())
+                    ->flatten()
+                    ->all()
             );
         }
     }
