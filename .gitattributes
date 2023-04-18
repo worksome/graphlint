@@ -11,6 +11,7 @@
 /box.json           export-ignore
 /ecs.php            export-ignore
 /docker             export-ignore
+/docker-compose.yml export-ignore
 /phpunit.xml        export-ignore
 /phpstan.neon       export-ignore
 /project.dic        export-ignore
