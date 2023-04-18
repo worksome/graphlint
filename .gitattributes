@@ -1,12 +1,19 @@
-.github export-ignore
-.tests export-ignore
-test-resources export-ignore
-..gitattributes export-ignore
-box.json export-ignore
-.php-cs-fixer.dist.php export-ignore
-phpcs.xml export-ignore
-phpstan.neon export-ignore
-phpunit.xml export-ignore
-rector.php export-ignore
-docker export-ignore
-docker-compose.yml export-ignore
+* text=auto
+
+# Path-based git attributes
+# https://git-scm.com/docs/gitattributes
+
+# Ignore all test and documentation with "export-ignore".
+/.editorconfig      export-ignore
+/.gitattributes     export-ignore
+/.github            export-ignore
+/.gitignore         export-ignore
+/box.json           export-ignore
+/ecs.php            export-ignore
+/docker             export-ignore
+/phpunit.xml        export-ignore
+/phpstan.neon       export-ignore
+/project.dic        export-ignore
+/rector.php         export-ignore
+/test-resources     export-ignore
+/tests              export-ignore
