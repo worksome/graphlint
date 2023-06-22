@@ -6,12 +6,16 @@ namespace Worksome\Graphlint\Utils;
 
 use GraphQL\Language\AST\NameNode;
 use GraphQL\Language\AST\Node;
+use GraphQL\Language\AST\NodeList;
 
 class NodeNameResolver
 {
-    public function getName(?Node $node): ?string
+    /**
+     * @param Node|NodeList<Node>|null $node
+     */
+    public function getName(Node|NodeList|null $node): ?string
     {
-        if ($node === null) {
+        if (! $node instanceof Node) {
             return null;
         }
 
