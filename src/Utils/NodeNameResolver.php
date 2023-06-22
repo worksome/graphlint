@@ -10,6 +10,9 @@ use GraphQL\Language\AST\NodeList;
 
 class NodeNameResolver
 {
+    /**
+     * @param Node|NodeList<Node>|null $node
+     */
     public function getName(Node|NodeList|null $node): ?string
     {
         if (! $node instanceof Node) {

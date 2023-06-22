@@ -172,7 +172,7 @@ abstract class VisitorCollector
     }
 
     /**
-     * @param array<Node|NodeList> $parent
+     * @param array<Node|NodeList<Node>> $parent
      */
     private function shouldSkip(Node $node, array $parent, Inspection $inspection): bool
     {

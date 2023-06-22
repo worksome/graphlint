@@ -11,7 +11,7 @@ use Worksome\Graphlint\Inspections\Inspection;
 interface SuppressorInspection
 {
     /**
-     * @param array<Node|NodeList> $parents
+     * @param array<Node|NodeList<Node>> $parents
      */
     public function shouldSuppress(Node $node, array $parents, Inspection $inspection): bool;
 }

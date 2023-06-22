@@ -13,6 +13,3 @@ parameters:
         -
             message: "#Undefined variable: \\$this#"
             path: tests/**
-        -
-            message: '#^Instanceof between GraphQL\\Language\\AST\\Node and GraphQL\\Language\\AST\\NodeList will always evaluate to false\.$#'
-            path: src/Inspections/IgnoreByNameSuppressorInspection.php
