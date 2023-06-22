@@ -23,35 +23,21 @@ class IgnoreByNameSuppressorInspection implements SuppressorInspection
 
     public function shouldSuppress(Node $node, array $parents, Inspection $inspection): bool
     {
-        $paths = $this->paths([...$parents, $node]);
-        foreach ($paths as $path) {
+        $path = '';
+        foreach ([...$parents, $node] as $ancestor) {
+            $name = $this->nameResolver->getName($ancestor);
+            if ($name === null) {
+                continue;
+            }
+            $path = $path === ''
+                ? $name
+                : "$path.$name";
             if (in_array($path, $this->names)) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    /**
-     * @param array<Node|NodeList> $nodes A list of nodes where the first parent and the following entries are children
-     *
-     * @return list<string> A list of increasingly specific paths, e.g. ['Parent', 'Parent.field', 'Parent.field.argument']
-     */
-    protected function paths(array $nodes): array
-    {
-        $paths = [];
-        foreach (array_reverse($nodes) as $node) {
-            $name = $this->nameResolver->getName($node);
-            if ($name === null) {
-                continue;
-            }
-            foreach ($paths as &$path) {
-                $path = "$name.$path";
-            }
-            array_unshift($paths, $name);
-        }
-        return $paths;
     }
 
     public function configure(string ...$names): void
