@@ -38,8 +38,8 @@ class MutationFieldArgumentNamedInputInspection extends Inspection
         Collection::make($fields)
             // Get all arguments of the fields
             ->flatMap(fn(FieldDefinitionNode $node) => iterator_to_array($node->arguments))
-            // Filter down to arguments which are not named `input`
-            ->filter(fn(InputValueDefinitionNode $node) => $this->nameResolver->getName($node) !== 'input')
+            // Reject arguments which are named `input`
+            ->reject(fn(InputValueDefinitionNode $node) => $this->nameResolver->getName($node) === 'input')
             // Register a problem on each of the arguments
             ->each(fn(InputValueDefinitionNode $node) => $problemsHolder->registerProblemWithDescription(
                 $node->name,
