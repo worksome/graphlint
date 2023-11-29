@@ -17,7 +17,7 @@
   },
   "require-dev": {
     "pestphp/pest": "^2.0",
-    "symfony/var-dumper": "^6.0",
+    "symfony/var-dumper": "^7.0",
     "symplify/easy-testing": "^11.0",
     "worksome/coding-style": "^2.5"
   },
