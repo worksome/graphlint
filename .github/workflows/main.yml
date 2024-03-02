@@ -6,14 +6,16 @@ on:
 jobs:
   setup:
     timeout-minutes: 15
+
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: true
       matrix:
-        os: [ ubuntu-latest ]
-        php: [ 8.2 ]
-        laravel: [ 10.* ]
-        stability: [ prefer-lowest, prefer-stable ]
+        os: [ubuntu-latest]
+        php: [8.2]
+        laravel: ['10.*', '11.*']
+        stability: [prefer-lowest, prefer-stable]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
