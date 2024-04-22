@@ -1,0 +1,3 @@
+type UserInformation {
+  fullName: String!
+}
