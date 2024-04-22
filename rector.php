@@ -23,7 +23,6 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::PHP_80,
         SetList::PHP_74,
         SetList::EARLY_RETURN,
-        SetList::PSR_4,
     ]);
 
     // Register extra a single rules
