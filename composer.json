@@ -18,8 +18,8 @@
     "require-dev": {
         "pestphp/pest": "^2.34",
         "symfony/var-dumper": "^6.4|^7.0",
-        "symplify/easy-testing": "^11.1",
-        "worksome/coding-style": "^2.10.2"
+        "worksome/coding-style": "^2.10.2",
+        "symfony/finder": "^6.4|^7.0"
     },
     "license": "MIT",
     "autoload": {
