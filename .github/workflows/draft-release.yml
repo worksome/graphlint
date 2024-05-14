@@ -12,7 +12,7 @@ jobs:
     steps:
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Fetch version
         id: version
@@ -41,12 +41,14 @@ jobs:
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
 
       - name: Download Box Phar
         run: wget https://github.com/box-project/box/releases/latest/download/box.phar && chmod 755 box.phar
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
         with:
           composer-options: "--no-dev"
 
