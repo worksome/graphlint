@@ -99,7 +99,7 @@ abstract class Inspection implements Stringable, InspectionDescriptor
     ): void {
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return class_basename($this);
     }
