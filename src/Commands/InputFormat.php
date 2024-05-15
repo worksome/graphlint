@@ -6,6 +6,6 @@ namespace Worksome\Graphlint\Commands;
 
 enum InputFormat: string
 {
-    case FILE = "file";
-    case TEXT = "text";
+    case FILE = 'file';
+    case TEXT = 'text';
 }
