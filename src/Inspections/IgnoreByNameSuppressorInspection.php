@@ -22,16 +22,16 @@ class IgnoreByNameSuppressorInspection implements SuppressorInspection
 
     public function shouldSuppress(Node $node, array $parents, Inspection $inspection): bool
     {
-        $path = '';
+        $path = [];
         foreach ([...$parents, $node] as $ancestor) {
             $name = $this->nameResolver->getName($ancestor);
             if ($name === null) {
                 continue;
             }
-            $path = $path === ''
-                ? $name
-                : "$path.$name";
-            if (in_array($path, $this->names)) {
+
+            $path[] = $name;
+            $fullName = implode('.', $path);
+            if (in_array($fullName, $this->names)) {
                 return true;
             }
         }
