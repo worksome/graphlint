@@ -1,1 +1,4 @@
-interface Admin
+enum Some {
+  "A test"
+  TEST
+}

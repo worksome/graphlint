@@ -1,4 +1,1 @@
-"Allowed cakes"
-enum Cake {
-  CHOCOLATE
-}
+scalar something

@@ -1,1 +1,4 @@
-union Pro = User | Company
+"Some user"
+type User {
+  name: String!
+}
