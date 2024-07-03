@@ -15,6 +15,7 @@ use GraphQL\Language\AST\InterfaceTypeDefinitionNode;
 use GraphQL\Language\AST\ListTypeNode;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\NodeKind;
+use GraphQL\Language\AST\NodeList;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\AST\ScalarTypeDefinitionNode;
 use GraphQL\Language\AST\UnionTypeDefinitionNode;
@@ -144,7 +145,7 @@ abstract class VisitorCollector
             $key,
             $parent,
             $path,
-            $ancestors,
+            array $ancestors,
         ) use (
             $closure,
             $affectedInspections,
@@ -171,7 +172,7 @@ abstract class VisitorCollector
     }
 
     /**
-     * @param Node[] $parent
+     * @param array<Node|NodeList<Node>> $parent
      */
     private function shouldSkip(Node $node, array $parent, Inspection $inspection): bool
     {

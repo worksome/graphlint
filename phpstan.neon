@@ -1,18 +1,11 @@
 includes:
-    - ./vendor/worksome/coding-style/phpstan.neon
-
+- vendor/worksome/coding-style/phpstan.neon
 parameters:
     paths:
-        - src
-        - tests
-
+    - src
+    - tests
     level: 9
-
     ignoreErrors:
-        - '#Call to an undefined method Pest\\Expectation.*#'
-        -
-            message: "#Undefined variable: \\$this#"
-            path: tests/**
-        -
-            message: '#^Instanceof between GraphQL\\Language\\AST\\Node and GraphQL\\Language\\AST\\NodeList will always evaluate to false\.$#'
-            path: src/Inspections/IgnoreByNameSuppressorInspection.php
+    - '#Call to an undefined method Pest\\Expectation.*#'
+    - message: "#Undefined variable: \\$this#"
+      path: tests/**
