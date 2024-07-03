@@ -16,10 +16,10 @@
     "jawira/case-converter": "^3.5"
   },
   "require-dev": {
-    "pestphp/pest": "^2.0",
-    "symfony/var-dumper": "^6.0",
+    "pestphp/pest": "^2.34",
+    "symfony/var-dumper": "^6.4",
     "symplify/easy-testing": "^11.0",
-    "worksome/coding-style": "^2.5"
+    "worksome/coding-style": "^2.10.2"
   },
   "license": "MIT",
   "autoload": {
