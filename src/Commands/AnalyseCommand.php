@@ -6,6 +6,7 @@ namespace Worksome\Graphlint\Commands;
 
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
+use JsonException;
 use Safe\Exceptions\FilesystemException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -31,7 +32,7 @@ class AnalyseCommand extends Command
 
     protected static $defaultName = 'analyse';
 
-    protected static $defaultDescription = 'Analyses a graphql file';
+    protected static $defaultDescription = 'Analyse a GraphQL file';
 
     protected function configure(): void
     {
@@ -49,22 +50,19 @@ class AnalyseCommand extends Command
             self::INPUT,
             null,
             InputOption::VALUE_OPTIONAL,
-            "The format for the schema inputs",
+            'The format for the schema inputs.',
             InputFormat::FILE->value,
         );
         $this->addOption(
             self::FORMAT,
             null,
             InputOption::VALUE_OPTIONAL,
-            "The output format",
+            'The output format.',
             OutputFormat::Text->value,
         );
     }
 
-    /**
-     * @throws SyntaxError
-     * @throws FilesystemException
-     */
+    /** @throws SyntaxError|FilesystemException|JsonException */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle(

@@ -6,22 +6,20 @@ on:
 jobs:
   setup:
     timeout-minutes: 15
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest]
-        php: [8.2]
-        laravel: ['10.*', '11.*']
-        stability: [prefer-lowest, prefer-stable]
+        os: [ ubuntu-latest ]
+        php: [ '8.2', '8.3' ]
+        laravel: [ ^10, ^11 ]
+        stability: [ prefer-lowest, prefer-stable ]
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

@@ -11,12 +11,13 @@ jobs:
     steps:
 
       - name: Generate App Token
-        uses: tibdex/github-app-token@v1
+        uses: tibdex/github-app-token@v2
         id: generate_token
         with:
           private_key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
           app_id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
-          repository: worksome/homebrew-tap
+          installation_retrieval_mode: repository
+          installation_retrieval_payload: worksome/homebrew-tap
 
       - name: Get version
         id: version
