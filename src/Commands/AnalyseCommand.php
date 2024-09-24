@@ -14,12 +14,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Path;
 use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
 use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\Graphlint;
 use Worksome\Graphlint\Kernel;
 use Worksome\Graphlint\Listeners\CheckstyleListener;
 use Worksome\Graphlint\Listeners\ConsolePrinterListener;
+use Worksome\Graphlint\ShouldNotHappenException;
 
 use function Safe\file_get_contents;
 
@@ -49,16 +51,23 @@ class AnalyseCommand extends Command
         $this->addOption(
             self::INPUT,
             null,
-            InputOption::VALUE_OPTIONAL,
+            InputOption::VALUE_REQUIRED,
             'The format for the schema inputs.',
             InputFormat::FILE->value,
         );
         $this->addOption(
             self::FORMAT,
             null,
-            InputOption::VALUE_OPTIONAL,
+            InputOption::VALUE_REQUIRED,
             'The output format.',
             OutputFormat::Text->value,
+        );
+        $this->addOption(
+            'configuration',
+            'c',
+            InputOption::VALUE_REQUIRED,
+            'The configuration file.',
+            'graphlint.php',
         );
     }
 
@@ -70,10 +79,19 @@ class AnalyseCommand extends Command
             $output
         );
 
-        $configurationFile = getcwd() . DIRECTORY_SEPARATOR . 'graphlint.php';
+        $currentWorkingDirectory = getcwd();
+        if ($currentWorkingDirectory === false) {
+            throw new ShouldNotHappenException();
+        }
+
+        /** @var string $configurationFile */
+        $configurationFile = $input->getOption('configuration');
+
+        /** @var non-empty-string $configurationFile */
+        $configurationFile = Path::makeAbsolute($configurationFile, $currentWorkingDirectory);
 
         if (! is_file($configurationFile) || ! is_readable($configurationFile)) {
-            $style->error("Unable to find a \"graphlint.php\" configuration file in your current directory.");
+            $style->error("Unable to find a \"{$configurationFile}\" configuration file.");
 
             return self::FAILURE;
         }
