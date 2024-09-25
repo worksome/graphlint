@@ -50,16 +50,13 @@ Create a file in the root called `graphlint.php` with the following configuratio
 ```php
 <?php declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Worksome\Graphlint\Configuration\Visitor;
+use Worksome\Graphlint\Config\GraphlintConfig;
 use Worksome\Graphlint\Inspections\CamelCaseFieldDefinitionInspection;
 
-return function (ContainerConfigurator $config): void {
-    $services = $config->services();
-
-    $services->set(CamelCaseFieldDefinitionInspection::class)
-        ->tag(Visitor::COMPILED);
-};
+return GraphlintConfig::configure()
+    ->withInspections([
+        CamelCaseFieldDefinitionInspection::class,
+    ]);
 ```
 
 To use the Worksome GraphQL standard:
@@ -67,12 +64,10 @@ To use the Worksome GraphQL standard:
 ```php
 <?php declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Worksome\Graphlint\GraphlintSet;
+use Worksome\Graphlint\Config\GraphlintConfig;
 
-return function (ContainerConfigurator $config): void {
-    $config->import(GraphlintSet::Standard->value);
-};
+return GraphlintConfig::configure()
+    ->withPreparedSets(standard: true);
 ```
 
 The tool can have a configuration for schemas before compiling and after.
@@ -93,14 +88,14 @@ In some cases, it is not possible to add a comment because the schema is auto ge
 those cases, the error can be ignored by adding the following in the configuration file.
 
 ```php
-return function (ContainerConfigurator $config): void {
-    $config->services()
-        ->set(IgnoreByNameSuppressorInspection::class)
-        ->call('configure', [
-            'TEST',
-            'AccountInput.name' // Dotted value for only applying on some fields
-        ]);
-};
+use Worksome\Graphlint\Config\GraphlintConfig;
+
+return GraphlintConfig::configure()
+    // ...
+    ->ignoring([
+        'TEST',
+        'AccountInput.name' // Dotted value for only applying on some fields
+    ]);
 ```
 
 ## Testing
