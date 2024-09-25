@@ -1,0 +1,1 @@
+union Pro = User | Company
