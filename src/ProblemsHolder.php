@@ -16,7 +16,7 @@ class ProblemsHolder
 
     public function registerProblem(
         Node $node,
-        ?Fixer $fix = null,
+        Fixer|null $fix = null,
     ): void {
         $this->problems[] = new ProblemDescriptor(
             $node,
@@ -28,7 +28,7 @@ class ProblemsHolder
     public function registerProblemWithDescription(
         Node $node,
         string $description,
-        ?Fixer $fix = null,
+        Fixer|null $fix = null,
     ): void {
         $this->problems[] = new ProblemDescriptor(
             $node,

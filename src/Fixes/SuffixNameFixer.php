@@ -31,6 +31,7 @@ class SuffixNameFixer extends Fixer
     public function withSuffix(string $suffix): self
     {
         $this->suffix = $suffix;
+
         return $this;
     }
 }

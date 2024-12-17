@@ -12,7 +12,7 @@ class ProblemDescriptor
     public function __construct(
         private readonly Node $node,
         private readonly string|null $description,
-        private readonly ?Fixer $fix,
+        private readonly Fixer|null $fix,
     ) {
     }
 
@@ -21,7 +21,7 @@ class ProblemDescriptor
         return $this->node;
     }
 
-    public function getFix(): ?Fixer
+    public function getFix(): Fixer|null
     {
         return $this->fix;
     }

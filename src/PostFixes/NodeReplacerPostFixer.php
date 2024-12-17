@@ -14,7 +14,7 @@ class NodeReplacerPostFixer extends PostFixer
     ) {
     }
 
-    public function visitNode(Node $node): ?Node
+    public function visitNode(Node $node): Node|null
     {
         $nodes = $this->nodeReplacerCollector->getNodesToReplace();
 

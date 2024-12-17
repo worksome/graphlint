@@ -135,7 +135,7 @@ class DescriptionRequiredInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "All definition nodes must have a description",
+            'All definition nodes must have a description',
         );
     }
 }

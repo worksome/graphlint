@@ -49,7 +49,7 @@ class CamelCaseFieldDefinitionInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Fields should always be written in CamelCase.",
+            'Fields should always be written in CamelCase.',
         );
     }
 }

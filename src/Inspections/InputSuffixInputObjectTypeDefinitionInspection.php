@@ -43,7 +43,7 @@ class InputSuffixInputObjectTypeDefinitionInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Input objects should always be suffixed with input.",
+            'Input objects should always be suffixed with input.',
         );
     }
 }

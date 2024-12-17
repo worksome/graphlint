@@ -7,5 +7,5 @@ namespace Worksome\Graphlint\Utils;
 enum RootTypeName: string
 {
     case Query = 'Query';
-    case Mutation = "Mutation";
+    case Mutation = 'Mutation';
 }

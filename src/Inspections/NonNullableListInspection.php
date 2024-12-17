@@ -63,7 +63,7 @@ class NonNullableListInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Lists must be non nullable.",
+            'Lists must be non nullable.',
         );
     }
 

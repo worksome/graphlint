@@ -57,7 +57,7 @@ class CheckstyleListener implements GraphlintListener
                 $location = $this->compiledPath ?? $problem->getNode()->loc?->source?->name;
 
                 if ($location === null) {
-                    throw new ShouldNotHappenException("No location on node.");
+                    throw new ShouldNotHappenException('No location on node.');
                 }
 
                 /** @var DOMElement $file */

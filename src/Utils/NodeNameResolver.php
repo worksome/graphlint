@@ -13,7 +13,7 @@ class NodeNameResolver
     /**
      * @param Node|NodeList<Node>|null $node
      */
-    public function getName(Node|NodeList|null $node): ?string
+    public function getName(Node|NodeList|null $node): string|null
     {
         if (! $node instanceof Node) {
             return null;

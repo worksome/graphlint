@@ -28,7 +28,7 @@ final readonly class ProblemOutputGenerator
     private function title(): string
     {
         return sprintf(
-            "<bg=red;options=bold>%s  %d: %s  %s</>",
+            '<bg=red;options=bold>%s  %d: %s  %s</>',
             PHP_EOL . PHP_EOL,
             $this->index + 1,
             $this->descriptor->getDescription(),
@@ -59,7 +59,7 @@ final readonly class ProblemOutputGenerator
         $startToken = $this->descriptor->getNode()->loc?->startToken;
 
         if ($startToken === null) {
-            throw new ShouldNotHappenException("No location on node.");
+            throw new ShouldNotHappenException('No location on node.');
         }
 
         return $startToken;
@@ -70,7 +70,7 @@ final readonly class ProblemOutputGenerator
         $endToken = $this->descriptor->getNode()->loc?->endToken;
 
         if ($endToken === null) {
-            throw new ShouldNotHappenException("No location on node.");
+            throw new ShouldNotHappenException('No location on node.');
         }
 
         return $endToken;
@@ -81,7 +81,7 @@ final readonly class ProblemOutputGenerator
         $body = $this->descriptor->getNode()->loc?->source?->body;
 
         if ($body === null) {
-            throw new ShouldNotHappenException("No source on node.");
+            throw new ShouldNotHappenException('No source on node.');
         }
 
         return $body;

@@ -25,6 +25,7 @@ class RenameFixer extends Fixer
     public function withName(string $name): self
     {
         $this->newName = $name;
+
         return $this;
     }
 }
