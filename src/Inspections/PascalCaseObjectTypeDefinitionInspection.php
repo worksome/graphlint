@@ -51,7 +51,7 @@ class PascalCaseObjectTypeDefinitionInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Object types must be PascalCase.",
+            'Object types must be PascalCase.',
         );
     }
 }

@@ -47,7 +47,7 @@ class NonNullableInsideListInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Type inside of a list must be non nullable.",
+            'Type inside of a list must be non nullable.',
         );
     }
 }

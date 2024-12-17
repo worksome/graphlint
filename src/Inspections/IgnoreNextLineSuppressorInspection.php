@@ -26,6 +26,6 @@ class IgnoreNextLineSuppressorInspection implements SuppressorInspection
             return false;
         }
 
-        return Str::of($comment)->trim()->is("@graphlint-ignore-next-line");
+        return Str::of($comment)->trim()->is('@graphlint-ignore-next-line');
     }
 }

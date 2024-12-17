@@ -41,12 +41,14 @@ class AddFieldFixer extends Fixer
     public function withFieldDefinitionNode(FieldDefinitionNode $fieldDefinitionNode): self
     {
         $this->fieldDefinitionNode = $fieldDefinitionNode;
+
         return $this;
     }
 
     public function atTop(bool $top = true): self
     {
         $this->fieldAtTop = $top;
+
         return $this;
     }
 }

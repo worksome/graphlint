@@ -45,7 +45,7 @@ class NonNullableIdInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Fields named ID must be non nullable.",
+            'Fields named ID must be non nullable.',
         );
     }
 }

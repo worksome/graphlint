@@ -39,6 +39,7 @@ class AffectedInspections
         }
 
         $this->inspections->add($inspection);
+
         return $this;
     }
 }

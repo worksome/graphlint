@@ -28,8 +28,11 @@ use function Safe\file_get_contents;
 class AnalyseCommand extends Command
 {
     private const ORIGINAL_SCHEMA = 'sdl';
+
     private const COMPILED_SCHEMA = 'compiled_schema';
+
     private const INPUT = 'input';
+
     private const FORMAT = 'format';
 
     protected static $defaultName = 'analyse';

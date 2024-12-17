@@ -23,7 +23,7 @@ class DisallowEnumInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Enums are not allowed.",
+            'Enums are not allowed.',
         );
     }
 }

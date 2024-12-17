@@ -49,79 +49,79 @@ abstract class VisitorCollector
     {
         /** @var array<int, VisitorArray> $visitors */
         $visitors = array_map(
-            fn(Inspection $inspection) => [
+            fn (Inspection $inspection) => [
                 NodeKind::FIELD_DEFINITION => $this->wrapper(
-                    fn(FieldDefinitionNode $fieldDefinitionNode) =>
+                    fn (FieldDefinitionNode $fieldDefinitionNode) =>
                         $inspection->visitFieldDefinition($problemsHolder, $fieldDefinitionNode),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::INPUT_OBJECT_TYPE_DEFINITION => $this->wrapper(
-                    fn(InputObjectTypeDefinitionNode $node) =>
+                    fn (InputObjectTypeDefinitionNode $node) =>
                         $inspection->visitInputObjectTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::ARGUMENT => $this->wrapper(
-                    fn(ArgumentNode $argumentNode) =>
+                    fn (ArgumentNode $argumentNode) =>
                         $inspection->visitArgumentNode($problemsHolder, $argumentNode),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::OBJECT_TYPE_DEFINITION => $this->wrapper(
-                    fn(ObjectTypeDefinitionNode $node) =>
+                    fn (ObjectTypeDefinitionNode $node) =>
                         $inspection->visitObjectTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::LIST_TYPE => $this->wrapper(
-                    fn(ListTypeNode $node, Node $parent, array $ancestors) =>
+                    fn (ListTypeNode $node, Node $parent, array $ancestors) =>
                         $inspection->visitListType($problemsHolder, $node, $parent, $ancestors),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::ENUM_TYPE_DEFINITION => $this->wrapper(
-                    fn(EnumTypeDefinitionNode $node) =>
+                    fn (EnumTypeDefinitionNode $node) =>
                     $inspection->visitEnumTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::SCALAR_TYPE_DEFINITION => $this->wrapper(
-                    fn(ScalarTypeDefinitionNode $node) =>
+                    fn (ScalarTypeDefinitionNode $node) =>
                     $inspection->visitScalarTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::INPUT_VALUE_DEFINITION => $this->wrapper(
-                    fn(InputValueDefinitionNode $node) =>
+                    fn (InputValueDefinitionNode $node) =>
                     $inspection->visitInputValueDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::INTERFACE_TYPE_DEFINITION => $this->wrapper(
-                    fn(InterfaceTypeDefinitionNode $node) =>
+                    fn (InterfaceTypeDefinitionNode $node) =>
                     $inspection->visitInterfaceTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::UNION_TYPE_DEFINITION => $this->wrapper(
-                    fn(UnionTypeDefinitionNode $node) =>
+                    fn (UnionTypeDefinitionNode $node) =>
                     $inspection->visitUnionTypeDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
                     $problemsHolder,
                 ),
                 NodeKind::ENUM_VALUE_DEFINITION => $this->wrapper(
-                    fn(EnumValueDefinitionNode $node) =>
+                    fn (EnumValueDefinitionNode $node) =>
                     $inspection->visitEnumValueDefinition($problemsHolder, $node),
                     $inspection,
                     $affectedInspections,
@@ -181,6 +181,7 @@ abstract class VisitorCollector
                 return true;
             }
         }
+
         return false;
     }
 }

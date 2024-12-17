@@ -51,7 +51,7 @@ class UpperSnakeCaseEnumCaseDefinitionInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Enum cases must be UPPER_CASE.",
+            'Enum cases must be UPPER_CASE.',
         );
     }
 }

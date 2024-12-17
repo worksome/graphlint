@@ -25,7 +25,7 @@ class ModelDirectiveRequiresIdFieldInspection extends Inspection
     ): void {
         $hasModelDirective = $this->listFinder->contains(
             $objectTypeDefinitionNode->directives,
-            "model",
+            'model',
         );
 
         if (! $hasModelDirective) {
@@ -34,7 +34,7 @@ class ModelDirectiveRequiresIdFieldInspection extends Inspection
 
         $hasIdField = $this->listFinder->contains(
             $objectTypeDefinitionNode->fields,
-            "id",
+            'id',
         );
 
         if ($hasIdField) {
@@ -45,7 +45,7 @@ class ModelDirectiveRequiresIdFieldInspection extends Inspection
             $objectTypeDefinitionNode,
             $this->definition()->getTitle(),
             $this->addFieldFixer->withFieldDefinitionNode(
-                Parser::fieldDefinition("id: ID!")
+                Parser::fieldDefinition('id: ID!')
             )->atTop()
         );
     }
@@ -53,7 +53,7 @@ class ModelDirectiveRequiresIdFieldInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Object types with @model directive on it, must have an id field.",
+            'Object types with @model directive on it, must have an id field.',
         );
     }
 }

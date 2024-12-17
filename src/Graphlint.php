@@ -74,6 +74,7 @@ class Graphlint
     public function addListener(GraphlintListener $listener): self
     {
         $this->listeners[] = $listener;
+
         return $this;
     }
 }

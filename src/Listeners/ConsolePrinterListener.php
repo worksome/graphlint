@@ -29,7 +29,7 @@ class ConsolePrinterListener implements GraphlintListener
 
     public function beforeAnalyse(BeforeAnalyseEvent $event): void
     {
-        $this->style->info("Analysing schema...");
+        $this->style->info('Analysing schema...');
     }
 
     public function afterAnalyse(AfterAnalyseEvent $event): void
@@ -45,6 +45,7 @@ class ConsolePrinterListener implements GraphlintListener
 
             if ($problemCount === 0) {
                 $this->style->success("No problems found in $type schema!");
+
                 continue;
             }
 
@@ -52,7 +53,7 @@ class ConsolePrinterListener implements GraphlintListener
             $this->style->error("Found $problemCount problems in $type schema");
 
             $unfixableErrors = Collection::make($problems)
-                ->filter(fn(ProblemDescriptor $descriptor) => $descriptor->getFix() === null)
+                ->filter(fn (ProblemDescriptor $descriptor) => $descriptor->getFix() === null)
                 ->count();
             $this->style->warning("$unfixableErrors cannot be automatically fixed in $type schema");
 

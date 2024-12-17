@@ -37,11 +37,11 @@ class MutationFieldArgumentNamedInputInspection extends Inspection
         // Take all the fields
         Collection::make($fields)
             // Get all arguments of the fields
-            ->flatMap(fn(FieldDefinitionNode $node) => iterator_to_array($node->arguments))
+            ->flatMap(fn (FieldDefinitionNode $node) => iterator_to_array($node->arguments))
             // Reject arguments which are named `input`
-            ->reject(fn(InputValueDefinitionNode $node) => $this->nameResolver->getName($node) === 'input')
+            ->reject(fn (InputValueDefinitionNode $node) => $this->nameResolver->getName($node) === 'input')
             // Register a problem on each of the arguments
-            ->each(fn(InputValueDefinitionNode $node) => $problemsHolder->registerProblemWithDescription(
+            ->each(fn (InputValueDefinitionNode $node) => $problemsHolder->registerProblemWithDescription(
                 $node->name,
                 $this->definition()->getTitle(),
                 $this->renameFixer->withName('input'),
@@ -51,7 +51,7 @@ class MutationFieldArgumentNamedInputInspection extends Inspection
     public function definition(): InspectionDescription
     {
         return new InspectionDescription(
-            "Mutation field may have one argument named input.",
+            'Mutation field may have one argument named input.',
         );
     }
 }
