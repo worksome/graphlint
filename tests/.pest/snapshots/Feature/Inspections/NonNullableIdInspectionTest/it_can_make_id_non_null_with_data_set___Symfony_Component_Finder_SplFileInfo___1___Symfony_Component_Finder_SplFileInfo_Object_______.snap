@@ -1,0 +1,3 @@
+type Person {
+  id: ID!
+}
