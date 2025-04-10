@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Path;
-use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\Diff\ConsoleDiffer;
 use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\Graphlint;
 use Worksome\Graphlint\Kernel;
