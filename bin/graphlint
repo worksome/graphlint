@@ -11,8 +11,9 @@ if (isset($GLOBALS['_composer_autoload_path'])) {
 
 use Symfony\Component\Console\Application;
 use Worksome\Graphlint\Commands\AnalyseCommand;
+use Worksome\Graphlint\Utils\Filesystem;
 
-$application = new Application('Graphlint', \Safe\file_get_contents(__DIR__ . '/../VERSION'));
+$application = new Application('Graphlint', Filesystem::file_get_contents(__DIR__ . '/../VERSION'));
 $command = new AnalyseCommand();
 
 $application->add($command);
