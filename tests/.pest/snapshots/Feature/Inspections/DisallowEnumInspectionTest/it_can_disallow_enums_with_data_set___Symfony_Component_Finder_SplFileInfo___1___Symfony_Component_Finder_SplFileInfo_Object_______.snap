@@ -1,0 +1,4 @@
+enum MyEnum {
+  GOOD
+  BAD
+}

@@ -8,9 +8,8 @@ use GraphQL\Language\Parser;
 use GraphQL\Language\Printer;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Symplify\EasyTesting\DataProvider\StaticFixtureFinder;
-use Symplify\EasyTesting\StaticFixtureSplitter;
-use Symplify\SmartFileSystem\SmartFileInfo;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Worksome\Graphlint\Analyser\Analyser;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Fixer\Fixer;
@@ -29,6 +28,7 @@ use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 |
 */
 uses(TestCase::class)->in('Feature');
+
 /*
 |--------------------------------------------------------------------------
 | Expectations
@@ -43,20 +43,19 @@ expect()->extend('toPassInspection', function (
     Inspection $inspection,
     SuppressorInspection|null $suppressorInspection = null,
 ) {
-    $smartFileInfo = $this->value;
-
-    $inputAndExpected = StaticFixtureSplitter::splitFileInfoToInputAndExpected($smartFileInfo);
+    /** @var SplFileInfo $file */
+    $file = $this->value;
 
     $analyser = new Analyser();
     $result = $analyser->analyse(
-        Parser::parse($inputAndExpected->getInput()),
+        Parser::parse($file->getContents()),
         new CompiledVisitorCollector(
             [$inspection],
             array_filter([$suppressorInspection]),
         ),
     );
 
-    if (Str::endsWith($smartFileInfo->getRealPath(), '.skip.graphql.inc')) {
+    if (Str::endsWith($file->getRealPath(), '.skip.graphql.inc')) {
         $descriptions = Collection::make($result->getProblemsHolder()->getProblems())
             ->map(fn (ProblemDescriptor $descriptor) => $descriptor->getDescription())
             ->all();
@@ -73,9 +72,7 @@ expect()->extend('toPassInspection', function (
     $fixerResult = $fixer->fix($result);
 
     $schemaPrint = Printer::doPrint($fixerResult->getDocumentNode());
-    expect($schemaPrint)->toEqual(
-        $inputAndExpected->getExpected()
-    );
+    expect($schemaPrint)->toMatchSnapshot();
 });
 
 /*
@@ -89,24 +86,11 @@ expect()->extend('toPassInspection', function (
 |
 */
 
-/**
- * @return array<string, array<int, SmartFileInfo>>
- */
-function getFixturesForDirectory(string $directory): array
+function getFixturesForDirectory(string $directory): Finder
 {
-    /** @var iterable<int, array<int, SmartFileInfo>> $args */
-    $args = StaticFixtureFinder::yieldDirectory(
-        $directory,
-        '*.graphql.inc',
-    );
-
-    $values = [];
-
-    foreach ($args as $files) {
-        $file = $files[0];
-
-        $values[$file->getFilename()] = $files;
-    }
-
-    return $values;
+    return Finder::create()
+        ->files()
+        ->name('*.graphql.inc')
+        ->in($directory)
+        ->sortByName(true);
 }
