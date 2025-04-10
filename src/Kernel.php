@@ -60,11 +60,21 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function getCacheDir(): string
     {
-        return sprintf('%s/.graphlint/cache/%s-%s', sys_get_temp_dir(), basename(Filesystem::getcwd()), $this->environment);
+        return sprintf(
+            '%s/.graphlint/cache/%s-%s',
+            sys_get_temp_dir(),
+            basename(Filesystem::getcwd()),
+            $this->environment
+        );
     }
 
     public function getLogDir(): string
     {
-        return sprintf('%s/.graphlint/logs/%s-%s', sys_get_temp_dir(), basename(Filesystem::getcwd()), $this->environment);
+        return sprintf(
+            '%s/.graphlint/logs/%s-%s',
+            sys_get_temp_dir(),
+            basename(Filesystem::getcwd()),
+            $this->environment
+        );
     }
 }

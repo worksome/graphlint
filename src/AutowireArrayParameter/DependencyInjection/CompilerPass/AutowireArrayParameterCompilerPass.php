@@ -23,15 +23,11 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
 {
     /**
      * These namespaces are already configured by their bundles/extensions.
-     *
-     * @var string[]
      */
     private const EXCLUDED_NAMESPACES = ['Doctrine', 'JMS', 'Symfony', 'Sensio', 'Knp', 'EasyCorp', 'Sonata', 'Twig'];
 
     /**
      * Classes that create circular dependencies
-     *
-     * @var string[]
      */
     private const EXCLUDED_FATAL_CLASSES = [
         'Symfony\Component\Form\FormExtensionInterface',
@@ -127,13 +123,14 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
 
         /** @var ReflectionMethod $constructorReflectionMethod */
         $constructorReflectionMethod = $reflectionClass->getConstructor();
+
         return ! $constructorReflectionMethod->getParameters();
     }
 
     private function processParameters(
         ContainerBuilder $container,
         ReflectionMethod $reflectionMethod,
-        Definition $definition
+        Definition $definition,
     ): void {
         $reflectionParameters = $reflectionMethod->getParameters();
         foreach ($reflectionParameters as $reflectionParameter) {
@@ -162,6 +159,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
      * Abstract definitions cannot be the target of references
      *
      * @param Definition[] $definitions
+     *
      * @return Definition[]
      */
     private function filterOutAbstractDefinitions(array $definitions): array
@@ -177,6 +175,7 @@ final class AutowireArrayParameterCompilerPass implements CompilerPassInterface
 
     /**
      * @param Definition[] $definitions
+     *
      * @return Reference[]
      */
     private function createReferencesFromDefinitions(array $definitions): array

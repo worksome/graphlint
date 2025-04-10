@@ -8,6 +8,7 @@ use ErrorException;
 
 /**
  * This contains helper methods from Safe PHP.
+ *
  * @deprecated This should be removed when updating to Safe PHP 3.x
  */
 final class Filesystem
@@ -17,7 +18,7 @@ final class Filesystem
         bool $use_include_path = false,
         mixed $context = null,
         int $offset = 0,
-        int|null $length = null
+        int|null $length = null,
     ): string {
         error_clear_last();
         if ($length !== null) {
@@ -35,6 +36,7 @@ final class Filesystem
         if ($safeResult === false) {
             throw self::exceptionFromPhpError();
         }
+
         return $safeResult;
     }
 
@@ -45,6 +47,7 @@ final class Filesystem
         if ($safeResult === false) {
             throw self::exceptionFromPhpError();
         }
+
         return $safeResult;
     }
 

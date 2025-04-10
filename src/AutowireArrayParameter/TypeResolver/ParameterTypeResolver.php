@@ -16,11 +16,11 @@ final class ParameterTypeResolver
     private array $resolvedParameterTypesCached = [];
 
     public function __construct(
-        private readonly ParamTypeDocBlockResolver $paramTypeDocBlockResolver
+        private readonly ParamTypeDocBlockResolver $paramTypeDocBlockResolver,
     ) {
     }
 
-    public function resolveParameterType(string $parameterName, ReflectionMethod $reflectionMethod): ?string
+    public function resolveParameterType(string $parameterName, ReflectionMethod $reflectionMethod): string|null
     {
         $docComment = $reflectionMethod->getDocComment();
         if ($docComment === false) {

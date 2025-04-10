@@ -6,8 +6,8 @@ namespace Worksome\Graphlint\AutowireArrayParameter\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Worksome\Graphlint\AutowireArrayParameter\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
 use Throwable;
+use Worksome\Graphlint\AutowireArrayParameter\Exception\DependencyInjection\DefinitionForTypeNotFoundException;
 
 /**
  * @api
@@ -45,7 +45,7 @@ final class DefinitionFinder
         throw new DefinitionForTypeNotFoundException(sprintf('Definition for type "%s" was not found.', $type));
     }
 
-    private function getByTypeIfExists(ContainerBuilder $containerBuilder, string $type): ?Definition
+    private function getByTypeIfExists(ContainerBuilder $containerBuilder, string $type): Definition|null
     {
         $containerBuilderDefinitions = $containerBuilder->getDefinitions();
         foreach ($containerBuilderDefinitions as $name => $definition) {

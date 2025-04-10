@@ -14,8 +14,6 @@ final class ParameterSkipper
 {
     /**
      * Classes that create circular dependencies
-     *
-     * @var string[]
      */
     private const DEFAULT_EXCLUDED_FATAL_CLASSES = [
         'Symfony\Component\Form\FormExtensionInterface',
@@ -38,15 +36,15 @@ final class ParameterSkipper
      */
     public function __construct(
         private readonly ParameterTypeResolver $parameterTypeResolver,
-        array $excludedFatalClasses
+        array $excludedFatalClasses,
     ) {
-        $this->excludedFatalClasses = array_merge(self::DEFAULT_EXCLUDED_FATAL_CLASSES, $excludedFatalClasses);
+        $this->excludedFatalClasses = [...self::DEFAULT_EXCLUDED_FATAL_CLASSES, ...$excludedFatalClasses];
     }
 
     public function shouldSkipParameter(
         ReflectionMethod $reflectionMethod,
         Definition $definition,
-        ReflectionParameter $reflectionParameter
+        ReflectionParameter $reflectionParameter,
     ): bool {
         if (! $this->isArrayType($reflectionParameter)) {
             return true;
