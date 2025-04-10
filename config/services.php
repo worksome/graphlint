@@ -41,6 +41,7 @@ return function (ContainerConfigurator $containerConfigurator) {
         'Worksome\\Graphlint\\',
         '../src/*',
     )->exclude([
+        '../src/AutowireArrayParameter',
         '../src/Fixer/FixerResult.php',
         '../src/Visitors',
         '../src/Analyser/AnalyserResult.php',

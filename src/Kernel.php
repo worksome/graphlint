@@ -7,7 +7,7 @@ namespace Worksome\Graphlint;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Symplify\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
+use Worksome\Graphlint\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Inspections\Inspection;
 use Worksome\Graphlint\PostFixes\PostFixer;
