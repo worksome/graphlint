@@ -6,19 +6,18 @@
         "php": "^8.2",
         "illuminate/support": "^10.48",
         "jawira/case-converter": "^3.5",
+        "nette/utils": "^4.0",
         "sebastian/diff": "^5.1",
         "symfony/config": "^6.4",
         "symfony/console": "^6.4",
         "symfony/dependency-injection": "^6.4",
         "symfony/filesystem": "^6.4",
+        "symfony/finder": "^6.4",
         "symfony/http-kernel": "^6.4",
-        "symplify/autowire-array-parameter": "^11.1",
-        "thecodingmachine/safe": "^2.5",
         "webonyx/graphql-php": "^15.20"
     },
     "require-dev": {
         "pestphp/pest": "^2.36",
-        "symfony/finder": "^6.4",
         "symfony/var-dumper": "^6.4",
         "worksome/coding-style": "^2.15"
     },
