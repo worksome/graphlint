@@ -30,6 +30,6 @@ class UpperSnakeCaseNameFixer extends Fixer
             return;
         }
 
-        $node->value = (new Convert($name))->toMacro();
+        $node->value = (new Convert($name))->fromAuto(false)->toMacro();
     }
 }

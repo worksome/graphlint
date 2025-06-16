@@ -5,7 +5,7 @@
     "require": {
         "php": "^8.2",
         "illuminate/support": "^10.48",
-        "jawira/case-converter": "^3.5",
+        "jawira/case-converter": "^3.6",
         "nette/utils": "^4.0",
         "sebastian/diff": "^5.1",
         "symfony/config": "^6.4",
