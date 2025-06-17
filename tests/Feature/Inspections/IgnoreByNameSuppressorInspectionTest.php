@@ -13,7 +13,10 @@ use function Worksome\Graphlint\Tests\getFixturesForDirectory;
 it('ignores list inspection by name', function (SplFileInfo $smartFileInfo) {
     $inspection = $this->app->get(NonNullableInsideListInspection::class);
     $suppressor = $this->app->get(IgnoreByNameSuppressorInspection::class);
-    $suppressor->configure('User.alwaysTwoItems');
+    $suppressor->configure(
+        'User.alwaysTwoItems',
+        'UserInput.alwaysTwoItems',
+    );
 
     expect($smartFileInfo)
         ->toPassInspection($inspection, $suppressor);
