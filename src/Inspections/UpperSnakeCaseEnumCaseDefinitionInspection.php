@@ -35,7 +35,7 @@ class UpperSnakeCaseEnumCaseDefinitionInspection extends Inspection
             return;
         }
 
-        $upperCase = (new Convert($name))->toMacro();
+        $upperCase = (new Convert($name))->fromAuto(false)->toMacro();
 
         if ($name === $upperCase) {
             return;
