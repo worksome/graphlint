@@ -7,4 +7,5 @@ enum NonWords {
     ISO8601
     IR35
     MADE2LAST
+    _4SC
 }
