@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\EnumValueDefinitionNode;
-use Jawira\CaseConverter\Convert;
 use Worksome\Graphlint\Fixes\UpperSnakeCaseNameFixer;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
 use Worksome\Graphlint\Utils\ApolloFederationChecker;
 use Worksome\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\Utils\UpperSnakeCaseConverter;
 
 class UpperSnakeCaseEnumCaseDefinitionInspection extends Inspection
 {
@@ -35,9 +35,7 @@ class UpperSnakeCaseEnumCaseDefinitionInspection extends Inspection
             return;
         }
 
-        $upperCase = (new Convert($name))->fromAuto(false)->toMacro();
-
-        if ($name === $upperCase) {
+        if ($name === UpperSnakeCaseConverter::convert($name)) {
             return;
         }
 
