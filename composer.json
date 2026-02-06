@@ -3,8 +3,8 @@
     "description": "A static analysis tool for GraphQl",
     "type": "project",
     "require": {
-        "php": "^8.4",
-        "illuminate/support": "^12.50",
+        "php": "^8.3",
+        "illuminate/support": "^11.47",
         "jawira/case-converter": "^3.6",
         "nette/utils": "^4.0",
         "sebastian/diff": "^7.0",
@@ -20,7 +20,7 @@
     "require-dev": {
         "pestphp/pest": "^4.0",
         "symfony/var-dumper": "^7.4",
-        "worksome/coding-style": "^3.3"
+        "worksome/coding-style": "^3.2"
     },
     "license": "MIT",
     "autoload": {
