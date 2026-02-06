@@ -1,6 +1,6 @@
 {
     "name": "worksome/graphlint",
-    "description": "A static analysis tool for GraphQl",
+    "description": "A static analysis tool for GraphQL",
     "type": "project",
     "require": {
         "php": "^8.3",
