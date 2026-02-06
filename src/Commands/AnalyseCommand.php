@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Commands;
 
 use ErrorException;
+use GraphQL\Error\Error;
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
+use GraphQL\Utils\BuildSchema;
 use JsonException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -75,7 +77,7 @@ class AnalyseCommand extends Command
         );
     }
 
-    /** @throws SyntaxError|ErrorException|JsonException */
+    /** @throws SyntaxError|ErrorException|JsonException|Error */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle(
@@ -114,18 +116,21 @@ class AnalyseCommand extends Command
         $differ = $container->get(ConsoleDiffer::class);
 
         // Get the schema files
-        /** @var string $compiledSchema */
-        $compiledSchema = $input->getArgument(self::COMPILED_SCHEMA);
+        /** @var string $compiledSchemaInput */
+        $compiledSchemaInput = $input->getArgument(self::COMPILED_SCHEMA);
         /** @var string $inputFormat */
         $inputFormat = $input->getOption(self::INPUT);
         $rawSchema = match ($inputFormat = InputFormat::tryFrom($inputFormat)) {
-            InputFormat::FILE => file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
-            default => $compiledSchema,
+            InputFormat::FILE => file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchemaInput),
+            default => $compiledSchemaInput,
         };
 
+        $compiledSchema = BuildSchema::build($rawSchema);
         $compiledNode = Parser::parse($rawSchema);
 
-        $compiledPath = $inputFormat === InputFormat::FILE ? getcwd() . DIRECTORY_SEPARATOR . $compiledSchema : null;
+        $compiledPath = $inputFormat === InputFormat::FILE
+            ? getcwd() . DIRECTORY_SEPARATOR . $compiledSchemaInput
+            : null;
 
         /** @var string $format */
         $format = $input->getOption(self::FORMAT);
@@ -139,6 +144,8 @@ class AnalyseCommand extends Command
         $graphlint->inspect(
             new EmptyDocumentNode(),
             $compiledNode,
+            null,
+            $compiledSchema,
         );
 
         return $printer->getStatusCode();

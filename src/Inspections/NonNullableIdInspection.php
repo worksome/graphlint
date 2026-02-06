@@ -6,6 +6,7 @@ namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\FieldDefinitionNode;
 use GraphQL\Language\AST\NonNullTypeNode;
+use GraphQL\Type\Definition\NonNull;
 use Worksome\Graphlint\Fixes\NonNullFixer;
 use Worksome\Graphlint\InspectionDescription;
 use Worksome\Graphlint\ProblemsHolder;
@@ -29,8 +30,12 @@ class NonNullableIdInspection extends Inspection
             return;
         }
 
-        $type = $fieldDefinitionNode->type;
+        $typeInfo = $this->typeInfo();
+        if ($typeInfo !== null && $typeInfo->getType() instanceof NonNull) {
+            return;
+        }
 
+        $type = $fieldDefinitionNode->type;
         if ($type instanceof NonNullTypeNode) {
             return;
         }

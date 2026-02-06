@@ -20,6 +20,7 @@ use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\AST\ScalarTypeDefinitionNode;
 use GraphQL\Language\AST\UnionTypeDefinitionNode;
 use GraphQL\Language\Visitor;
+use GraphQL\Utils\TypeInfo;
 use Worksome\Graphlint\Analyser\AffectedInspections;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Inspections\Inspection;
@@ -45,11 +46,17 @@ abstract class VisitorCollector
      *
      * @phpstan-return VisitorArray
      */
-    public function getVisitor(ProblemsHolder $problemsHolder, AffectedInspections $affectedInspections): array
-    {
+    public function getVisitor(
+        ProblemsHolder $problemsHolder,
+        AffectedInspections $affectedInspections,
+        TypeInfo|null $typeInfo = null,
+    ): array {
         /** @var array<int, VisitorArray> $visitors */
         $visitors = array_map(
-            fn (Inspection $inspection): array => [
+            function (Inspection $inspection) use ($affectedInspections, $problemsHolder, $typeInfo): array {
+                $inspection->setTypeInfo($typeInfo);
+
+                return [
                 NodeKind::FIELD_DEFINITION => $this->wrapper(
                     fn (FieldDefinitionNode $fieldDefinitionNode) => $inspection->visitFieldDefinition(
                         $problemsHolder,
@@ -139,7 +146,8 @@ abstract class VisitorCollector
                     $affectedInspections,
                     $problemsHolder,
                 ),
-            ],
+                ];
+            },
             [...$this->getInspections()],
         );
 

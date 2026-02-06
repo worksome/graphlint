@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint;
 
 use GraphQL\Language\AST\DocumentNode;
+use GraphQL\Type\Schema;
 use Worksome\Graphlint\Analyser\Analyser;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;
 use Worksome\Graphlint\Events\AfterFixerEvent;
@@ -36,16 +37,20 @@ class Graphlint
     public function inspect(
         DocumentNode $originalDocumentNode,
         DocumentNode $compiledDocumentNode,
+        Schema|null $originalSchema = null,
+        Schema|null $compiledSchema = null,
     ): void {
         $this->dispatchEvent(new BeforeAnalyseEvent());
 
         $originalAnalyserResult = $this->analyser->analyse(
             $originalDocumentNode,
-            $this->originalVisitorCollector
+            $this->originalVisitorCollector,
+            $originalSchema,
         );
         $compiledAnalyserResult = $this->analyser->analyse(
             $compiledDocumentNode,
-            $this->compiledVisitorCollector
+            $this->compiledVisitorCollector,
+            $compiledSchema,
         );
 
         $this->dispatchEvent(new AfterAnalyseEvent(

@@ -16,12 +16,25 @@ use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\ObjectTypeDefinitionNode;
 use GraphQL\Language\AST\ScalarTypeDefinitionNode;
 use GraphQL\Language\AST\UnionTypeDefinitionNode;
+use GraphQL\Utils\TypeInfo;
 use Stringable;
 use Worksome\Graphlint\Contracts\InspectionDescriptor;
 use Worksome\Graphlint\ProblemsHolder;
 
 abstract class Inspection implements Stringable, InspectionDescriptor
 {
+    private TypeInfo|null $typeInfo = null;
+
+    final public function setTypeInfo(TypeInfo|null $typeInfo): void
+    {
+        $this->typeInfo = $typeInfo;
+    }
+
+    protected function typeInfo(): TypeInfo|null
+    {
+        return $this->typeInfo;
+    }
+
     public function visitFieldDefinition(
         ProblemsHolder $problemsHolder,
         FieldDefinitionNode $fieldDefinitionNode,
