@@ -11,6 +11,7 @@ use Worksome\Graphlint\Diff\ConsoleDiffer;
 use Worksome\Graphlint\Diff\DifferFactory;
 use Worksome\Graphlint\Fixer\Fixer;
 use Worksome\Graphlint\Graphlint;
+use Worksome\Graphlint\Inspections\IgnoreNextLineSuppressorInspection;
 use Worksome\Graphlint\Listeners\GraphlintListener;
 use Worksome\Graphlint\PostFixes\PostFixer;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
@@ -83,6 +84,10 @@ return function (ContainerConfigurator $containerConfigurator) {
             '$inspections' => tagged_iterator(Visitor::COMPILED),
             '$suppressors' => tagged_iterator('graphlint.suppressor'),
         ]);
+
+    // Register suppressor inspections explicitly
+    $services->set(IgnoreNextLineSuppressorInspection::class)
+        ->tag('graphlint.suppressor');
 
     // Graphlint main class with listeners (added dynamically)
     $services->set(Graphlint::class)

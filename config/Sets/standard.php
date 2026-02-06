@@ -31,6 +31,7 @@ return function (ContainerConfigurator $config): void {
 
     foreach ($inspections as $inspection) {
         $services->set($inspection)
+            ->autowire()
             ->tag(Visitor::COMPILED);
     }
 };
