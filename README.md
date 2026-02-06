@@ -1,5 +1,10 @@
 # GraphLint
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/worksome/graphlint.svg?style=flat-square&label=Packagist)](https://packagist.org/packages/worksome/graphlint)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/worksome/graphlint/tests.yml?branch=main&style=flat-square&label=Tests)](https://github.com/worksome/graphlint/actions?query=workflow%3ATests+branch%3Amain)
+[![GitHub Static Analysis Action Status](https://img.shields.io/github/actions/workflow/status/worksome/graphlint/static.yml?branch=main&style=flat-square&label=Static%20Analysis)](https://github.com/worksome/graphlint/actions?query=workflow%3A"Static%20Analysis"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/worksome/graphlint.svg?style=flat-square&label=Downloads)](https://packagist.org/packages/worksome/graphlint)
+
 A linting tool for GraphQL schemas.
 
 This tool is meant for finding errors in your GraphQL schemas.
@@ -13,7 +18,7 @@ to implement the [GraphQL Standard from Worksome](https://github.com/worksome/gr
 The tool can be installed as a composer global dependency via
 
 ```bash
-$ composer global require worksome/graphlint
+composer global require worksome/graphlint
 ```
 
 or via Homebrew
@@ -28,7 +33,7 @@ brew install --formula worksome/tap/graphlint
 The tool can be run via
 
 ```bash
-$ graphlint path/to/schema.graphql
+graphlint path/to/schema.graphql
 ```
 
 ### CI Usage with GitHub Actions
