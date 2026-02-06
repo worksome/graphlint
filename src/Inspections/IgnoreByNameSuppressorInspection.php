@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Inspections;
 
 use GraphQL\Language\AST\Node;
+use GraphQL\Language\AST\NodeList;
 use Worksome\Graphlint\Contracts\SuppressorInspection;
 use Worksome\Graphlint\Utils\NodeNameResolver;
 
@@ -20,10 +21,14 @@ class IgnoreByNameSuppressorInspection implements SuppressorInspection
     ) {
     }
 
-    public function shouldSuppress(Node $node, array $parents, Inspection $inspection): bool
-    {
+    public function shouldSuppress(
+        Node $node,
+        Node|NodeList|null $parent,
+        array $ancestors,
+        Inspection $inspection,
+    ): bool {
         $path = [];
-        foreach ([...$parents, $node] as $ancestor) {
+        foreach ([...$ancestors, $parent, $node] as $ancestor) {
             $name = $this->nameResolver->getName($ancestor);
             if ($name === null) {
                 continue;

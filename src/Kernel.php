@@ -7,8 +7,7 @@ namespace Worksome\Graphlint;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-
-use function Safe\getcwd;
+use Worksome\Graphlint\Utils\Filesystem;
 
 class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {
@@ -50,11 +49,21 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function getCacheDir(): string
     {
-        return sprintf('%s/.graphlint/cache/%s-%s', sys_get_temp_dir(), basename(getcwd()), $this->environment);
+        return sprintf(
+            '%s/.graphlint/cache/%s-%s',
+            sys_get_temp_dir(),
+            basename(Filesystem::getcwd()),
+            $this->environment
+        );
     }
 
     public function getLogDir(): string
     {
-        return sprintf('%s/.graphlint/logs/%s-%s', sys_get_temp_dir(), basename(getcwd()), $this->environment);
+        return sprintf(
+            '%s/.graphlint/logs/%s-%s',
+            sys_get_temp_dir(),
+            basename(Filesystem::getcwd()),
+            $this->environment
+        );
     }
 }

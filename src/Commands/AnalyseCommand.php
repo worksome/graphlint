@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint\Commands;
 
+use ErrorException;
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
 use JsonException;
-use Safe\Exceptions\FilesystemException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,15 +15,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Path;
-use Worksome\Graphlint\Console\ConsoleDiffer;
+use Worksome\Graphlint\Diff\ConsoleDiffer;
 use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\Graphlint;
 use Worksome\Graphlint\Kernel;
 use Worksome\Graphlint\Listeners\CheckstyleListener;
 use Worksome\Graphlint\Listeners\ConsolePrinterListener;
 use Worksome\Graphlint\ShouldNotHappenException;
-
-use function Safe\file_get_contents;
+use Worksome\Graphlint\Utils\Filesystem;
 
 class AnalyseCommand extends Command
 {
@@ -35,9 +34,9 @@ class AnalyseCommand extends Command
 
     private const FORMAT = 'format';
 
-    protected static $defaultName = 'analyse';
+    protected static ?string $defaultName = 'analyse';
 
-    protected static $defaultDescription = 'Analyse a GraphQL file';
+    protected static ?string $defaultDescription = 'Analyse a GraphQL file';
 
     protected function configure(): void
     {
@@ -74,7 +73,7 @@ class AnalyseCommand extends Command
         );
     }
 
-    /** @throws SyntaxError|FilesystemException|JsonException */
+    /** @throws SyntaxError|ErrorException|JsonException */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $style = new SymfonyStyle(
@@ -117,7 +116,7 @@ class AnalyseCommand extends Command
         /** @var string $inputFormat */
         $inputFormat = $input->getOption(self::INPUT);
         $rawSchema = match ($inputFormat = InputFormat::tryFrom($inputFormat)) {
-            InputFormat::FILE => file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
+            InputFormat::FILE => Filesystem::file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
             default => $compiledSchema,
         };
 
