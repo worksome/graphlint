@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint\Commands;
 
+use function Safe\file_get_contents;
 use ErrorException;
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
@@ -118,7 +119,7 @@ class AnalyseCommand extends Command
         /** @var string $inputFormat */
         $inputFormat = $input->getOption(self::INPUT);
         $rawSchema = match ($inputFormat = InputFormat::tryFrom($inputFormat)) {
-            InputFormat::FILE => \Safe\file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
+            InputFormat::FILE => file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
             default => $compiledSchema,
         };
 

@@ -14,7 +14,10 @@ class AffectedInspections
 
     public function __construct()
     {
-        $this->inspections = new Collection();
+        /** @var Collection<int, Inspection> $inspections */
+        $inspections = new Collection();
+
+        $this->inspections = $inspections;
     }
 
     /**

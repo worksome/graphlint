@@ -1,11 +1,17 @@
 includes:
-- vendor/worksome/coding-style/phpstan.neon
+    - vendor/worksome/coding-style/phpstan.neon
+
 parameters:
     paths:
-    - src
-    - tests
+        - src
+        - tests
+
     level: 9
+
     ignoreErrors:
-    - '#Call to an undefined method Pest\\Expectation.*#'
-    - message: "#Undefined variable: \\$this#"
-      path: tests/**
+        -
+            message: '#Call to an undefined method Pest\\Expectation.*#'
+            identifier: method.notFound
+        -
+            message: '#Access to an undefined property PHPUnit\\Framework\\TestCase::\$app#'
+            identifier: property.notFound
