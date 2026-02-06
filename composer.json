@@ -19,7 +19,7 @@
     },
     "require-dev": {
         "pestphp/pest": "^4.0",
-        "symfony/var-dumper": "^7.4",
+        "symfony/var-dumper": "^8.0",
         "worksome/coding-style": "^3.2"
     },
     "license": "MIT",
