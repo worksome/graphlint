@@ -48,6 +48,7 @@ return function (ContainerConfigurator $containerConfigurator) {
         '../src/*',
     )->exclude([
         '../src/AutowireArrayParameter',
+        '../src/Diff',
         '../src/Fixer/FixerResult.php',
         '../src/Visitors',
         '../src/Analyser/AnalyserResult.php',
@@ -60,7 +61,6 @@ return function (ContainerConfigurator $containerConfigurator) {
         '../src/Events',
         '../src/Laravel',
         '../src/InspectionDescription.php',
-        '../src/Utils/AutowireInterfacesCompilerPass.php',
         '../src/Utils/ProblemOutputGenerator.php',
     ]);
 

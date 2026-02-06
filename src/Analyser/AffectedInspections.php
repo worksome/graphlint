@@ -9,9 +9,7 @@ use Worksome\Graphlint\Inspections\Inspection;
 
 class AffectedInspections
 {
-    /**
-     * @var Collection<int, Inspection>
-     */
+    /** @var Collection<int, Inspection> */
     private readonly Collection $inspections;
 
     public function __construct()

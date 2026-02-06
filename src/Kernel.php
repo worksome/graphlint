@@ -7,7 +7,6 @@ namespace Worksome\Graphlint;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Worksome\Graphlint\Utils\Filesystem;
 
 class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {
@@ -52,7 +51,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
         return sprintf(
             '%s/.graphlint/cache/%s-%s',
             sys_get_temp_dir(),
-            basename(Filesystem::getcwd()),
+            basename(\Safe\getcwd()),
             $this->environment
         );
     }
@@ -62,7 +61,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
         return sprintf(
             '%s/.graphlint/logs/%s-%s',
             sys_get_temp_dir(),
-            basename(Filesystem::getcwd()),
+            basename(\Safe\getcwd()),
             $this->environment
         );
     }

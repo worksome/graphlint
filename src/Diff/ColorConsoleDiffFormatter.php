@@ -13,13 +13,13 @@ use Symfony\Component\Console\Formatter\OutputFormatter;
  */
 final class ColorConsoleDiffFormatter
 {
-    private const PLUS_START_REGEX = '#^(\+.*)#';
+    private const string PLUS_START_REGEX = '#^(\+.*)#';
 
-    private const MINUT_START_REGEX = '#^(-.*)#';
+    private const string MINUS_START_REGEX = '#^(-.*)#';
 
-    private const AT_START_REGEX = '#^(@.*)#';
+    private const string AT_START_REGEX = '#^(@.*)#';
 
-    private const NEWLINES_REGEX = "#\n\r|\n#";
+    private const string NEWLINES_REGEX = "#\n\r|\n#";
 
     private readonly string $template;
 
@@ -76,7 +76,7 @@ final class ColorConsoleDiffFormatter
 
     private function makeMinusLinesRed(string $string): string
     {
-        return Strings::replace($string, self::MINUT_START_REGEX, '<fg=red>$1</fg=red>');
+        return Strings::replace($string, self::MINUS_START_REGEX, '<fg=red>$1</fg=red>');
     }
 
     private function makeAtNoteCyan(string $string): string

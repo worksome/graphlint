@@ -6,7 +6,7 @@ namespace Worksome\Graphlint\Configuration;
 
 class Visitor
 {
-    public const ORIGINAL = 'graphlint.original_visitor';
+    public const string ORIGINAL = 'graphlint.original_visitor';
 
-    public const COMPILED = 'graphlint.compiled_visitor';
+    public const string COMPILED = 'graphlint.compiled_visitor';
 }
