@@ -3,23 +3,24 @@
     "description": "A static analysis tool for GraphQl",
     "type": "project",
     "require": {
-        "php": "^8.2",
-        "illuminate/support": "^10.48",
+        "php": "^8.3",
+        "illuminate/support": "^11.47|^12.0",
         "jawira/case-converter": "^3.6",
         "nette/utils": "^4.0",
-        "sebastian/diff": "^5.1",
-        "symfony/config": "^6.4",
-        "symfony/console": "^6.4",
-        "symfony/dependency-injection": "^6.4",
-        "symfony/filesystem": "^6.4",
-        "symfony/finder": "^6.4",
-        "symfony/http-kernel": "^6.4",
-        "webonyx/graphql-php": "^15.20"
+        "sebastian/diff": "^7.0",
+        "symfony/config": "^7.4",
+        "symfony/console": "^7.4",
+        "symfony/dependency-injection": "^7.4",
+        "symfony/filesystem": "^7.4",
+        "symfony/finder": "^7.4",
+        "symfony/http-kernel": "^7.4",
+        "thecodingmachine/safe": "^3.3",
+        "webonyx/graphql-php": "^15.30"
     },
     "require-dev": {
-        "pestphp/pest": "^2.36",
-        "symfony/var-dumper": "^6.4",
-        "worksome/coding-style": "^2.15"
+        "pestphp/pest": "^4.0",
+        "symfony/var-dumper": "^7.4",
+        "worksome/coding-style": "^3.2"
     },
     "license": "MIT",
     "autoload": {
