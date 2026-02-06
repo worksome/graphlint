@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint;
 
-use function Safe\getcwd;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use function Safe\getcwd;
 
 class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {

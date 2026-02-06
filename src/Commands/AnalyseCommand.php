@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint\Commands;
 
-use function Safe\file_get_contents;
 use ErrorException;
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
@@ -24,6 +23,7 @@ use Worksome\Graphlint\Kernel;
 use Worksome\Graphlint\Listeners\CheckstyleListener;
 use Worksome\Graphlint\Listeners\ConsolePrinterListener;
 use Worksome\Graphlint\ShouldNotHappenException;
+use function Safe\file_get_contents;
 
 #[AsCommand('analyse')]
 class AnalyseCommand extends Command
