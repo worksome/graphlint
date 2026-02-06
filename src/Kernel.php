@@ -7,12 +7,7 @@ namespace Worksome\Graphlint;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
-use Worksome\Graphlint\AutowireArrayParameter\DependencyInjection\CompilerPass\AutowireArrayParameterCompilerPass;
-use Worksome\Graphlint\Contracts\SuppressorInspection;
-use Worksome\Graphlint\Inspections\Inspection;
-use Worksome\Graphlint\PostFixes\PostFixer;
-use Worksome\Graphlint\Utils\AutowireInterfacesCompilerPass;
-use Worksome\Graphlint\Utils\Filesystem;
+use function Safe\getcwd;
 
 class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {
@@ -48,12 +43,6 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     protected function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new AutowireInterfacesCompilerPass([
-            Inspection::class,
-            PostFixer::class,
-            SuppressorInspection::class,
-        ]));
-        $container->addCompilerPass(new AutowireArrayParameterCompilerPass());
         $container->addCompilerPass(new MakeInspectionsPublicCompilerPass());
         $container->addCompilerPass(new MakeSuppressorPublicCompilerPass());
     }
@@ -63,7 +52,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
         return sprintf(
             '%s/.graphlint/cache/%s-%s',
             sys_get_temp_dir(),
-            basename(Filesystem::getcwd()),
+            basename(getcwd()),
             $this->environment
         );
     }
@@ -73,7 +62,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
         return sprintf(
             '%s/.graphlint/logs/%s-%s',
             sys_get_temp_dir(),
-            basename(Filesystem::getcwd()),
+            basename(getcwd()),
             $this->environment
         );
     }

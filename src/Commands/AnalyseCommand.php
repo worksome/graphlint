@@ -8,6 +8,7 @@ use ErrorException;
 use GraphQL\Error\SyntaxError;
 use GraphQL\Language\Parser;
 use JsonException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,21 +23,22 @@ use Worksome\Graphlint\Kernel;
 use Worksome\Graphlint\Listeners\CheckstyleListener;
 use Worksome\Graphlint\Listeners\ConsolePrinterListener;
 use Worksome\Graphlint\ShouldNotHappenException;
-use Worksome\Graphlint\Utils\Filesystem;
+use function Safe\file_get_contents;
 
+#[AsCommand('analyse')]
 class AnalyseCommand extends Command
 {
-    private const ORIGINAL_SCHEMA = 'sdl';
+    private const string ORIGINAL_SCHEMA = 'sdl';
 
-    private const COMPILED_SCHEMA = 'compiled_schema';
+    private const string COMPILED_SCHEMA = 'compiled_schema';
 
-    private const INPUT = 'input';
+    private const string INPUT = 'input';
 
-    private const FORMAT = 'format';
+    private const string FORMAT = 'format';
 
-    protected static $defaultName = 'analyse';
+    protected string|null $name = 'analyse';
 
-    protected static $defaultDescription = 'Analyse a GraphQL file';
+    protected string|null $description = 'Analyse a GraphQL file';
 
     protected function configure(): void
     {
@@ -101,6 +103,7 @@ class AnalyseCommand extends Command
         $kernel = new Kernel([
             $configurationFile,
         ]);
+
         $kernel->boot();
 
         $container = $kernel->getContainer();
@@ -116,7 +119,7 @@ class AnalyseCommand extends Command
         /** @var string $inputFormat */
         $inputFormat = $input->getOption(self::INPUT);
         $rawSchema = match ($inputFormat = InputFormat::tryFrom($inputFormat)) {
-            InputFormat::FILE => Filesystem::file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
+            InputFormat::FILE => file_get_contents(getcwd() . DIRECTORY_SEPARATOR . $compiledSchema),
             default => $compiledSchema,
         };
 

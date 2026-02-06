@@ -9,14 +9,15 @@ use Worksome\Graphlint\Inspections\Inspection;
 
 class AffectedInspections
 {
-    /**
-     * @var Collection<int, Inspection>
-     */
+    /** @var Collection<int, Inspection> */
     private readonly Collection $inspections;
 
     public function __construct()
     {
-        $this->inspections = new Collection();
+        /** @var Collection<int, Inspection> $inspections */
+        $inspections = new Collection();
+
+        $this->inspections = $inspections;
     }
 
     /**

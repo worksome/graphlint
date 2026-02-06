@@ -34,6 +34,8 @@ final class GraphlintConfigBuilder
 
         $services
             ->set(IgnoreByNameSuppressorInspection::class)
+            ->autowire()
+            ->tag('graphlint.suppressor')
             ->call('configure', $this->ignored);
     }
 
