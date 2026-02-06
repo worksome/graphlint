@@ -17,16 +17,20 @@ use Worksome\Graphlint\Visitors\OriginalVisitorCollector;
 
 class Graphlint
 {
+    /** @var GraphlintListener[] */
+    private array $listeners;
+
     /**
-     * @param GraphlintListener[] $listeners
+     * @param iterable<GraphlintListener> $listeners
      */
     public function __construct(
         private readonly OriginalVisitorCollector $originalVisitorCollector,
         private readonly CompiledVisitorCollector $compiledVisitorCollector,
         private readonly Analyser $analyser,
         private readonly Fixer $fixer,
-        private array $listeners,
+        iterable $listeners = [],
     ) {
+        $this->listeners = [...$listeners];
     }
 
     public function inspect(

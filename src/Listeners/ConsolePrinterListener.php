@@ -8,7 +8,7 @@ use GraphQL\Language\Printer;
 use Illuminate\Support\Collection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symplify\PackageBuilder\Console\Output\ConsoleDiffer;
+use Worksome\Graphlint\Console\ConsoleDiffer;
 use Worksome\Graphlint\Analyser\AnalyserResult;
 use Worksome\Graphlint\EmptyDocumentNode;
 use Worksome\Graphlint\Events\AfterAnalyseEvent;

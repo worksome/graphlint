@@ -1,8 +1,13 @@
 <?php
 
-use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Worksome\Graphlint\Configuration\Visitor;
+use Worksome\Graphlint\Console\ConsoleDiffer;
+use Worksome\Graphlint\Contracts\SuppressorInspection;
+use Worksome\Graphlint\Fixer\Fixer;
+use Worksome\Graphlint\Graphlint;
+use Worksome\Graphlint\Listeners\GraphlintListener;
+use Worksome\Graphlint\PostFixes\PostFixer;
 use Worksome\Graphlint\Visitors\CompiledVisitorCollector;
 use Worksome\Graphlint\Visitors\OriginalVisitorCollector;
 
@@ -14,13 +19,17 @@ return function (ContainerConfigurator $configurator) {
             ->autowire()
             ->autoconfigure();
 
-    $services->public()->set(Application::class);
+    // Register interface/class tags for autoconfiguration
+    $services->instanceof(SuppressorInspection::class)
+        ->tag('graphlint.suppressor');
 
-    $services->set(OriginalVisitorCollector::class)
-        ->args([tagged_iterator(Visitor::ORIGINAL)]);
-    $services->set(CompiledVisitorCollector::class)
-        ->args([tagged_iterator(Visitor::COMPILED)]);
+    $services->instanceof(GraphlintListener::class)
+        ->tag('graphlint.listener');
 
+    $services->instanceof(PostFixer::class)
+        ->tag('graphlint.post_fixer');
+
+    // Load all services from src first
     $services->load(
         'Worksome\\Graphlint\\',
         '../src/*',
@@ -38,5 +47,37 @@ return function (ContainerConfigurator $configurator) {
         '../src/Laravel',
         '../src/InspectionDescription.php',
         '../src/Utils/ProblemOutputGenerator.php',
+        '../src/DependencyInjection',
+        '../src/Console',
     ]);
+
+    // Public services that need to be fetched from container (after load to override)
+    $services->set(ConsoleDiffer::class)->public();
+
+    // Fixer with tagged post fixers
+    $services->set(Fixer::class)
+        ->public()
+        ->args([
+            '$postFixers' => tagged_iterator('graphlint.post_fixer'),
+        ]);
+
+    // Visitor collectors with tagged iterators
+    $services->set(OriginalVisitorCollector::class)
+        ->args([
+            '$inspections' => tagged_iterator(Visitor::ORIGINAL),
+            '$suppressors' => tagged_iterator('graphlint.suppressor'),
+        ]);
+
+    $services->set(CompiledVisitorCollector::class)
+        ->args([
+            '$inspections' => tagged_iterator(Visitor::COMPILED),
+            '$suppressors' => tagged_iterator('graphlint.suppressor'),
+        ]);
+
+    // Graphlint main class with empty listeners (added dynamically)
+    $services->set(Graphlint::class)
+        ->public()
+        ->args([
+            '$listeners' => tagged_iterator('graphlint.listener'),
+        ]);
 };

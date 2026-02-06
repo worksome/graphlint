@@ -14,10 +14,10 @@ use Worksome\Graphlint\PostFixes\PostFixer;
 class Fixer
 {
     /**
-     * @param PostFixer[] $postFixers
+     * @param iterable<PostFixer> $postFixers
      */
     public function __construct(
-        private readonly array $postFixers,
+        private readonly iterable $postFixers,
     ) {
     }
 
@@ -41,7 +41,6 @@ class Fixer
             /** @var DocumentNode $documentNode */
             $documentNode = Visitor::visit(
                 $documentNode,
-                /** @phpstan-ignore-next-line */
                 [
                     'leave' => fn (Node $node) => $postFixer->visitNode($node),
                 ],
