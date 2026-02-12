@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Worksome\Graphlint\Fixes;
 
 use GraphQL\Language\AST\NameNode;
-use Jawira\CaseConverter\Convert;
 use Worksome\Graphlint\ProblemDescriptor;
 use Worksome\Graphlint\Utils\NodeNameResolver;
+use Worksome\Graphlint\Utils\UpperSnakeCaseConverter;
 
 class UpperSnakeCaseNameFixer extends Fixer
 {
@@ -30,6 +30,6 @@ class UpperSnakeCaseNameFixer extends Fixer
             return;
         }
 
-        $node->value = (new Convert($name))->fromAuto(false)->toMacro();
+        $node->value = UpperSnakeCaseConverter::convert($name);
     }
 }
