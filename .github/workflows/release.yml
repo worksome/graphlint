@@ -11,19 +11,18 @@ jobs:
     steps:
 
       - name: Generate App Token
-        uses: tibdex/github-app-token@v2
+        uses: actions/create-github-app-token@v2
         id: generate_token
         with:
-          private_key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
-          app_id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
-          installation_retrieval_mode: repository
-          installation_retrieval_payload: worksome/homebrew-tap
+          app-id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
+          private-key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
+          repositories: worksome/homebrew-tap
 
       - name: Get version
         id: version
-        uses: dawidd6/action-get-tag@v1
-        with:
-          strip_v: true # Strip 'v' prefix
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          echo "tag=${TAG#v}" >> $GITHUB_OUTPUT
 
       - name: Trigger Homebrew Tap Update
         uses: benc-uk/workflow-dispatch@v1
