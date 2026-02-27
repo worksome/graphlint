@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^11.47|^12.0",
+        "illuminate/support": "^11.47|^12.0|^13.0",
         "jawira/case-converter": "^3.6",
         "nette/utils": "^4.0",
         "sebastian/diff": "^6.0|^7.0",
