@@ -16,7 +16,8 @@ jobs:
         with:
           app-id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
           private-key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
-          repositories: worksome/homebrew-tap
+          owner: worksome
+          repositories: homebrew-tap
 
       - name: Get version
         id: version
