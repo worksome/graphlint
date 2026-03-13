@@ -13,7 +13,7 @@
         "symfony/dependency-injection": "^7.4",
         "symfony/filesystem": "^7.4",
         "symfony/finder": "^7.4",
-        "symfony/http-kernel": "^7.4",
+        "symfony/http-kernel": "^8.0",
         "thecodingmachine/safe": "^3.3",
         "webonyx/graphql-php": "^15.30"
     },
