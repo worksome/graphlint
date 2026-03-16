@@ -48,6 +48,6 @@ jobs:
           tools: cs2pr
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@v4
 
       - run: ${{ matrix.actions.run }}
