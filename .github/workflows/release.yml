@@ -11,10 +11,10 @@ jobs:
     steps:
 
       - name: Generate App Token
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         id: generate_token
         with:
-          app-id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
+          client-id: ${{ secrets.WORKSOME_INTERNAL_APP_ID }}
           private-key: ${{ secrets.WORKSOME_INTERNAL_PRIVATE_KEY }}
           owner: worksome
           repositories: homebrew-tap
