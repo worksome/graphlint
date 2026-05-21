@@ -13,5 +13,5 @@ parameters:
             message: '#Call to an undefined method Pest\\Expectation.*#'
             identifier: method.notFound
         -
-            message: '#Access to an undefined property PHPUnit\\Framework\\TestCase::\$app#'
+            message: '#Access to an undefined property (PHPUnit\\Framework\\TestCase|Pest\\PendingCalls\\TestCall)::\$app#'
             identifier: property.notFound
