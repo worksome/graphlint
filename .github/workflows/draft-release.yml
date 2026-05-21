@@ -10,9 +10,10 @@ jobs:
     name: Update draft
     runs-on: ubuntu-latest
     steps:
+
       # Check out current repository
       - name: Fetch Sources
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Fetch version
         id: version
@@ -40,7 +41,7 @@ jobs:
             --generate-notes
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2.37.1
         with:
           php-version: 8.3
 
@@ -48,7 +49,7 @@ jobs:
         run: wget https://github.com/box-project/box/releases/latest/download/box.phar && chmod 755 box.phar
 
       - name: Install Composer dependencies
-        uses: ramsey/composer-install@v3
+        uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
         with:
           composer-options: "--no-dev"
 
