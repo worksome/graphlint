@@ -6,13 +6,13 @@ namespace Worksome\Graphlint;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\BundleInterface;
+use Symfony\Component\DependencyInjection\Kernel\BundleInterface;
 use function Safe\getcwd;
 
 class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {
     /**
-     * @param non-empty-string[] $configFiles
+     * @param list<non-empty-string> $configFiles
      */
     public function __construct(
         private readonly array $configFiles,
@@ -24,12 +24,11 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
     }
 
     /**
-     * @return BundleInterface[]
+     * @return list<BundleInterface>
      */
     public function registerBundles(): array
     {
-        return [
-        ];
+        return [];
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
