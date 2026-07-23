@@ -3,8 +3,8 @@
     "description": "A static analysis tool for GraphQL",
     "type": "project",
     "require": {
-        "php": "^8.3",
-        "illuminate/support": "^11.47|^12.0|^13.0",
+        "php": "^8.4",
+        "illuminate/support": "^12.0|^13.0",
         "jawira/case-converter": "^3.6",
         "nette/utils": "^4.1",
         "sebastian/diff": "^6.0|^7.0",
@@ -15,12 +15,12 @@
         "symfony/finder": "^7.4|^8.0",
         "symfony/http-kernel": "^7.4|^8.0",
         "thecodingmachine/safe": "^3.4",
-        "webonyx/graphql-php": "^15.32"
+        "webonyx/graphql-php": "^15.34"
     },
     "require-dev": {
         "pestphp/pest": "^4.7",
         "symfony/var-dumper": "^7.4|^8.0",
-        "worksome/coding-style": "^3.2"
+        "worksome/coding-style": "^4.0"
     },
     "license": "MIT",
     "autoload": {
