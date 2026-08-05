@@ -20,7 +20,7 @@
     "require-dev": {
         "pestphp/pest": "^4.7",
         "symfony/var-dumper": "^7.4|^8.0",
-        "worksome/coding-style": "^4.0"
+        "worksome/coding-style": "^5.0"
     },
     "license": "MIT",
     "autoload": {
