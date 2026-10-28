@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace Worksome\Graphlint\Diff;
 
-use ReflectionProperty;
-use SebastianBergmann\Diff\Output\UnifiedDiffOutputBuilder;
+use SebastianBergmann\Diff\Output\StrictUnifiedDiffOutputBuilder;
 
 /** @api */
 final class CompleteUnifiedDiffOutputBuilderFactory
 {
     /** @api */
-    public function create(): UnifiedDiffOutputBuilder
+    public function create(): StrictUnifiedDiffOutputBuilder
     {
-        $unifiedDiffOutputBuilder = new UnifiedDiffOutputBuilder('');
-
-        $contextLines = new ReflectionProperty($unifiedDiffOutputBuilder, 'contextLines');
-
-        $contextLines->setValue($unifiedDiffOutputBuilder, 10000);
-
-        return $unifiedDiffOutputBuilder;
+        return new StrictUnifiedDiffOutputBuilder([
+            'addLineNumbers' => false,
+            'contextLines' => 10000,
+            'header' => '',
+        ]);
     }
 }
