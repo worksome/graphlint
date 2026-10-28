@@ -1,6 +1,3 @@
-includes:
-    - vendor/worksome/coding-style/phpstan.neon
-
 parameters:
     paths:
         - src
